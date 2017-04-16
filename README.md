@@ -2,31 +2,31 @@
 Hotel room booking system on the Android platform using Spring framework.
 
 Done:
--none
+- none
 Backlog:
-1.        [S/A] logowanie użytkownika [oauth2]
-2.        [S] wystawienie Api umożlwiającego pobieranie listy hotelów (Hotele na sztywno zapisane w bazie danych, wysyłana jest sama informacja o hotelach)
-3.        [A] wyświetlenie hotelów na mapie z pozycją w obrębie X Km
-4.        [S/A] możliwość sprecyzowania terminu oraz ilości miejsc w pokoju (do wyszukiwania) (domyślnie system szuka pokoju na najbliższą noc dla 2 osób)
-5.        [A] wyświetlenie znalezionych wyników jako listView
-6.        [S/A] Wyświetlenie informacji o wybranym pokoju (ilość miejsc, standard, usługi hotelowe, udogodnienia itp)
-7.        [S/A] obsługa rezerwacji wybranego pokoju (oczekuje na weryfikację, oczekuje na wpłatę, zarezerwowane)
-8.        [S/A] Sprawdzenie swoich rezerwacji
-9.        [S/A] rejestracja dla użytkownika
-10.        [I] przygotowanie bootStrapa pod interferjs użytkownika
-11.        [I] logowanie dla obsługi hotelu (oauth2)
-11.        [I] możliwość konfiguracji pokojów, terminów, informacji o pokoju (ilość miejsc, standard, usługi hotelowe, udogodnienia, opis, lokalizacja)
-12.        [I] możliwość zmiany stanów zamówień klientów
-13.        [I] możliwość edytowania informacji o hotelu (opis/lokalizacja)
-14.        [A] uumozliwienie konfiguracji promienia wyszukiwania hotelów
-15.        [S/A/I] galeria zdjęć Hotelu
-16.        [S/A/I} system ocen/opinii pokoju
-17.        [I] wykorzystanie netSocketów do aktualizacji danych o zamówieniach
-18.        [S/A] notyfikacja MQTT o zmianie stanu rezerwacji
-19.        [S] wysyłanie mailów z potwierdzeniem rezerwacji
-20.        [A] filtrowanie list/hoteli (np. tylko tam, gdzie basen, czy tylko pokoje w konkretnym hotelu)
-21.        [S/A] możliwość dodania hotelu do ulubionych
-22.        [S/A/I] wyszukanie hotelu w danym mieście
+- [S/A] logowanie użytkownika [oauth2]
+- [S] wystawienie Api umożlwiającego pobieranie listy hotelów (Hotele na sztywno zapisane w bazie danych, wysyłana jest sama informacja o hotelach)
+- [A] wyświetlenie hotelów na mapie z pozycją w obrębie X Km
+- [S/A] możliwość sprecyzowania terminu oraz ilości miejsc w pokoju (do wyszukiwania) (domyślnie system szuka pokoju na najbliższą noc dla 2 osób)
+- [A] wyświetlenie znalezionych wyników jako listView
+- [S/A] Wyświetlenie informacji o wybranym pokoju (ilość miejsc, standard, usługi hotelowe, udogodnienia itp)
+- [S/A] obsługa rezerwacji wybranego pokoju (oczekuje na weryfikację, oczekuje na wpłatę, zarezerwowane)
+- [S/A] Sprawdzenie swoich rezerwacji
+- [S/A] rejestracja dla użytkownika
+- [I] przygotowanie bootStrapa pod interferjs użytkownika
+- [I] logowanie dla obsługi hotelu (oauth2)
+- [I] możliwość konfiguracji pokojów, terminów, informacji o pokoju (ilość miejsc, standard, usługi hotelowe, udogodnienia, opis, lokalizacja)
+- [I] możliwość zmiany stanów zamówień klientów
+- [I] możliwość edytowania informacji o hotelu (opis/lokalizacja)
+- [A] uumozliwienie konfiguracji promienia wyszukiwania hotelów
+- [S/A/I] galeria zdjęć Hotelu
+- [S/A/I} system ocen/opinii pokoju
+- [I] wykorzystanie netSocketów do aktualizacji danych o zamówieniach
+- [S/A] notyfikacja MQTT o zmianie stanu rezerwacji
+- [S] wysyłanie mailów z potwierdzeniem rezerwacji
+- [A] filtrowanie list/hoteli (np. tylko tam, gdzie basen, czy tylko pokoje w konkretnym hotelu)
+- [S/A] możliwość dodania hotelu do ulubionych
+- [S/A/I] wyszukanie hotelu w danym mieście
 
 
 S - Serwer, A - Android, I - Interface
