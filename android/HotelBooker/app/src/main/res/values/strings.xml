@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">SmartParkingApp</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <string name="server_ip_address">192.168.0.103</string>
+
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid </string>
+    <string name="error_invalid_password">This password is too short </string>
+    <string name="error_incorrect_password">This password is incorrect </string>
+    <string name="error_authentication_failed">Login Authentication failed </string>
+    <string name="error_login_other">Unexpected login error occurs</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+</resources>
