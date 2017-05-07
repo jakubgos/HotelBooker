@@ -2,8 +2,11 @@
 Hotel room booking system on the Android platform using Spring framework.
 
 Done:
+
 - none
+
 Backlog:
+
 - [S/A] logowanie użytkownika [oauth2]
 - [S] wystawienie Api umożlwiającego pobieranie listy hotelów (Hotele na sztywno zapisane w bazie danych, wysyłana jest sama informacja o hotelach)
 - [A] wyświetlenie hotelów na mapie z pozycją w obrębie X Km

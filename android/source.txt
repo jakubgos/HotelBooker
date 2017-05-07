@@ -1,1 +1,5 @@
 https://spin.atomicobject.com/2016/11/28/sending-data-actions-android/     //Serializables vs Parcelable
+https://spring.io/guides/gs/serving-web-content/							//MVC project setup
+http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-hotswapping		//Developing web apps 
+
+http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html		//thymeleaf
