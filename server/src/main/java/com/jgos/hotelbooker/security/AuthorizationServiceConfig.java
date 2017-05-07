@@ -41,14 +41,27 @@ public class AuthorizationServiceConfig extends AuthorizationServerConfigurerAda
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.authenticationManager(authenticationManager)
-                .userDetailsService(userDetailsService)
-                .tokenStore(tokenStore());
+      //  endpoints.authenticationManager(authenticationManager)
+       //         .userDetailsService(userDetailsService)
+        //        .tokenStore(tokenStore());
+
+        endpoints
+                .tokenStore(tokenStore())
+                .authenticationManager(authenticationManager);
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.jdbc(dataSource);
+        //clients.jdbc(dataSource);
+
+        clients
+                .inMemory()
+                .withClient("client")
+                .scopes("read", "write")
+                .authorities("'refresh_token","password")
+                .authorizedGrantTypes("password", "refresh_token")
+                .secret("secret")
+                .accessTokenValiditySeconds(1800);
     }
 
     @Override
