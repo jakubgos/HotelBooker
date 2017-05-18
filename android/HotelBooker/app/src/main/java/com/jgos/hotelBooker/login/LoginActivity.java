@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        Log.d("MyApp_Login", "view attemptLogin invoked");
+        Log.d("MyApp_login", "view attemptLogin invoked");
         // Store values at the time of the login attempt.
         String login = mLoginView.getText().toString();
         String password = mPasswordView.getText().toString();
@@ -107,7 +107,6 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
         // The ViewPropertyAnimator APIs are not available, so simply show
         // and hide the relevant UI components.
         mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-        mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
     }
 
 
@@ -125,6 +124,8 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
 
     @Override
     public void showLoginError(Result msg, String message) {
+
+        //todo improve
         switch (msg)
         {
             case LoginInvalid:
@@ -138,8 +139,9 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
                 break;
             default:
                 mLoginView.setError(getString(R.string.error_login_other)+ message);
-                Log.e("MyApp_Login","showLoginError, unexpected result code: "+ msg);
+                Log.e("MyApp_login","showLoginError, unexpected result code: "+ msg);
                 break;
+
         }
 
     }

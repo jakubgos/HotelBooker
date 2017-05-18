@@ -85,8 +85,9 @@ public class LoginPresenter implements LoginPresenterOps, LoginModelPresenterOps
         handler.post(new Runnable() {
             @Override
             public void run() {
-        getView().showProgress(false);
         getView().showLoginError(AuthFailed, loginInvalid.getMessage());
+                getView().showProgress(false);
+
             }
         });
     }

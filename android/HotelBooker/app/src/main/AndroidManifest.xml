@@ -23,8 +23,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme">
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -39,7 +38,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name="com.jgos.hotelBooker.splash.SplashActivity"
+            android:name=".splash.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -49,7 +48,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.jgos.hotelBooker.map.MapsActivity"
+            android:name=".map.MapsActivity"
             android:label="@string/title_activity_maps"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -62,7 +61,7 @@
             -->
         </activity>
         <activity
-            android:name="com.jgos.hotelBooker.login.LoginActivity"
+            android:name=".login.LoginActivity"
             android:label="@string/title_activity_login" />
         <!--
 ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -73,9 +72,11 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".menu.MenuActivity" />
-        <activity android:name="com.jgos.hotelBooker.parkingList.ParkingListViewImpl"></activity>
-        <service android:name="org.eclipse.paho.android.service.MqttService" >
-        </service>
+        <activity android:name=".parkingList.ParkingListViewImpl" />
+
+        <service android:name="org.eclipse.paho.android.service.MqttService"></service>
+
+        <activity android:name=".filter.FilterActivity"></activity>
     </application>
 
 </manifest>
