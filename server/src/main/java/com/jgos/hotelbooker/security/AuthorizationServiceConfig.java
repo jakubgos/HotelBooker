@@ -52,13 +52,13 @@ public class AuthorizationServiceConfig extends AuthorizationServerConfigurerAda
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        //clients.jdbc(dataSource);
+       //clients.jdbc(dataSource);
 
-        clients
-                .inMemory()
+       clients.
+                inMemory()
                 .withClient("client")
                 .scopes("read", "write")
-                .authorities("'refresh_token","password")
+                .authorities(Authorities.ROLE_WEB.name(),Authorities.ROLE_USER.name())
                 .authorizedGrantTypes("password", "refresh_token")
                 .secret("secret")
                 .accessTokenValiditySeconds(1800);

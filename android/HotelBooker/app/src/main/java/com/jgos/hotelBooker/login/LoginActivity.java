@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     // UI references.
-    private AutoCompleteTextView mEmailView;
+    private AutoCompleteTextView mLoginView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
         setupMVP();
 
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mLoginView = (AutoCompleteTextView) findViewById(R.id.user_login);
 
         mPasswordView = (EditText) findViewById(R.id.password);
 
@@ -89,13 +89,12 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
     private void attemptLogin() {
         Log.d("...", "view attemptLogin invoked");
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
+        String login = mLoginView.getText().toString();
         String password = mPasswordView.getText().toString();
 
-        LoginReqParam loginReqParam = new LoginReqParam(email, password);
+        LoginReqParam loginReqParam = new LoginReqParam(login, password);
 
         mPresenter.attemptLogin(loginReqParam);
-
     }
 
 
@@ -121,7 +120,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
                 new ArrayAdapter<>(LoginActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
-        mEmailView.setAdapter(adapter);
+        mLoginView.setAdapter(adapter);
     }
 
     @Override
@@ -129,16 +128,16 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
         switch (msg)
         {
             case LoginInvalid:
-                mEmailView.setError(getString(R.string.error_invalid_email) + message);
+                mLoginView.setError(getString(R.string.error_invalid_email) + message);
                 break;
             case PasswordInvalid:
                 mPasswordView.setError(getString(R.string.error_invalid_password)+ message);
                 break;
             case AuthFailed:
-                mEmailView.setError(getString(R.string.error_authentication_failed)+ ": " + message);
+                mLoginView.setError(getString(R.string.error_authentication_failed)+ ": " + message);
                 break;
             default:
-                mEmailView.setError(getString(R.string.error_login_other)+ message);
+                mLoginView.setError(getString(R.string.error_login_other)+ message);
                 Log.e("...","showLoginError, unexpected result code: "+ msg);
                 break;
         }
@@ -148,7 +147,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
     @Override
     public void resetLoginErrors() {
         // Reset errors.
-        mEmailView.setError(null);
+        mLoginView.setError(null);
         mPasswordView.setError(null);
     }
 

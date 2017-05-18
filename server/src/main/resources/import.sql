@@ -3,6 +3,14 @@ insert into user_db (id, email, password) values (1, 'john.doe@gmail.com', 'pass
 insert into user_db (id, email, password) values (2, 'john.doe2@gmail.com', 'password');
 
 insert into user_db (id, email, password) values (3, 'test', 'test');
+insert into user_db (id, email, password) values (4, 'testweb', 'test');
+insert into user_db_authorities (user_db_id, authorities) values (1, 'ROLE_USER');
+insert into user_db_authorities (user_db_id, authorities) values (2, 'ROLE_USER');
+insert into user_db_authorities (user_db_id, authorities) values (3, 'ROLE_WEB');
+insert into user_db_authorities (user_db_id, authorities) values (3, 'ROLE_USER');
+insert into user_db_authorities (user_db_id, authorities) values (4, 'ROLE_WEB');
+
+
 
 DROP TABLE oauth_client_details;
 DROP TABLE oauth_client_token;
@@ -30,3 +38,9 @@ create table oauth_approvals (	userId VARCHAR(256),	clientId VARCHAR(256),	scope
 -- customized oauth_client_details table
 create table ClientDetails (  appId VARCHAR(256) PRIMARY KEY,  resourceIds VARCHAR(256),  appSecret VARCHAR(256),  scope VARCHAR(256),  grantTypes VARCHAR(256),  redirectUrl VARCHAR(256),  authorities VARCHAR(256),  access_token_validity INTEGER,  refresh_token_validity INTEGER,  additionalInformation VARCHAR(4096),  autoApproveScopes VARCHAR(256));
 
+
+insert into oauth_client_details (client_id, client_secret, scope, authorized_grant_types) values ('client', 'secret', 'read,write', 'password,refresh_token');
+
+--insert into user_authorities (user_id, authorities) values (1, 'ROLE_USER');
+
+--insert into user_authorities (user_id, authorities) values (2, 'ROLE_USER');

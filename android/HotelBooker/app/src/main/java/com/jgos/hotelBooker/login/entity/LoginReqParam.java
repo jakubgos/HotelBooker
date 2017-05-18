@@ -12,7 +12,7 @@ public class LoginReqParam {
         this.password=password;
     }
 
-    public String getEmail() {
+    public String getLogin() {
         return email;
     }
 

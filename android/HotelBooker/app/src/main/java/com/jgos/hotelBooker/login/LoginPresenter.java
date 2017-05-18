@@ -11,6 +11,7 @@ import com.jgos.hotelBooker.login.interfaces.LoginModelOps;
 import com.jgos.hotelBooker.login.interfaces.LoginModelPresenterOps;
 import com.jgos.hotelBooker.login.interfaces.LoginPresenterOps;
 import com.jgos.hotelBooker.login.interfaces.LoginViewOps;
+import com.jgos.hotelBooker.storage.Storage;
 
 import java.lang.ref.WeakReference;
 
@@ -42,8 +43,11 @@ public class LoginPresenter implements LoginPresenterOps, LoginModelPresenterOps
 
         getView().resetLoginErrors();
 
+        getView().showProgress(true);
+        loginModelOps.login(loginReqParam);
+
         //first check if given parameters are correct (do not check with server yet)
-        loginModelOps.validateLoginParameters(loginReqParam);
+        //loginModelOps.validateLoginParameters(loginReqParam);
     }
 
     @Override
@@ -53,10 +57,18 @@ public class LoginPresenter implements LoginPresenterOps, LoginModelPresenterOps
 
     @Override
     public void onStartup() {
+
 }
 
     @Override
     public void loginSuccess(final LoginData s) {
+        Log.d("...","Login OK!!!!");
+        Storage.getInstance().setLoginData(s);
+        NetworkServiceImpl temp = new NetworkServiceImpl();
+
+        temp.testMsg(s);
+
+        /*
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -65,6 +77,7 @@ public class LoginPresenter implements LoginPresenterOps, LoginModelPresenterOps
 
             }
         });
+        */
     }
 
     @Override

@@ -44,7 +44,7 @@ public class LoginModel implements LoginModelOps {
     @Override
     public void validateLoginParameters(LoginReqParam loginReqParam) {
         boolean error= false;
-        if (!isEmailValid(loginReqParam.getEmail())) {
+        if (!isEmailValid(loginReqParam.getLogin())) {
             error = true;
             loginPresenter.validateLoginParamFailed(Result.LoginInvalid);
         }
