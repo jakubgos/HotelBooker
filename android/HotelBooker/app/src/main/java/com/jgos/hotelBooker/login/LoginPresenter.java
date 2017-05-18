@@ -39,7 +39,7 @@ public class LoginPresenter implements LoginPresenterOps, LoginModelPresenterOps
 
     @Override
     public void attemptLogin(LoginReqParam loginReqParam) {
-        Log.d("...","presenter attemptLogin invoked");
+        Log.d("MyApp_Login","presenter attemptLogin invoked");
 
         getView().resetLoginErrors();
 
@@ -62,7 +62,7 @@ public class LoginPresenter implements LoginPresenterOps, LoginModelPresenterOps
 
     @Override
     public void loginSuccess(final LoginData s) {
-        Log.d("...","Login OK!!!!");
+        Log.d("MyApp_Login","Login OK!!!!");
         Storage.getInstance().setLoginData(s);
         NetworkServiceImpl temp = new NetworkServiceImpl();
 

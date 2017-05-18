@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        Log.d("...", "view attemptLogin invoked");
+        Log.d("MyApp_Login", "view attemptLogin invoked");
         // Store values at the time of the login attempt.
         String login = mLoginView.getText().toString();
         String password = mPasswordView.getText().toString();
@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
                 break;
             default:
                 mLoginView.setError(getString(R.string.error_login_other)+ message);
-                Log.e("...","showLoginError, unexpected result code: "+ msg);
+                Log.e("MyApp_Login","showLoginError, unexpected result code: "+ msg);
                 break;
         }
 

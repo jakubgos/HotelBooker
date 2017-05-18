@@ -63,12 +63,12 @@ public class  MapsActivity extends AppCompatActivity implements OnMapReadyCallba
 
     @Override
     public void  onInfoWindowClick (Marker marker){
-        Log.d("Info", "Info pressed");
+        Log.d("MyApp_Map", "Info pressed");
     }
 
     @Override
     public boolean onMarkerClick(final Marker marker){
-        Log.d("Marker", "Marker pressed");
+        Log.d("MyApp_Map", "Marker pressed");
         BottomSheetDialogFragment bottomSheetDialogFragment = new BottomSheetDialog();
         Bundle bundle = new Bundle();
         bundle.putString("Parkingname", marker.getTitle());
@@ -220,7 +220,7 @@ public class  MapsActivity extends AppCompatActivity implements OnMapReadyCallba
 
     @Override
     public void initGps() {
-        Log.d("...","initGps");
+        Log.d("MyApp_Map","initGps");
 
         // Acquire a reference to the system Location Manager
         LocationManager locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
@@ -233,7 +233,7 @@ public class  MapsActivity extends AppCompatActivity implements OnMapReadyCallba
             public void onLocationChanged(Location location) {
 
                 mPresenter.reportLocation(new Coordinates(location.getLatitude(), location.getLongitude() ));
-                Log.d("...","onLocationChanged " + "lat: "+location.getLatitude() + " long: "+ location.getLongitude());
+                Log.d("MyApp_Map","onLocationChanged " + "lat: "+location.getLatitude() + " long: "+ location.getLongitude());
 
             }
 
@@ -255,7 +255,7 @@ public class  MapsActivity extends AppCompatActivity implements OnMapReadyCallba
         };
 // Register the listener with the Location Manager to receive location updates
         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.d("...","no Prem");
+            Log.d("MyApp_Map","no Prem");
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1
             );
@@ -268,7 +268,7 @@ public class  MapsActivity extends AppCompatActivity implements OnMapReadyCallba
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
 
-        Log.d("...","GPS started");
+        Log.d("MyApp_Map","GPS started");
     }
 
     @Override
@@ -300,7 +300,7 @@ public class  MapsActivity extends AppCompatActivity implements OnMapReadyCallba
         markerToUpdate.setIcon(BitmapDescriptorFactory.defaultMarker((determineColorMarker(parkingToModify))));
         markerToUpdate.setTitle(prepareParkingDescription(parkingToModify));
         markerToUpdate.setSnippet(prepareParkingSnippet(parkingToModify));
-        Log.d("Parking to modify",prepareParkingSnippet(parkingToModify));
+        Log.d("MyApp_Map",prepareParkingSnippet(parkingToModify));
     }
 
     @Override
@@ -322,7 +322,7 @@ public class  MapsActivity extends AppCompatActivity implements OnMapReadyCallba
         parkingMarker.icon(BitmapDescriptorFactory.defaultMarker((determineColorMarker(parking))));
         parkingMarker.title(prepareParkingDescription(parking));
         parkingMarker.snippet(prepareParkingSnippet(parking));
-        Log.d("Parking snippet",prepareParkingSnippet(parking));
+        Log.d("MyApp_Map",prepareParkingSnippet(parking));
         Marker resultMarker = mMap.addMarker(parkingMarker);
         resultMarker.setTag(parking.getId());
         parkingMarkerMap.put(parking.getId(),resultMarker);
@@ -366,7 +366,7 @@ public class  MapsActivity extends AppCompatActivity implements OnMapReadyCallba
             login_token.setActionCallback(new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    Log.d("Mqtt","Login successful");
+                    Log.d("MyApp_Map","Login successful");
                     for (int i = 0; i<list.size(); i++){
                         Long parking_id = list.get(i).getId();
                         final String topic = "parking/"+parking_id;//tutaj lista topiców odpowiadających wszystkim parkingom
@@ -375,12 +375,12 @@ public class  MapsActivity extends AppCompatActivity implements OnMapReadyCallba
                             subscribe_token.setActionCallback(new IMqttActionListener() {
                                 @Override
                                 public void onSuccess(IMqttToken asyncActionToken) {
-                                    Log.d("Mqtt","Subscription successful. Subscribed to topic: "+ topic);
+                                    Log.d("MyApp_Map","Subscription successful. Subscribed to topic: "+ topic);
                                 }
 
                                 @Override
                                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                                    Log.d("Mqtt","Subscription to topic "+topic+" failed. Reason: "+exception);
+                                    Log.d("MyApp_Map","Subscription to topic "+topic+" failed. Reason: "+exception);
                                 }
                             });
                         }catch (MqttException e){
@@ -391,7 +391,7 @@ public class  MapsActivity extends AppCompatActivity implements OnMapReadyCallba
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Log.d("Mqtt","Login failed. Reason: "+exception);
+                    Log.d("MyApp_Map","Login failed. Reason: "+exception);
                 }
             });
 
@@ -403,7 +403,7 @@ public class  MapsActivity extends AppCompatActivity implements OnMapReadyCallba
 
     @Override
     public void connectionLost(Throwable cause){
-        Log.d("Connection lost", "Connection lost because: "+cause);
+        Log.d("MyApp_Map", "Connection lost because: "+cause);
     }
 
     @Override
@@ -413,7 +413,7 @@ public class  MapsActivity extends AppCompatActivity implements OnMapReadyCallba
 
     @Override
     public void messageArrived(String topic, MqttMessage message){
-        Log.d("Message", "Topic: "+topic+" Message: "+message.toString());
+        Log.d("MyApp_Map", "Topic: "+topic+" Message: "+message.toString());
 
         mPresenter.messageArrivedInd(message.toString());
     }

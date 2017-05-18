@@ -58,7 +58,7 @@ public class NetworkServiceImpl implements NetworkService {
         final Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d("...", "view attemptLogin invoked");
+                Log.d("MyApp_Service", "view attemptLogin invoked");
 
                 OkHttpClient okHttpClient = new OkHttpClient();
 
@@ -80,7 +80,7 @@ public class NetworkServiceImpl implements NetworkService {
                         .addHeader("Authorization", Credentials.basic("client", "secret"))
                         .post(RequestBody.create(MediaType.parse("application/json; charset=utf-8"), ""))
                         .build();
-                Log.d("...", "view attemptLogin request " + request.toString());
+                Log.d("MyApp_Service", "view attemptLogin request " + request.toString());
 
                 try {
                     Response response = okHttpClient
@@ -90,9 +90,9 @@ public class NetworkServiceImpl implements NetworkService {
 
                     String responseJson = response.body().string();
 
-                    Log.d("...", "view attemptLogin result " + responseJson);
+                    Log.d("MyApp_Service", "view attemptLogin result " + responseJson);
                     LoginData loginData = objectMapper.readValue(responseJson, LoginData.class);
-                    Log.d("...", "view attemptLogin result loginData object" + loginData.toString());
+                    Log.d("MyApp_Service", "view attemptLogin result loginData object" + loginData.toString());
 
                     if (response.isSuccessful()) {
                         callBack.loginSuccess(loginData);
@@ -128,7 +128,7 @@ public class NetworkServiceImpl implements NetworkService {
         final Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d("...", "view attemptLogin invoked");
+                Log.d("MyApp_Service", "view attemptLogin invoked");
 
                 OkHttpClient okHttpClient = new OkHttpClient();
                 String json = null;
@@ -154,7 +154,7 @@ public class NetworkServiceImpl implements NetworkService {
                         .addHeader("Authorization", "Bearer " + loginData.getAccess_token())
                         .build();
 
-                Log.d("...", "NetworkServiceImpl getParkingList request " + request.toString() + "JSON: " + json);
+                Log.d("MyApp_Service", "NetworkServiceImpl getParkingList request " + request.toString() + "JSON: " + json);
 
                 Response response = null;
                 try {
@@ -163,12 +163,12 @@ public class NetworkServiceImpl implements NetworkService {
                             .execute();
 
                     String responseJson = response.body().string();
-                    //Log.d("...", "NetworkServiceImpl getParkingList result " + responseJson);
+                    //Log.d("MyApp_Service", "NetworkServiceImpl getParkingList result " + responseJson);
 
                     List<Parking> list = objectMapper.readValue(responseJson, TypeFactory.defaultInstance().constructCollectionType(List.class,
                             Parking.class));
 
-                    Log.d("...", "NetworkServiceImpl getParkingList list " + list.toString());
+                    Log.d("MyApp_Service", "NetworkServiceImpl getParkingList list " + list.toString());
 
                     parkingListCallback.getParkingListResult(list);
 
@@ -199,7 +199,7 @@ public class NetworkServiceImpl implements NetworkService {
                 .addHeader("Authorization", "Bearer " + s.getAccess_token())
                 .build();
 
-        Log.d("...", "NetworkServiceImpl testMsg request " + request.toString() + "JSON: " + json);
+        Log.d("MyApp_Service", "NetworkServiceImpl testMsg request " + request.toString() + "JSON: " + json);
 
         Response response = null;
         try {
@@ -208,7 +208,7 @@ public class NetworkServiceImpl implements NetworkService {
                     .execute();
 
             String responseJson = response.body().string();
-            Log.d("...", "NetworkServiceImpl testMsg result " + responseJson);
+            Log.d("MyApp_Service", "NetworkServiceImpl testMsg result " + responseJson);
 
 
         } catch (JsonParseException e) {

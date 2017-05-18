@@ -30,7 +30,7 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
         final Button button = (Button) contentView.findViewById(R.id.button_add_sheet);
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Log.d("Button","Wcisnieto przycisk parkingu: "+strtext+". Id: "+parkingID);
+                Log.d("MyApp_","Wcisnieto przycisk parkingu: "+strtext+". Id: "+parkingID);
             }
         });
 

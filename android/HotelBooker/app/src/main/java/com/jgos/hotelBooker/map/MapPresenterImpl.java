@@ -56,12 +56,12 @@ public class MapPresenterImpl implements MapPresenter, MapPresenterCallBackFromM
 
     @Override
     public void reportLocation(Coordinates coordinates) {
-        Log.d("...", "reportLocation");
+        Log.d("MyApp_Map", "reportLocation");
 
 
         //first location update
         if (this.coordinates == null) {
-            Log.d("...", "reportLocation, first coordinates, getting parking list ");
+            Log.d("MyApp_Map", "reportLocation, first coordinates, getting parking list ");
             mapModel.getParkingList(loginData, coordinates, this);
             getView().createUserMarker(new LatLng(coordinates.getLatitude(),coordinates.getLongitude()));
             getView().moveUserCamera(new LatLng(coordinates.getLatitude(),coordinates.getLongitude()));
@@ -88,9 +88,9 @@ public class MapPresenterImpl implements MapPresenter, MapPresenterCallBackFromM
     @Override
     public void getParkingListResult(final List<Parking> list) {
         parkingList= list;
-        Log.d("...","getParkingListResult()");
+        Log.d("MyApp_Map","getParkingListResult()");
         getView().initMQTT(list);
-        Log.d("...", "getParkingListResult executed");
+        Log.d("MyApp_Map", "getParkingListResult executed");
         handler.post(new Runnable() {
             @Override
             public void run() {
