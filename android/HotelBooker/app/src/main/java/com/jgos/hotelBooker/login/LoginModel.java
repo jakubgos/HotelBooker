@@ -6,7 +6,7 @@ import com.jgos.hotelBooker.login.entity.Result;
 import com.jgos.hotelBooker.login.interfaces.LoginModelOps;
 import com.jgos.hotelBooker.login.interfaces.LoginModelPresenterOps;
 import com.jgos.hotelBooker.data.interfaces.NetworkService;
-import com.jgos.hotelBooker.login.interfaces.LoginServiceResult;
+import com.jgos.hotelBooker.login.interfaces.LoginServiceLoginResult;
 
 /**
  * Created by Bos on 2017-03-04.
@@ -17,7 +17,7 @@ public class LoginModel implements LoginModelOps {
     private final NetworkService loginService;
 
     //todo remove:, replace with callback
-    LoginModelPresenterOps loginPresenter;
+    private final LoginModelPresenterOps loginPresenter;
 
 
     public LoginModel(LoginModelPresenterOps loginPresenter, NetworkService loginService) {
@@ -28,7 +28,7 @@ public class LoginModel implements LoginModelOps {
 
     @Override
     public void login(LoginReqParam loginReqParam) {
-        loginService.login(loginReqParam, new LoginServiceResult() {
+        loginService.login(loginReqParam, new LoginServiceLoginResult() {
             @Override
             public void loginSuccess(LoginData s) {
                 loginPresenter.loginSuccess(s);

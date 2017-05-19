@@ -64,20 +64,19 @@ public class LoginPresenter implements LoginPresenterOps, LoginModelPresenterOps
     public void loginSuccess(final LoginData s) {
         Log.d("MyApp_Login","Login OK!!!!");
         Storage.getInstance().setLoginData(s);
-        NetworkServiceImpl temp = new NetworkServiceImpl();
 
-        temp.testMsg(s);
+        //NetworkServiceImpl temp = new NetworkServiceImpl();
+        //temp.testMsg(s);
 
-        /*
         handler.post(new Runnable() {
             @Override
             public void run() {
-                getView().showMapActivity(s);
-                //getView().showProgress(false);
+                getView().showFilterActivity();
+                getView().showProgress(false);
 
             }
         });
-        */
+
     }
 
     @Override

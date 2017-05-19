@@ -10,14 +10,14 @@ import java.util.List;
 public class UserDb {
 
     @Id
-    public Long id;
+    private Long id;
     @Column
-    public String email;
+    private String email;
     @Column
-    public String password;
+    private String password;
 
     @ElementCollection
-    public List<String> authorities = new ArrayList<>();
+    private List<String> authorities = new ArrayList<>();
 
 
     public UserDb() {

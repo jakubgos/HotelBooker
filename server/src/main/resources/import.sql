@@ -10,6 +10,9 @@ insert into user_db_authorities (user_db_id, authorities) values (3, 'ROLE_WEB')
 insert into user_db_authorities (user_db_id, authorities) values (3, 'ROLE_USER');
 insert into user_db_authorities (user_db_id, authorities) values (4, 'ROLE_WEB');
 
+insert into city (id, name) values (1, 'Łódź');
+insert into city (id, name) values (2, 'Gdynia');
+insert into city (id, name) values (3, 'Warszawa');
 
 
 DROP TABLE oauth_client_details;

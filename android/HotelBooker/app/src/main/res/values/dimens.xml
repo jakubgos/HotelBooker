@@ -4,4 +4,24 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
+
+    <!-- Spacing -->
+    <dimen name="screen_spacing_horizontal">16dp</dimen>
+    <dimen name="screen_spacing_vertical">16dp</dimen>
+    <dimen name="content_spacing_horizontal">12dp</dimen>
+    <dimen name="content_spacing_vertical">12dp</dimen>
+    <dimen name="view_spacing_extra_small">4dp</dimen>
+    <dimen name="view_spacing_small">8dp</dimen>
+    <dimen name="view_spacing_medium">16dp</dimen>
+    <dimen name="view_spacing_large">24dp</dimen>
+
+    <!-- Floating Action Button -->
+    <dimen name="floating_action_button_spacing">16dp</dimen>
+
+    <!-- Cards -->
+    <dimen name="card_corner_radius">3dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+
+    <!-- Selectable Items -->
+    <dimen name="selectable_rounded_rect_corner_radius">3dp</dimen>
 </resources>

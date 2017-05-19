@@ -7,12 +7,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.jgos.hotelBooker.data.entity.City;
 import com.jgos.hotelBooker.data.entity.Coordinates;
 import com.jgos.hotelBooker.data.entity.LoginData;
 import com.jgos.hotelBooker.data.entity.Parking;
+import com.jgos.hotelBooker.filter.interfaces.LoginServiceCityListResult;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
 import com.jgos.hotelBooker.data.interfaces.NetworkService;
-import com.jgos.hotelBooker.login.interfaces.LoginServiceResult;
+import com.jgos.hotelBooker.login.interfaces.LoginServiceLoginResult;
 import com.jgos.hotelBooker.map.interfaces.ParkingListCallback;
 import com.jgos.hotelBooker.parkingList.interfaces.FavoriteParkingCallback;
 
@@ -40,6 +42,9 @@ public class NetworkServiceImpl implements NetworkService {
             8080;
     private static final String PARKING_PATH =
             "api/parkings";
+
+    private static final String CITY_LIST_PATH =
+            "api/getCityList";
     private static final String GRANT_TYPE =
             "password";
     private static final String CLIENT_ID =
@@ -53,7 +58,7 @@ public class NetworkServiceImpl implements NetworkService {
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public void login(final LoginReqParam loginReqParam, final LoginServiceResult callBack) {
+    public void login(final LoginReqParam loginReqParam, final LoginServiceLoginResult callBack) {
 
         final Thread thread = new Thread(new Runnable() {
             @Override
@@ -180,6 +185,59 @@ public class NetworkServiceImpl implements NetworkService {
         thread.start();
 
     }
+
+    @Override
+    public void getCityList(final LoginData loginData, final LoginServiceCityListResult callBack) {
+        final Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("MyApp_Service", "networkimpl getCityList invoked");
+
+                OkHttpClient okHttpClient = new OkHttpClient();
+
+                HttpUrl url = new HttpUrl.Builder()
+                        .scheme("http")
+                        .host(SERVER_ADDRESS)
+                        .port(8080)
+                        .addPathSegments(CITY_LIST_PATH)
+                        .build();
+
+                Request request = new Request.Builder()
+                        .url(url)
+                        .addHeader("Authorization", "Bearer " + loginData.getAccess_token())
+                        .build();
+
+                Log.d("MyApp_Service", "NetworkServiceImpl getCityList request " + request.toString());
+
+                Response response;
+                try {
+                    response = okHttpClient
+                            .newCall(request)
+                            .execute();
+
+                    String responseJson = response.body().string();
+                    Log.d("MyApp_Service", "NetworkServiceImpl getCityList response list " + responseJson);
+
+                    List<City> list = objectMapper.readValue(responseJson, TypeFactory.defaultInstance().constructCollectionType(List.class,
+                            City.class));
+
+                    Log.d("MyApp_Service", "NetworkServiceImpl getCityList list " + list.toString());
+
+                    callBack.getCityListResult(list);
+
+                } catch (IOException e) {
+                    callBack.failure("failed to get city list");
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+    }
+
+
+
+
+
 
     public void testMsg(LoginData s) {
 

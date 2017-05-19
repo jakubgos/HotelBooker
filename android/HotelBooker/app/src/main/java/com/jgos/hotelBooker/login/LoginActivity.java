@@ -18,6 +18,7 @@ import java.util.List;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jgos.hotelBooker.data.entity.LoginData;
+import com.jgos.hotelBooker.filter.FilterActivity;
 import com.jgos.hotelBooker.map.MapsActivity;
 import com.jgos.hotelBooker.R;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
@@ -37,7 +38,6 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
     private AutoCompleteTextView mLoginView;
     private EditText mPasswordView;
     private View mProgressView;
-    private View mLoginFormView;
 
     //Presenter interface
     LoginPresenterOps mPresenter;
@@ -62,7 +62,6 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
         addEmailsToAutoComplete();
 
@@ -155,6 +154,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
 
     @Override
     public void showMapActivity(LoginData s) {
+        //todo remove
         Intent myIntent = new Intent(this, MapsActivity.class);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
@@ -162,6 +162,12 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+        this.startActivity(myIntent);
+    }
+
+    @Override
+    public void showFilterActivity() {
+        Intent myIntent = new Intent(this, FilterActivity.class);
         this.startActivity(myIntent);
     }
 

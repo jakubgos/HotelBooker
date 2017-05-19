@@ -52,4 +52,50 @@
          <item name="android:textColor">@color/white</item>
      </style>
 
+
+    <!-- Text Styles -->
+    <style name="TextStyle" parent="TextAppearance.AppCompat">
+    </style>
+
+    <style name="TextStyle.Title" parent="TextAppearance.AppCompat.Title">
+    </style>
+
+    <style name="TextStyle.Body1" parent="TextAppearance.AppCompat.Body1">
+    </style>
+
+    <style name="TextStyle.Body2" parent="TextAppearance.AppCompat.Body2">
+    </style>
+
+    <!-- Edit Text Styles -->
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+    </style>
+
+    <style name="TextInputLayoutStyle" parent="Widget.Design.TextInputLayout">
+    </style>
+
+    <!-- Spinner Styles -->
+    <style name="SpinnerStyle" parent="Widget.AppCompat.Spinner">
+    </style>
+
+    <style name="SpinnerStyle.Underlined" parent="Widget.AppCompat.Spinner.Underlined">
+    </style>
+
+
+    <style name="CardStyle" parent="CardView.Light">
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+    </style>
+
+    <style name="CardStyle.Home">
+        <item name="contentPaddingBottom">@dimen/content_spacing_vertical</item>
+        <item name="contentPaddingLeft">@dimen/content_spacing_horizontal</item>
+        <item name="contentPaddingRight">@dimen/content_spacing_horizontal</item>
+        <item name="contentPaddingTop">@dimen/content_spacing_vertical</item>
+        <item name="android:layout_marginBottom">@dimen/view_spacing_small</item>
+        <item name="android:layout_marginLeft">@dimen/screen_spacing_horizontal</item>
+        <item name="android:layout_marginRight">@dimen/screen_spacing_horizontal</item>
+        <item name="android:layout_marginTop">@dimen/view_spacing_small</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
  </resources>

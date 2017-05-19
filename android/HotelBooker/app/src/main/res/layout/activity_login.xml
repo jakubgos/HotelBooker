@@ -1,20 +1,26 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/md_grey_200"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
     tools:context="com.jgos.hotelBooker.login.LoginActivity">
 
-    <!-- Login progress -->
-    <ScrollView
-        android:id="@+id/login_form"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/view_spacing_small"
+        android:gravity="center">
+    <android.support.v7.widget.CardView
+        style="@style/CardStyle.Home"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
 
         <LinearLayout
             android:id="@+id/email_login_form"
@@ -55,15 +61,30 @@
 
             </android.support.design.widget.TextInputLayout>
 
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            >
             <Button
-                android:theme="@style/AppTheme.Button"
                 android:id="@+id/email_sign_in_button"
                 style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_weight="0.0"/>
+            <Button
+                android:id="@+id/register_in_button"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/action_register_in"
+                android:textStyle="bold"
+                android:layout_weight="0.0"/>
+
             <ProgressBar
                 android:id="@+id/login_progress"
                 style="@style/Widget.AppCompat.ProgressBar"
@@ -71,9 +92,12 @@
                 android:layout_height="wrap_content"
                 android:indeterminate="true"
                 android:paddingTop="40px"
-                />
-
+                android:layout_weight="0.2"/>
 
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    </LinearLayout>
+</ScrollView>
+
+
