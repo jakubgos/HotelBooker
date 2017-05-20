@@ -27,8 +27,8 @@
     <string name="filter_view_chose_city">Wybierz miasto</string>
     <string name="Szukaj_Pokoi">Szukaj pokoi</string>
     <string name="miasto">Miasto</string>
-    <string name="data_przyjazdu">Przyjazd</string>
-    <string name="data_wyjazdu">Wyjazd</string>
+    <string name="data_przyjazdu">Zameldowanie</string>
+    <string name="data_wyjazdu">Wymeldowanie</string>
     <string name="loading">Loading...</string>
     <string name="DATA_FORMAT">yyyy-MM-dd</string>
 </resources>
