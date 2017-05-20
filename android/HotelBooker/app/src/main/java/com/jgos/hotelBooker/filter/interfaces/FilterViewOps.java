@@ -2,6 +2,7 @@ package com.jgos.hotelBooker.filter.interfaces;
 
 import com.jgos.hotelBooker.data.entity.City;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface FilterViewOps {
     void displayArrivalDate(String s);
 
     void displayDepartureDate(String s);
+
+    void showCalendarDialog(Calendar current, Calendar minDate, String title);
 }

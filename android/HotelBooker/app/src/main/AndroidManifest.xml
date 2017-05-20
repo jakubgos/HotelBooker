@@ -71,7 +71,6 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".menu.MenuActivity" />
         <activity android:name=".parkingList.ParkingListViewImpl" />
 
         <service android:name="org.eclipse.paho.android.service.MqttService"></service>

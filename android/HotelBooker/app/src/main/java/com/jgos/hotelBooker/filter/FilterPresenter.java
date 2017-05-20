@@ -2,10 +2,12 @@ package com.jgos.hotelBooker.filter;
 
 import android.os.Handler;
 import android.text.format.DateFormat;
+import android.util.Log;
 
 import com.jgos.hotelBooker.R;
 import com.jgos.hotelBooker.data.NetworkServiceImpl;
 import com.jgos.hotelBooker.data.entity.City;
+import com.jgos.hotelBooker.data.entity.DialogChoice;
 import com.jgos.hotelBooker.filter.interfaces.FilterPresenterOps;
 import com.jgos.hotelBooker.filter.interfaces.FilterViewOps;
 import com.jgos.hotelBooker.filter.interfaces.FilterModelOps;
@@ -26,6 +28,8 @@ class FilterPresenter implements FilterPresenterOps {
     private final FilterModelOps filterModelOps;
     private final Handler handler = new Handler();
     private final String DATA_FORMAT = "yyyy-MM-dd";
+    private Calendar arrivalCalendar = null;
+    private Calendar departureCalendar = null;
     public FilterPresenter(FilterViewOps filterViewOps ) {
         this.filterViewOps=new WeakReference<>(filterViewOps);
         this.filterModelOps = new FilterModel(this, new NetworkServiceImpl());
@@ -43,15 +47,19 @@ class FilterPresenter implements FilterPresenterOps {
         getView().showCityLoadProgressBar(true);
 
 
-        Date dt = new Date();
-        Calendar c = Calendar.getInstance();
-        c.setTime(dt);
-        getView().displayArrivalDate( DateFormat.format(DATA_FORMAT,dt).toString());
+        Date arrivalDate = new Date();
+        Date departureDate = new Date();
 
-        c.add(Calendar.DATE, 1);
-        dt = c.getTime();
+        arrivalCalendar = Calendar.getInstance();
+        arrivalCalendar.setTime(arrivalDate);
 
-        getView().displayDepartureDate( DateFormat.format(DATA_FORMAT,dt).toString());
+        departureCalendar = Calendar.getInstance();
+        departureCalendar.setTime(departureDate);
+        departureCalendar.add(Calendar.DATE, 1);
+        departureDate = departureCalendar.getTime();
+
+        getView().displayArrivalDate( DateFormat.format(DATA_FORMAT,arrivalDate).toString());
+        getView().displayDepartureDate( DateFormat.format(DATA_FORMAT,departureDate).toString());
 
         filterModelOps.getCityList(Storage.getInstance().getLoginData());
 
@@ -82,12 +90,39 @@ class FilterPresenter implements FilterPresenterOps {
     }
 
     @Override
-    public void arrivalDateChange() {
+    public void arrivalDateClick() {
+        getView().showCalendarDialog(arrivalCalendar, null, DialogChoice.ARRIVAL.name());
+    }
+
+    @Override
+    public void departureDateClick() {
+        Calendar minCalendarTime= Calendar.getInstance();
+        minCalendarTime.setTime(arrivalCalendar.getTime());
+        minCalendarTime.add(Calendar.DATE, 1);
+
+        getView().showCalendarDialog(departureCalendar, minCalendarTime, DialogChoice.DEPARTURE.name());
 
     }
 
     @Override
-    public void departureDateChange() {
+    public void arrivalDateChange(Date date) {
+        arrivalCalendar.setTime(date);
+        getView().displayArrivalDate( DateFormat.format(DATA_FORMAT,date).toString());
+        if(arrivalCalendar.getTime().compareTo(departureCalendar.getTime()) >= 0)
+        {
+            Log.d("MyApp_filter","arrivalCalendar > departureCalendar, update departureCalendar ");
+            departureCalendar.setTime(arrivalCalendar.getTime());
+            departureCalendar.add(Calendar.DATE, 1);
+
+            getView().displayDepartureDate( DateFormat.format(DATA_FORMAT,departureCalendar.getTime()).toString());
+        }
+
+    }
+
+    @Override
+    public void departureDateChange(Date date) {
+        departureCalendar.setTime(date);
+        getView().displayDepartureDate( DateFormat.format(DATA_FORMAT,date).toString());
 
     }
 }
