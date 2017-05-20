@@ -97,5 +97,18 @@
         <item name="android:layout_marginTop">@dimen/view_spacing_small</item>
         <item name="android:layout_gravity">center</item>
     </style>
+    <style name="CardStyle.Home.SelectableItemStyle.Rect" parent="CardStyle.Home">
+        <item name="android:background">@drawable/state_list_selectable_rect_green</item>
+    </style>
+    <!-- Selectable Item Styles -->
+
+    <style name="SelectableItemStyle">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="SelectableItemStyle.Rect">
+        <item name="android:background">@drawable/state_list_selectable_rect_green</item>
+    </style>
 
  </resources>

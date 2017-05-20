@@ -65,6 +65,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
+            android:minHeight="70dp"
             >
             <Button
                 android:id="@+id/email_sign_in_button"

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    style="@style/CardStyle.Home"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Szukaj_Pokoi"
+                android:textAppearance="@style/TextStyle.Title"/>
+
+            <ProgressBar
+                android:id="@+id/city_load_progress"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:visibility="visible"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/view_spacing_medium"
+            android:text="@string/miasto"
+            android:textAppearance="@style/TextStyle.Body2"/>
+
+        <Spinner
+            android:id="@+id/citySpinner"
+            style="@style/SpinnerStyle.Underlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/view_spacing_small"
+            android:spinnerMode="dropdown"/>
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

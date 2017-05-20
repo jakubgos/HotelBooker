@@ -14,4 +14,8 @@ public interface FilterPresenterOps {
     void getCityListResult(List<City> list);
 
     void getCityListResultFailed(String s);
+
+    void arrivalDateChange();
+
+    void departureDateChange();
 }
