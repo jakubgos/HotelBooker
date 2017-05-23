@@ -31,4 +31,7 @@
     <string name="data_wyjazdu">Wymeldowanie</string>
     <string name="loading">Loading...</string>
     <string name="DATA_FORMAT">yyyy-MM-dd</string>
+    <string name="Kryteria">Kryteria</string>
+    <string name="Ilosc_miejsc">Osoby</string>
+    <string name="Szukaj">Szukaj</string>
 </resources>

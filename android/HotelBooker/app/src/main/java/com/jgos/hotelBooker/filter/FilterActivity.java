@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -16,6 +17,8 @@ import com.jgos.hotelBooker.data.entity.City;
 import com.jgos.hotelBooker.data.entity.DialogChoice;
 import com.jgos.hotelBooker.filter.interfaces.FilterPresenterOps;
 import com.jgos.hotelBooker.filter.interfaces.FilterViewOps;
+import com.jgos.hotelBooker.login.entity.LoginReqParam;
+import com.shawnlin.numberpicker.NumberPicker;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.text.ParseException;
@@ -34,6 +37,9 @@ public class FilterActivity extends AppCompatActivity implements FilterViewOps, 
     TextView viewDepartureDate;
     TextView viewArrivalDate;
     private View mCityLoadProgressView;
+    NumberPicker numberPicker;
+    Button mSearchButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +65,17 @@ public class FilterActivity extends AppCompatActivity implements FilterViewOps, 
             public void onClick(View v) {
                 mPresenter.departureDateClick();
             }});
+
+        numberPicker = (NumberPicker) findViewById(R.id.filter_number_picker);
+
+        mSearchButton = (Button) findViewById(R.id.filter_select_button);
+        mSearchButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attemptSearch();
+            }
+        });
+
 
         setupMVP();
 
@@ -148,6 +165,15 @@ public class FilterActivity extends AppCompatActivity implements FilterViewOps, 
         {
             Log.e("MyApp_filter","onDateSet received incorrect tag: " +  view.getTag());
         }
+    }
+
+    private void attemptSearch() {
+        Log.d("MyApp_search", "view attemptSearch invoked");
+        // Store values at the time of the login attempt.
+        City city = (City) citySpinner.getSelectedItem();
+        int value = numberPicker.getValue();
+        Log.d("MyApp_search", city.toString() + "  " + value);
+
 
 
     }

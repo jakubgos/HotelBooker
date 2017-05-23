@@ -19,5 +19,7 @@
 
         <include layout="@layout/filter_city_view"/>
 
+
+
     </LinearLayout>
 </ScrollView>

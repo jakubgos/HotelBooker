@@ -14,3 +14,13 @@ http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html		//thymeleaf
  curl http://localhost:8080/test  
  curl -X POST 'http://client:secret@localhost:8080/oauth/token?grant_type=password&&username=john.doe@gmail.com&password=password'
  curl -i -H "Authorization: Bearer e8111331-8f9d-464b-b615-d5a5473c68be" http://localhost:8080/test
+ 
+ 
+ 
+ https://github.com/wasabeef/awesome-android-ui
+ 
+ https://material.io/guidelines/style/color.html#color-color-palette
+ 
+ SUPER:
+ https://www.captechconsulting.com/blogs/android-material-themes-made-easy-with-appcompat
+ 
