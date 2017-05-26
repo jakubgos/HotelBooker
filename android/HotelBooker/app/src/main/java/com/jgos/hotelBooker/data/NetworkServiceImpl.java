@@ -9,9 +9,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.jgos.hotelBooker.data.entity.City;
 import com.jgos.hotelBooker.data.entity.Coordinates;
+import com.jgos.hotelBooker.data.entity.HotelOffer;
 import com.jgos.hotelBooker.data.entity.LoginData;
 import com.jgos.hotelBooker.data.entity.Parking;
+import com.jgos.hotelBooker.data.entity.SearchRequest;
 import com.jgos.hotelBooker.filter.interfaces.LoginServiceCityListResult;
+import com.jgos.hotelBooker.filter.interfaces.SearchRequestResult;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
 import com.jgos.hotelBooker.data.interfaces.NetworkService;
 import com.jgos.hotelBooker.login.interfaces.LoginServiceLoginResult;
@@ -42,6 +45,9 @@ public class NetworkServiceImpl implements NetworkService {
             8080;
     private static final String PARKING_PATH =
             "api/parkings";
+
+    private static final String SEARCH_PATH =
+            "api/searchOffer";
 
     private static final String CITY_LIST_PATH =
             "api/getCityList";
@@ -234,9 +240,61 @@ public class NetworkServiceImpl implements NetworkService {
         thread.start();
     }
 
+    @Override
+    public void searchRequest(final SearchRequest searchRequest, final LoginData loginData, final SearchRequestResult searchRequestResult) {
+        final Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("MyApp_Service", "searchRequest invoked");
 
+                OkHttpClient okHttpClient = new OkHttpClient();
+                String json = null;
+                try {
+                    json = objectMapper.writeValueAsString(searchRequest);
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                    searchRequestResult.failure("Failed to create Json Object");
+                    return;
+                }
 
+                HttpUrl url = new HttpUrl.Builder()
+                        .scheme("http")
+                        .host(SERVER_ADDRESS)
+                        .port(8080)
+                        .addPathSegments(SEARCH_PATH)
+                        .build();
 
+                Request request = new Request.Builder()
+                        .url(url)
+                        .addHeader("Authorization", "Bearer " + loginData.getAccess_token())
+                        .post(RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json))
+                        .build();
+
+                Log.d("MyApp_Service", "NetworkServiceImpl searchRequest request " + request.toString() + "JSON: " + json);
+
+                Response response = null;
+                try {
+                    response = okHttpClient
+                            .newCall(request)
+                            .execute();
+
+                    String responseJson = response.body().string();
+                    Log.d("MyApp_Service", "NetworkServiceImpl searchRequest result " + responseJson);
+
+                    //List<Parking> list = objectMapper.readValue(responseJson, TypeFactory.defaultInstance().constructCollectionType(List.class,
+                    //        Parking.class));
+
+                    //Log.d("MyApp_Service", "NetworkServiceImpl getParkingList list " + list.toString());
+
+                    searchRequestResult.getSearchRequestResult(new ArrayList<HotelOffer>());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+    }
 
 
     public void testMsg(LoginData s) {

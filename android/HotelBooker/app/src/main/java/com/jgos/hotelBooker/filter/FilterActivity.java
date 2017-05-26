@@ -172,6 +172,8 @@ public class FilterActivity extends AppCompatActivity implements FilterViewOps, 
         // Store values at the time of the login attempt.
         City city = (City) citySpinner.getSelectedItem();
         int value = numberPicker.getValue();
+
+        mPresenter.search(city , numberPicker.getValue());
         Log.d("MyApp_search", city.toString() + "  " + value);
 
 

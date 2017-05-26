@@ -4,17 +4,17 @@ import android.os.Handler;
 import android.text.format.DateFormat;
 import android.util.Log;
 
-import com.jgos.hotelBooker.R;
 import com.jgos.hotelBooker.data.NetworkServiceImpl;
 import com.jgos.hotelBooker.data.entity.City;
 import com.jgos.hotelBooker.data.entity.DialogChoice;
+import com.jgos.hotelBooker.data.entity.HotelOffer;
+import com.jgos.hotelBooker.data.entity.SearchRequest;
 import com.jgos.hotelBooker.filter.interfaces.FilterPresenterOps;
 import com.jgos.hotelBooker.filter.interfaces.FilterViewOps;
 import com.jgos.hotelBooker.filter.interfaces.FilterModelOps;
 import com.jgos.hotelBooker.storage.Storage;
 
 import java.lang.ref.WeakReference;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -123,6 +123,18 @@ class FilterPresenter implements FilterPresenterOps {
     public void departureDateChange(Date date) {
         departureCalendar.setTime(date);
         getView().displayDepartureDate( DateFormat.format(DATA_FORMAT,date).toString());
+
+    }
+
+    @Override
+    public void search(City city, int numberOfPeople) {
+        SearchRequest searchRequest = new SearchRequest(city,arrivalCalendar.getTime().getTime(),departureCalendar.getTime().getTime(), numberOfPeople);
+        filterModelOps.searchRequest(searchRequest, Storage.getInstance().getLoginData() , this);
+
+    }
+
+    @Override
+    public void getSearchRequestResult(List<HotelOffer> list) {
 
     }
 }

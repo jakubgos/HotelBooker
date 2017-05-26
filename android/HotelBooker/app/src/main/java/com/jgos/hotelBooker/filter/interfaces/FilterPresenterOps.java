@@ -1,6 +1,7 @@
 package com.jgos.hotelBooker.filter.interfaces;
 
 import com.jgos.hotelBooker.data.entity.City;
+import com.jgos.hotelBooker.data.entity.HotelOffer;
 
 import java.util.Date;
 import java.util.List;
@@ -23,4 +24,8 @@ public interface FilterPresenterOps {
     void arrivalDateChange(Date date);
 
     void departureDateChange(Date date);
+
+    void search(City city, int value);
+
+    void getSearchRequestResult(List<HotelOffer> list);
 }

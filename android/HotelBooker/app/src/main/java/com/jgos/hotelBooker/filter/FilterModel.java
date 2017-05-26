@@ -1,11 +1,14 @@
 package com.jgos.hotelBooker.filter;
 
 import com.jgos.hotelBooker.data.entity.City;
+import com.jgos.hotelBooker.data.entity.HotelOffer;
 import com.jgos.hotelBooker.data.entity.LoginData;
+import com.jgos.hotelBooker.data.entity.SearchRequest;
 import com.jgos.hotelBooker.data.interfaces.NetworkService;
 import com.jgos.hotelBooker.filter.interfaces.FilterModelOps;
 import com.jgos.hotelBooker.filter.interfaces.FilterPresenterOps;
 import com.jgos.hotelBooker.filter.interfaces.LoginServiceCityListResult;
+import com.jgos.hotelBooker.filter.interfaces.SearchRequestResult;
 
 import java.util.List;
 
@@ -39,4 +42,20 @@ class FilterModel implements FilterModelOps {
             }
         });
     }
+
+    @Override
+    public void searchRequest(SearchRequest searchRequest, LoginData loginData, final FilterPresenterOps filterPresenterOps) {
+        networkService.searchRequest(searchRequest, loginData, new SearchRequestResult() {
+
+            @Override
+            public void getSearchRequestResult(List<HotelOffer> list) {
+                filterPresenterOps.getSearchRequestResult(list);
+            }
+
+            @Override
+            public void failure(String s) {
+                filterPresenterOps.getCityListResultFailed(s);
+            }
+        });
+}
 }

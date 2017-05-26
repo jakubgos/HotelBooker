@@ -40,5 +40,11 @@ public class ApiHotel {
 
     }
 
+    @RequestMapping("/searchOffer")
+    public String searchOffer(Model model) throws InterruptedException {
+        return "ok";
+
+    }
+
 
 }
