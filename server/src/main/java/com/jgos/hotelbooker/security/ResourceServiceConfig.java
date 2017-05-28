@@ -20,9 +20,11 @@ public class ResourceServiceConfig extends ResourceServerConfigurerAdapter {
                 //.antMatchers("/test/").permitAll()
                 //.and()
                 .authorizeRequests()
-                .antMatchers("/api/**").hasAuthority(Authorities.ROLE_USER.name())
+                .antMatchers("/api/**").permitAll()//.hasAuthority(Authorities.ROLE_USER.name())
                 .and()
                 .authorizeRequests()
-                .antMatchers("/web/**").hasAuthority(Authorities.ROLE_WEB.name());
+                .antMatchers("/web/**").hasAuthority(Authorities.ROLE_WEB.name())
+                .and().authorizeRequests()
+                .antMatchers("/test/**").permitAll();
     }
 }

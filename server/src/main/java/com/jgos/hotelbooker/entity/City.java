@@ -1,6 +1,9 @@
 package com.jgos.hotelbooker.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -11,13 +14,16 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class City {
 
     @Id
+    @Min(1)
     @GeneratedValue( strategy = GenerationType.SEQUENCE )
     private long id;
+
     @Column
+    @NotNull
+    @Size(min = 3)
     private String name;
 
     public City() {
-
     }
 
     public City(long id, String name) {
