@@ -15,6 +15,16 @@ insert into city (id, name) values (2, 'Gdynia');
 insert into city (id, name) values (3, 'Warszawa');
 insert into city (id, name) values (4, 'Katowice');
 
+
+insert into coordinates (id, latitude, longitude) values (1,0,0);
+
+insert into hotel (id, name, city_id, description,adress, coordinates_id) values (1, 'hotelName1',1,'hotel_1_description','hotel_1_address', 1);
+
+insert into room (id,name,description,size ) values (1,'room_1_name','room_1_description',2);
+
+insert into hotel_room_list (hotel_id, room_list_id) values (1,1);
+
+
 DROP TABLE oauth_client_details;
 DROP TABLE oauth_client_token;
 DROP TABLE oauth_access_token;

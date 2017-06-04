@@ -51,11 +51,11 @@ public class ApiHotel {
 
     @RequestMapping(value = "/searchOffer", method = RequestMethod.POST)
     @ResponseBody
-    public HotelOffer searchOffer(
+    public List<HotelOffer> searchOffer(
             @Valid @RequestBody SearchRequest searchRequest) throws InterruptedException {
       log.info("searchOffer received with data:" + searchRequest);
 
-        HotelOffer ho =hotelSearch.search(searchRequest);
+        List<HotelOffer> ho = hotelSearch.search(searchRequest);
         return ho;
     }
 

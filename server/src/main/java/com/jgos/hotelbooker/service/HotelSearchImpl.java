@@ -4,6 +4,8 @@ import com.jgos.hotelbooker.entity.HotelOffer;
 import com.jgos.hotelbooker.entity.SearchRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Bos on 2017-05-28.
  */
@@ -12,7 +14,12 @@ import org.springframework.stereotype.Service;
 public class HotelSearchImpl implements HotelSearch {
 
     @Override
-    public HotelOffer search(SearchRequest searchRequest) {
-        return new HotelOffer();
+    public List<HotelOffer> search(SearchRequest searchRequest) {
+
+
+
+
+
+        return (List<HotelOffer>) new HotelOffer();
     }
 }

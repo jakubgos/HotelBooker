@@ -54,4 +54,15 @@ public class UserDb {
     public void setAuthorities(List<String> authorities) {
         this.authorities = authorities;
    }
+
+
+    @Override
+    public String toString() {
+        return "UserDb{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", authorities=" + authorities +
+                '}';
+    }
 }
