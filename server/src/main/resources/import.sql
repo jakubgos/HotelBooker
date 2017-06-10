@@ -17,12 +17,23 @@ insert into city (id, name) values (4, 'Katowice');
 
 
 insert into coordinates (id, latitude, longitude) values (1,0,0);
+insert into coordinates (id, latitude, longitude) values (2,10,10);
 
-insert into hotel (id, name, city_id, description,adress, coordinates_id) values (1, 'hotelName1',1,'hotel_1_description','hotel_1_address', 1);
+insert into hotel_detail (id, name, city_id, description,address, coordinates_id) values (1, 'hotelName1',1,'hotel_1_description','hotel_1_address', 1);
+insert into hotel_detail (id, name, city_id, description,address, coordinates_id) values (2, 'hotelName2',1,'hotel_2_description','hotel_2_address', 2);
+
+insert into hotel (id, hotel_detail_id) values (1, 1)
+insert into hotel (id, hotel_detail_id) values (2, 2)
 
 insert into room (id,name,description,size ) values (1,'room_1_name','room_1_description',2);
+insert into room (id,name,description,size ) values (2,'room_2_name','room_2_description',2);
+insert into room (id,name,description,size ) values (3,'room_3_name','room_3_description',3);
 
 insert into hotel_room_list (hotel_id, room_list_id) values (1,1);
+insert into hotel_room_list (hotel_id, room_list_id) values (1,2);
+insert into hotel_room_list (hotel_id, room_list_id) values (2,3);
+
+insert into reservation (id, room_id,user_id,date) values (2,1,1,'2017-05-28');
 
 
 DROP TABLE oauth_client_details;

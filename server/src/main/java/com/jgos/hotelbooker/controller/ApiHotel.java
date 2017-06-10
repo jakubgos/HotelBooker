@@ -1,23 +1,18 @@
 package com.jgos.hotelbooker.controller;
 
 import com.jgos.hotelbooker.entity.City;
-import com.jgos.hotelbooker.entity.HotelOffer;
+import com.jgos.hotelbooker.entity.shared.HotelOffer;
 import com.jgos.hotelbooker.entity.SearchRequest;
 import com.jgos.hotelbooker.repository.CityRepository;
-import com.jgos.hotelbooker.service.HotelSearch;
+import com.jgos.hotelbooker.service.OfferSearchImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by Bos on 2017-04-16.
@@ -34,7 +29,7 @@ public class ApiHotel {
     private CityRepository cityRepository;
 
     @Autowired
-    private HotelSearch hotelSearch;
+    private OfferSearchImpl offerSearch;
 
     @RequestMapping("/test")
     @ResponseBody
@@ -51,12 +46,11 @@ public class ApiHotel {
 
     @RequestMapping(value = "/searchOffer", method = RequestMethod.POST)
     @ResponseBody
-    public List<HotelOffer> searchOffer(
+    public HotelOffer searchOffer(
             @Valid @RequestBody SearchRequest searchRequest) throws InterruptedException {
       log.info("searchOffer received with data:" + searchRequest);
 
-        List<HotelOffer> ho = hotelSearch.search(searchRequest);
-        return ho;
+      return offerSearch.search(searchRequest);
     }
 
 

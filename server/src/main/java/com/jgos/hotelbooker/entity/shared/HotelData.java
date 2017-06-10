@@ -1,35 +1,24 @@
-package com.jgos.hotelbooker.entity;
+package com.jgos.hotelbooker.entity.shared;
 
-import javax.persistence.*;
+import com.jgos.hotelbooker.entity.HotelDetail;
+import com.jgos.hotelbooker.entity.Room;
+
 import java.util.List;
 
 /**
- * Created by Bos on 2017-05-28.
+ * Created by Bos on 2017-06-11.
  */
+public class HotelData {
 
-@Entity
-public class Hotel {
-
-    @Id
-    @GeneratedValue( strategy = GenerationType.TABLE )
-    private long id;
-
-    @OneToOne
     private HotelDetail hotelDetail;
-
-
-    @OneToMany(fetch = FetchType.LAZY)
     private List<Room> roomList;
 
-    public Hotel() {
+    public HotelData(HotelDetail hotelDetail, List<Room> roomList) {
+        this.hotelDetail = hotelDetail;
+        this.roomList = roomList;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public HotelData() {
     }
 
     public HotelDetail getHotelDetail() {
@@ -50,9 +39,8 @@ public class Hotel {
 
     @Override
     public String toString() {
-        return "Hotel{" +
-                "id=" + id +
-                ", hotelDetail=" + hotelDetail +
+        return "HotelData{" +
+                "hotelDetail=" + hotelDetail +
                 ", roomList=" + roomList +
                 '}';
     }

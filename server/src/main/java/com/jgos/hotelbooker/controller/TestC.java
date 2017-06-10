@@ -57,7 +57,8 @@ public class TestC {
 
 
 
-        return user+"\n "+hotel +"\nOLD::" +reservation + "\n NEW:: " + newRes;
+        //return user+"\n "+hotel +"\nOLD::" +reservation + "\n NEW:: " + newRes + "\n";
+    return "!: " +hotels.findOne((long)1).getRoomList() + "\n 2:"+ hotels.findOne((long)2).getRoomList();
     }
 
 }

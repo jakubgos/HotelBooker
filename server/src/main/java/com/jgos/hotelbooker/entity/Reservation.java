@@ -1,6 +1,7 @@
 package com.jgos.hotelbooker.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -16,12 +17,15 @@ public class Reservation {
     @GeneratedValue( strategy = GenerationType.TABLE )
     private long id;
 
+    @NotNull
     @ManyToOne
     private Room room;
 
+    @NotNull
     @ManyToOne
     UserDb user;
 
+    @NotNull
     @Temporal(TemporalType.DATE)
     Date date;
 
@@ -33,6 +37,10 @@ public class Reservation {
 
     public Room getRoom() {
         return room;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public void setRoom(Room room) {
