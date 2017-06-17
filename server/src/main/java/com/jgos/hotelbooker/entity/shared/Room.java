@@ -1,9 +1,7 @@
-package com.jgos.hotelbooker.entity;
+package com.jgos.hotelbooker.entity.shared;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Bos on 2017-05-28.
@@ -17,6 +15,9 @@ public class Room {
     private String name;
     private String description;
     private int size;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<RoomFacilities> roomFacilities;
 
 
     public long getId() {
@@ -54,12 +55,6 @@ public class Room {
     public Room() {
     }
 
-    public Room(String name, String description, int size) {
-        this.name = name;
-        this.description = description;
-        this.size = size;
-    }
-
     @Override
     public String toString() {
         return "Room{" +
@@ -67,6 +62,7 @@ public class Room {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", size=" + size +
+                ", roomFacilities=" + roomFacilities +
                 '}';
     }
 }

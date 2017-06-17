@@ -2,9 +2,7 @@ package com.jgos.hotelbooker.service;
 
 import com.jgos.hotelbooker.controller.ApiHotel;
 import com.jgos.hotelbooker.entity.*;
-import com.jgos.hotelbooker.entity.shared.HotelData;
-import com.jgos.hotelbooker.entity.shared.HotelOffer;
-import com.jgos.hotelbooker.entity.shared.HotelResultStatus;
+import com.jgos.hotelbooker.entity.shared.*;
 import com.jgos.hotelbooker.repository.HotelRepository;
 import com.jgos.hotelbooker.repository.ReservationRepository;
 import com.jgos.hotelbooker.repository.RoomRepository;

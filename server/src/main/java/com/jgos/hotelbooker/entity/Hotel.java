@@ -1,5 +1,8 @@
 package com.jgos.hotelbooker.entity;
 
+import com.jgos.hotelbooker.entity.shared.HotelDetail;
+import com.jgos.hotelbooker.entity.shared.Room;
+
 import javax.persistence.*;
 import java.util.List;
 

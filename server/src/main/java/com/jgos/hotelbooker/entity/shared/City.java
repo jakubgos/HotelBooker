@@ -1,4 +1,4 @@
-package com.jgos.hotelbooker.entity;
+package com.jgos.hotelbooker.entity.shared;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;

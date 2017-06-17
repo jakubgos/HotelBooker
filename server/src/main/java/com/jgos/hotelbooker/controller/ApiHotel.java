@@ -1,8 +1,8 @@
 package com.jgos.hotelbooker.controller;
 
-import com.jgos.hotelbooker.entity.City;
+import com.jgos.hotelbooker.entity.shared.City;
 import com.jgos.hotelbooker.entity.shared.HotelOffer;
-import com.jgos.hotelbooker.entity.SearchRequest;
+import com.jgos.hotelbooker.entity.shared.SearchRequest;
 import com.jgos.hotelbooker.repository.CityRepository;
 import com.jgos.hotelbooker.service.OfferSearchImpl;
 import org.slf4j.Logger;
@@ -50,7 +50,9 @@ public class ApiHotel {
             @Valid @RequestBody SearchRequest searchRequest) throws InterruptedException {
       log.info("searchOffer received with data:" + searchRequest);
 
-      return offerSearch.search(searchRequest);
+        HotelOffer hotelOffer = offerSearch.search(searchRequest);
+        log.info(hotelOffer.toString());
+      return hotelOffer;
     }
 
 

@@ -14,7 +14,8 @@ http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html		//thymeleaf
  curl http://localhost:8080/test  
  curl -X POST 'http://client:secret@localhost:8080/oauth/token?grant_type=password&&username=john.doe@gmail.com&password=password'
  curl -i -H "Authorization: Bearer e8111331-8f9d-464b-b615-d5a5473c68be" http://localhost:8080/test
- 
+ curl -i -H "Content-Type: application/json" -H "Authorization: Bearer $token" -X POST -d '{"arrivalTime":1495980364873,"city":{"id":1,"name":"Łódź"},"departureTime":1496066764873,"numberOfPeople":2}' http://localhost:8080/api/searchOffer
+
  
  
  https://github.com/wasabeef/awesome-android-ui
@@ -24,3 +25,13 @@ http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html		//thymeleaf
  SUPER:
  https://www.captechconsulting.com/blogs/android-material-themes-made-easy-with-appcompat
  
+ 
+ http://blog.codeleak.pl/2013/09/request-body-validation-in-spring-mvc-3.2.html
+ 
+ 
+ https://github.com/spring-projects/spring-boot/tree/v1.5.3.RELEASE/spring-boot-samples
+ https://github.com/spring-projects/spring-boot/tree/v1.5.3.RELEASE/spring-boot-samples/spring-boot-sample-hibernate52/src/main/java/sample/hibernate52/domain
+ 
+ https://stackoverflow.com/questions/2990799/difference-between-fetchtype-lazy-and-eager-in-java-persistence-api
+ 
+ http://docs.spring.io/spring-data/jpa/docs/current/reference/html/#specifications

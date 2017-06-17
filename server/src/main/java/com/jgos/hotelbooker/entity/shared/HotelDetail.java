@@ -1,6 +1,8 @@
-package com.jgos.hotelbooker.entity;
+package com.jgos.hotelbooker.entity.shared;
+
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Bos on 2017-06-11.
@@ -14,19 +16,28 @@ public class HotelDetail {
     private long id;
 
     @Column(nullable = false)
-    String name;
-    @Column(nullable = false)
-
-    String description;
+    private String name;
 
     @Column(nullable = false)
-    String address;
+    private String description;
+
+    @Column(nullable = false)
+    private String address;
 
     @OneToOne
     private Coordinates coordinates;
 
     @ManyToOne(optional = false)
     private City city;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<FoodOffer> foodOffer;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<HotelFacilities> hotelFacilities;
+
+    @ManyToOne
+    private Rating rating;
 
     public HotelDetail() {
     }
@@ -79,6 +90,15 @@ public class HotelDetail {
         this.city = city;
     }
 
+
+    public List<FoodOffer> getFoodOffer() {
+        return foodOffer;
+    }
+
+    public void setFoodOffer(List<FoodOffer> foodOffer) {
+        this.foodOffer = foodOffer;
+    }
+
     @Override
     public String toString() {
         return "HotelDetail{" +
@@ -88,14 +108,17 @@ public class HotelDetail {
                 ", address='" + address + '\'' +
                 ", coordinates=" + coordinates +
                 ", city=" + city +
+                ", foodOffer=" + foodOffer +
+                ", hotelFacilities=" + hotelFacilities +
+                ", rating=" + rating +
                 '}';
     }
 
-    public HotelDetail(String name, String description, String address, Coordinates coordinates, City city) {
-        this.name = name;
-        this.description = description;
-        this.address = address;
-        this.coordinates = coordinates;
-        this.city = city;
+    public List<HotelFacilities> getFacilities() {
+        return hotelFacilities;
+    }
+
+    public void setFacilities(List<HotelFacilities> facilities) {
+        this.hotelFacilities = facilities;
     }
 }

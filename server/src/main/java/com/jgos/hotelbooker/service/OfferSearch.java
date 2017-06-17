@@ -1,7 +1,7 @@
 package com.jgos.hotelbooker.service;
 
 import com.jgos.hotelbooker.entity.shared.HotelOffer;
-import com.jgos.hotelbooker.entity.SearchRequest;
+import com.jgos.hotelbooker.entity.shared.SearchRequest;
 
 /**
  * Created by Bos on 2017-05-28.

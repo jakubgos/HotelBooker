@@ -1,8 +1,5 @@
 package com.jgos.hotelbooker.entity.shared;
 
-import com.jgos.hotelbooker.entity.HotelDetail;
-import com.jgos.hotelbooker.entity.Room;
-
 import java.util.List;
 
 /**

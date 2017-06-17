@@ -1,6 +1,6 @@
-package com.jgos.hotelbooker.entity;
+package com.jgos.hotelbooker.entity.shared;
 
-import org.hibernate.validator.constraints.NotBlank;
+import com.jgos.hotelbooker.entity.shared.City;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;

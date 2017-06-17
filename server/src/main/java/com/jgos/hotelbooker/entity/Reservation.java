@@ -1,5 +1,7 @@
 package com.jgos.hotelbooker.entity;
 
+import com.jgos.hotelbooker.entity.shared.Room;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
