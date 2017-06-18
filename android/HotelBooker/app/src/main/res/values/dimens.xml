@@ -24,4 +24,5 @@
 
     <!-- Selectable Items -->
     <dimen name="selectable_rounded_rect_corner_radius">3dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

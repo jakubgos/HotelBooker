@@ -110,7 +110,7 @@ public class NetworkServiceImpl implements NetworkService {
                     Log.d("MyApp_Service", "view attemptLogin result " + responseJson);
                     LoginData loginData = objectMapper.readValue(responseJson, LoginData.class);
                     Log.d("MyApp_Service", "view attemptLogin result loginData object" + loginData.toString());
-
+                    loginData.setLogin(loginReqParam.getLogin());
                     if (response.isSuccessful()) {
                         callBack.loginSuccess(loginData);
                     } else {

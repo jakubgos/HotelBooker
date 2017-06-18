@@ -1,5 +1,6 @@
 package com.jgos.hotelBooker.filter;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +18,7 @@ import com.jgos.hotelBooker.data.entity.DialogChoice;
 import com.jgos.hotelBooker.data.serverEntity.hotel.data.City;
 import com.jgos.hotelBooker.filter.interfaces.FilterPresenterOps;
 import com.jgos.hotelBooker.filter.interfaces.FilterViewOps;
-import com.jgos.hotelBooker.login.entity.LoginReqParam;
+import com.jgos.hotelBooker.hotelList.HotelListActivity;
 import com.shawnlin.numberpicker.NumberPicker;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
@@ -179,7 +180,8 @@ public class FilterActivity extends AppCompatActivity implements FilterViewOps, 
 
     @Override
     public void showHotelListView() {
-
+        Intent myIntent = new Intent(this, HotelListActivity.class);
+        this.startActivity(myIntent);
     }
 
 }

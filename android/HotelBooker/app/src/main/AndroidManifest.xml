@@ -73,9 +73,13 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
 
         <activity android:name=".parkingList.ParkingListViewImpl" />
 
-        <service android:name="org.eclipse.paho.android.service.MqttService"></service>
+        <service android:name="org.eclipse.paho.android.service.MqttService" />
 
-        <activity android:name=".filter.FilterActivity"></activity>
+        <activity android:name=".filter.FilterActivity" />
+        <activity
+            android:name=".hotelList.HotelListActivity"
+            android:label="@string/title_activity_hotel_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

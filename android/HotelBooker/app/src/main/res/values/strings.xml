@@ -34,4 +34,8 @@
     <string name="Kryteria">Kryteria</string>
     <string name="Ilosc_miejsc">Osoby</string>
     <string name="Szukaj">Szukaj</string>
+    <string name="title_activity_hotel_list">HotelList</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="not_logged_in">Not logged in</string>
 </resources>

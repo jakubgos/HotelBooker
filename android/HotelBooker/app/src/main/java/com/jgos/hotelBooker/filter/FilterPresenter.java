@@ -31,6 +31,7 @@ class FilterPresenter implements FilterPresenterOps {
     private final String DATA_FORMAT = "yyyy-MM-dd";
     private Calendar arrivalCalendar = null;
     private Calendar departureCalendar = null;
+
     public FilterPresenter(FilterViewOps filterViewOps ) {
         this.filterViewOps=new WeakReference<>(filterViewOps);
         this.filterModelOps = new FilterModel(this, new NetworkServiceImpl());

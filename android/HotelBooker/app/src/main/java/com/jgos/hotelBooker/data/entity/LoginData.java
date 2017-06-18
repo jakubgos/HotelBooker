@@ -17,6 +17,7 @@ public class LoginData {
     public long status =-1;
     public String error;
     public String message;
+    private String login;
 
     public LoginData(String s) {
         this.message=s;
@@ -100,6 +101,15 @@ public class LoginData {
                 ", status=" + status +
                 ", error='" + error + '\'' +
                 ", message='" + message + '\'' +
+                ", login='" + login + '\'' +
                 '}';
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getLogin() {
+        return login;
     }
 }
