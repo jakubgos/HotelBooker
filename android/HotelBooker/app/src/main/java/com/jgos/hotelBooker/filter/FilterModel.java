@@ -53,7 +53,7 @@ class FilterModel implements FilterModelOps {
             }
 
             @Override
-            public void failure(String s) {
+            public void searchRequestFailure(String s) {
                 filterPresenterOps.getCityListResultFailed(s);
             }
         });

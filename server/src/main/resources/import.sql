@@ -32,11 +32,11 @@ insert into hotel_detail (id, name, city_id, description,address, coordinates_id
 insert into hotel_facilities (id, name) values (1,'Parking');
 insert into hotel_facilities (id, name) values (2,'Basen');
 
-insert into hotel_detail_hotelfacilities (hotel_detail_id ,hotelfacilities_id) values (1,1);
-insert into hotel_detail_hotelfacilities (hotel_detail_id ,hotelfacilities_id) values (1,2);
-insert into hotel_detail_hotelfacilities (hotel_detail_id ,hotelfacilities_id) values (2,1);
+insert into hotel_detail_hotel_facilities (hotel_detail_id ,hotel_facilities_id) values (1,1);
+insert into hotel_detail_hotel_facilities (hotel_detail_id ,hotel_facilities_id) values (1,2);
+insert into hotel_detail_hotel_facilities (hotel_detail_id ,hotel_facilities_id) values (2,1);
 
-insert into food_offer (id, name) values (1,'Śniadanie');
+insert into food_offer (id, name) values (1,'śniadanie');
 insert into food_offer (id, name) values (2,'Obiad');
 insert into food_offer (id, name) values (3,'Kolacja');
 

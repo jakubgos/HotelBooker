@@ -52,6 +52,14 @@ public class Room {
         this.size = size;
     }
 
+    public List<RoomFacilities> getRoomFacilities() {
+        return roomFacilities;
+    }
+
+    public void setRoomFacilities(List<RoomFacilities> roomFacilities) {
+        this.roomFacilities = roomFacilities;
+    }
+
     public Room() {
     }
 

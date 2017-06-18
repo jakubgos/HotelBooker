@@ -11,5 +11,5 @@ import java.util.List;
 public interface SearchRequestResult {
     void getSearchRequestResult(List<HotelOffer> list);
 
-    void failure(String s);
+    void searchRequestFailure(String s);
 }

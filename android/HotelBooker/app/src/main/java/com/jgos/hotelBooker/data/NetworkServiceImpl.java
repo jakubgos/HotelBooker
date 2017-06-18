@@ -253,7 +253,7 @@ public class NetworkServiceImpl implements NetworkService {
                     json = objectMapper.writeValueAsString(searchRequest);
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
-                    searchRequestResult.failure("Failed to create Json Object");
+                    searchRequestResult.searchRequestFailure("Failed to create Json Object");
                     return;
                 }
 

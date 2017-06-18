@@ -92,13 +92,28 @@ public class HotelDetail {
         this.city = city;
     }
 
-
     public List<FoodOffer> getFoodOffer() {
         return foodOffer;
     }
 
     public void setFoodOffer(List<FoodOffer> foodOffer) {
         this.foodOffer = foodOffer;
+    }
+
+    public List<HotelFacilities> getHotelFacilities() {
+        return hotelFacilities;
+    }
+
+    public void setHotelFacilities(List<HotelFacilities> hotelFacilities) {
+        this.hotelFacilities = hotelFacilities;
+    }
+
+    public Rating getRating() {
+        return rating;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
     }
 
     @Override
@@ -114,13 +129,5 @@ public class HotelDetail {
                 ", hotelFacilities=" + hotelFacilities +
                 ", rating=" + rating +
                 '}';
-    }
-
-    public List<HotelFacilities> getFacilities() {
-        return hotelFacilities;
-    }
-
-    public void setFacilities(List<HotelFacilities> facilities) {
-        this.hotelFacilities = facilities;
     }
 }
