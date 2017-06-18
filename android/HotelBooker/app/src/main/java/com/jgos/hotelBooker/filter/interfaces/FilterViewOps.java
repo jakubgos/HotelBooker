@@ -25,4 +25,6 @@ public interface FilterViewOps {
     void displayDepartureDate(String s);
 
     void showCalendarDialog(Calendar current, Calendar minDate, String title);
+
+    void showHotelListView();
 }

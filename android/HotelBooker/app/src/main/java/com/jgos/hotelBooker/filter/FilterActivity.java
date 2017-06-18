@@ -99,7 +99,7 @@ public class FilterActivity extends AppCompatActivity implements FilterViewOps, 
 
     @Override
     public void showCityLoadProgressBar(boolean show) {
-        mCityLoadProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+        mCityLoadProgressView.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
@@ -175,8 +175,11 @@ public class FilterActivity extends AppCompatActivity implements FilterViewOps, 
 
         mPresenter.search(city , numberPicker.getValue());
         Log.d("MyApp_search", city.toString() + "  " + value);
+    }
 
-
+    @Override
+    public void showHotelListView() {
 
     }
+
 }

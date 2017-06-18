@@ -28,5 +28,7 @@ public interface FilterPresenterOps {
 
     void search(City city, int value);
 
-    void getSearchRequestResult(List<HotelOffer> list);
+    void getSearchRequestResult(HotelOffer hotelOffer);
+
+    void getSearchRequestFailure(String s);
 }

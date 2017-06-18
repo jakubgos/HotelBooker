@@ -13,6 +13,7 @@ import com.jgos.hotelBooker.data.entity.LoginData;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.HotelOffer;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.SearchRequest;
 import com.jgos.hotelBooker.data.serverEntity.hotel.data.City;
+import com.jgos.hotelBooker.data.serverEntity.hotel.data.HotelResultStatus;
 import com.jgos.hotelBooker.filter.interfaces.LoginServiceCityListResult;
 import com.jgos.hotelBooker.filter.interfaces.SearchRequestResult;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
@@ -31,6 +32,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import static com.jgos.hotelBooker.data.serverEntity.hotel.data.HotelResultStatus.NO_DATA;
 
 /**
  * Created by Bos on 2017-03-04.
@@ -61,6 +64,10 @@ public class NetworkServiceImpl implements NetworkService {
     private static final String SERVER_LOGIN_PATH =
             "oauth/token";
     private ObjectMapper objectMapper = new ObjectMapper();
+    private static final String NO_DATA_ERROR ="Nie znaleźiono żadnych wyników";
+
+    public static final String UNKNOWN_ERROR = "Błąd:" ;
+
 
     @Override
     public void login(final LoginReqParam loginReqParam, final LoginServiceLoginResult callBack) {
@@ -170,6 +177,7 @@ public class NetworkServiceImpl implements NetworkService {
     @Override
     public void searchRequest(final SearchRequest searchRequest, final LoginData loginData, final SearchRequestResult searchRequestResult) {
         final Thread thread = new Thread(new Runnable() {
+
             @Override
             public void run() {
                 Log.d("MyApp_Service", "searchRequest invoked");
@@ -206,17 +214,31 @@ public class NetworkServiceImpl implements NetworkService {
                             .execute();
 
                     String responseJson = response.body().string();
-                    Log.d("MyApp_Service", "NetworkServiceImpl searchRequest result " + responseJson);
+                    //Log.d("MyApp_Service", "NetworkServiceImpl searchRequest result " + responseJson);
 
-                    //List<Parking> list = objectMapper.readValue(responseJson, TypeFactory.defaultInstance().constructCollectionType(List.class,
-                    //        Parking.class));
+                    HotelOffer hotelOffer = objectMapper.readValue(responseJson, TypeFactory.defaultInstance().constructType(HotelOffer.class));
 
                     //Log.d("MyApp_Service", "NetworkServiceImpl getParkingList list " + list.toString());
+                    Log.d("MyApp_Service", "NetworkServiceImpl searchRequest result " + hotelOffer.toString());
 
-                    searchRequestResult.getSearchRequestResult(new ArrayList<HotelOffer>());
+                    switch (  hotelOffer.getStatus())
+                    {
+                        case NO_DATA:
+                            searchRequestResult.searchRequestFailure(NO_DATA_ERROR);
+                            break;
+                        case OK:
+                            searchRequestResult.getSearchRequestResult(hotelOffer);
+                            break;
+                        default:
+                            searchRequestResult.searchRequestFailure(UNKNOWN_ERROR + hotelOffer.getStatus().getValue());
+
+                    }
+
 
                 } catch (IOException e) {
                     e.printStackTrace();
+                    searchRequestResult.searchRequestFailure(UNKNOWN_ERROR + e.getMessage());
+
                 }
             }
         });

@@ -20,15 +20,6 @@
                 android:textAppearance="@style/TextStyle.Title"
                 android:layout_weight="1"/>
 
-            <ProgressBar
-                android:id="@+id/city_load_progress"
-                style="@style/Widget.AppCompat.ProgressBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:indeterminate="true"
-                android:visibility="visible"
-                android:layout_weight="1"/>
-
         </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -81,17 +72,33 @@
                 app:np_textSize="30dp"
                 />
         </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="0dp">
+
+        <ProgressBar
+            android:id="@+id/city_load_progress"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:indeterminate="true"
+            android:visibility="visible"/>
 
         <Button
             android:id="@+id/filter_select_button"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/Szukaj"
             android:textStyle="bold"
             android:layout_gravity="right"
-            android:layout_weight="0.0"/>
+            android:layout_weight="1"
+            android:layout_margin="0dp"
+            android:layout_width="0dp" />
+
+    </LinearLayout>
     </LinearLayout>
 
 

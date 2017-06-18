@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public interface SearchRequestResult {
-    void getSearchRequestResult(List<HotelOffer> list);
+    void getSearchRequestResult(HotelOffer hotelOffer);
 
     void searchRequestFailure(String s);
 }

@@ -54,7 +54,7 @@ public class OfferSearchImpl implements OfferSearch {
         }
         List<Hotel> hotelList = hotelRepository.findByHotelDetailCity(searchRequest.getCity());
 
-        HotelOffer hotelOffer = new HotelOffer(HotelResultStatus.NO_DATA.ordinal());
+        HotelOffer hotelOffer = new HotelOffer(HotelResultStatus.NO_DATA);
         for (Hotel hotel: hotelList) {
             List<Room> roomList = new ArrayList<>();
             for (Room room: hotel.getRoomList()) {
@@ -66,7 +66,7 @@ public class OfferSearchImpl implements OfferSearch {
             if(!roomList.isEmpty())
             {
                 hotelOffer.addHotelData(new HotelData(hotel.getHotelDetail(),roomList));
-                hotelOffer.setStatus(HotelResultStatus.OK.ordinal());
+                hotelOffer.setStatus(HotelResultStatus.OK);
             }
         }
         return hotelOffer;

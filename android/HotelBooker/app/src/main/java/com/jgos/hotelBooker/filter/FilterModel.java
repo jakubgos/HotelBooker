@@ -49,13 +49,13 @@ class FilterModel implements FilterModelOps {
         networkService.searchRequest(searchRequest, loginData, new SearchRequestResult() {
 
             @Override
-            public void getSearchRequestResult(List<HotelOffer> list) {
-                filterPresenterOps.getSearchRequestResult(list);
+            public void getSearchRequestResult(HotelOffer hotelOffer) {
+                filterPresenterOps.getSearchRequestResult(hotelOffer);
             }
 
             @Override
             public void searchRequestFailure(String s) {
-                filterPresenterOps.getCityListResultFailed(s);
+                filterPresenterOps.getSearchRequestFailure(s);
             }
         });
 }

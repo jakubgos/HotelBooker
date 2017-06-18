@@ -129,13 +129,33 @@ class FilterPresenter implements FilterPresenterOps {
 
     @Override
     public void search(City city, int numberOfPeople) {
+        getView().showCityLoadProgressBar(true);
         SearchRequest searchRequest = new SearchRequest(city,arrivalCalendar.getTime().getTime(),departureCalendar.getTime().getTime(), numberOfPeople);
         filterModelOps.searchRequest(searchRequest, Storage.getInstance().getLoginData() , this);
 
     }
 
     @Override
-    public void getSearchRequestResult(List<HotelOffer> list) {
+    public void getSearchRequestResult(final HotelOffer hotelOffer) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Storage.getInstance().save(hotelOffer);
+                getView().showCityLoadProgressBar(false);
+                getView().showHotelListView();
+            }
+        });
+    }
 
+    @Override
+    public void getSearchRequestFailure(final String s) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                getView().showCityLoadProgressBar(false);
+
+                getView().makeToast(s);
+            }
+        });
     }
 }

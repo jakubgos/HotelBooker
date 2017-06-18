@@ -2,6 +2,7 @@ package com.jgos.hotelbooker.entity.endpoint;
 
 
 import com.jgos.hotelbooker.entity.hotel.HotelData;
+import com.jgos.hotelbooker.entity.hotel.data.HotelResultStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,19 +12,19 @@ import java.util.List;
  */
 public class HotelOffer {
 
-    long status;
+    HotelResultStatus status;
 
     private List<HotelData> hotelData = new ArrayList<>();
 
-    public HotelOffer(long status) {
+    public HotelOffer(HotelResultStatus status) {
         this.status = status;
     }
 
-    public long getStatus() {
+    public HotelResultStatus getStatus() {
         return status;
     }
 
-    public void setStatus(long status) {
+    public void setStatus(HotelResultStatus status) {
         this.status = status;
     }
 
