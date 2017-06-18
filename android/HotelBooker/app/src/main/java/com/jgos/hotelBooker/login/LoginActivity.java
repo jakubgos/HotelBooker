@@ -15,11 +15,8 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jgos.hotelBooker.data.entity.LoginData;
+
 import com.jgos.hotelBooker.filter.FilterActivity;
-import com.jgos.hotelBooker.map.MapsActivity;
 import com.jgos.hotelBooker.R;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
 import com.jgos.hotelBooker.login.entity.Result;
@@ -150,19 +147,6 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
         // Reset errors.
         mLoginView.setError(null);
         mPasswordView.setError(null);
-    }
-
-    @Override
-    public void showMapActivity(LoginData s) {
-        //todo remove
-        Intent myIntent = new Intent(this, MapsActivity.class);
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            myIntent.putExtra("LOGIN_DATA",objectMapper.writeValueAsString(s));
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        this.startActivity(myIntent);
     }
 
     @Override

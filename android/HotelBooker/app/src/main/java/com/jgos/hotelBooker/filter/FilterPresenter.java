@@ -5,10 +5,11 @@ import android.text.format.DateFormat;
 import android.util.Log;
 
 import com.jgos.hotelBooker.data.NetworkServiceImpl;
-import com.jgos.hotelBooker.data.entity.City;
 import com.jgos.hotelBooker.data.entity.DialogChoice;
-import com.jgos.hotelBooker.data.entity.HotelOffer;
-import com.jgos.hotelBooker.data.entity.SearchRequest;
+
+import com.jgos.hotelBooker.data.serverEntity.endpoint.HotelOffer;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.SearchRequest;
+import com.jgos.hotelBooker.data.serverEntity.hotel.data.City;
 import com.jgos.hotelBooker.filter.interfaces.FilterPresenterOps;
 import com.jgos.hotelBooker.filter.interfaces.FilterViewOps;
 import com.jgos.hotelBooker.filter.interfaces.FilterModelOps;

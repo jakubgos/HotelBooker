@@ -1,7 +1,8 @@
 package com.jgos.hotelBooker.filter.interfaces;
 
-import com.jgos.hotelBooker.data.entity.City;
-import com.jgos.hotelBooker.data.entity.HotelOffer;
+
+import com.jgos.hotelBooker.data.serverEntity.endpoint.HotelOffer;
+import com.jgos.hotelBooker.data.serverEntity.hotel.data.City;
 
 import java.util.Date;
 import java.util.List;

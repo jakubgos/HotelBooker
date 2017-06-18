@@ -1,20 +1,21 @@
-package com.jgos.hotelBooker.data.entity;
+package com.jgos.hotelBooker.data.serverEntity.hotel.data;
+
+
 
 /**
- * Created by Bos on 2017-05-19.
+ * Created by Bos on 2017-05-20.
  */
-
 public class City {
 
     private long id;
     private String name;
 
+    public City() {
+    }
+
     public City(long id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public City() {
     }
 
     public long getId() {
@@ -35,6 +36,9 @@ public class City {
 
     @Override
     public String toString() {
-        return name;
+        return "City{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

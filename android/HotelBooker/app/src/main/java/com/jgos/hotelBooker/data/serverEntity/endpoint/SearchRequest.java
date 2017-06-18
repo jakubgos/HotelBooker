@@ -1,17 +1,19 @@
-package com.jgos.hotelBooker.data.entity;
+package com.jgos.hotelBooker.data.serverEntity.endpoint;
 
-import java.util.Calendar;
+
+import com.jgos.hotelBooker.data.serverEntity.hotel.data.City;
 
 /**
- * Created by Bos on 2017-05-26.
+ * Created by Bos on 2017-05-28.
  */
-
 public class SearchRequest {
 
     private final City city;
     private final long arrivalTime;
     private final long departureTime;
     private final int numberOfPeople;
+
+
     public SearchRequest(City city, long arrivalTime, long departureTime, int numberOfPeople) {
         this.city = city;
         this.arrivalTime =arrivalTime;
@@ -42,5 +44,15 @@ public class SearchRequest {
 
     public long getDepartureTime() {
         return departureTime;
+    }
+
+    @Override
+    public String toString() {
+        return "SearchRequest{" +
+                "city=" + city +
+                ", arrivalTime=" + arrivalTime +
+                ", departureTime=" + departureTime +
+                ", numberOfPeople=" + numberOfPeople +
+                '}';
     }
 }

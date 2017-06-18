@@ -13,8 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jgos.hotelBooker.R;
-import com.jgos.hotelBooker.data.entity.City;
 import com.jgos.hotelBooker.data.entity.DialogChoice;
+import com.jgos.hotelBooker.data.serverEntity.hotel.data.City;
 import com.jgos.hotelBooker.filter.interfaces.FilterPresenterOps;
 import com.jgos.hotelBooker.filter.interfaces.FilterViewOps;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;

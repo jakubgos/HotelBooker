@@ -7,19 +7,18 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import com.jgos.hotelBooker.data.entity.City;
-import com.jgos.hotelBooker.data.entity.Coordinates;
-import com.jgos.hotelBooker.data.entity.HotelOffer;
+
 import com.jgos.hotelBooker.data.entity.LoginData;
-import com.jgos.hotelBooker.data.entity.Parking;
-import com.jgos.hotelBooker.data.entity.SearchRequest;
+
+import com.jgos.hotelBooker.data.serverEntity.endpoint.HotelOffer;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.SearchRequest;
+import com.jgos.hotelBooker.data.serverEntity.hotel.data.City;
 import com.jgos.hotelBooker.filter.interfaces.LoginServiceCityListResult;
 import com.jgos.hotelBooker.filter.interfaces.SearchRequestResult;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
 import com.jgos.hotelBooker.data.interfaces.NetworkService;
 import com.jgos.hotelBooker.login.interfaces.LoginServiceLoginResult;
-import com.jgos.hotelBooker.map.interfaces.ParkingListCallback;
-import com.jgos.hotelBooker.parkingList.interfaces.FavoriteParkingCallback;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -118,78 +117,6 @@ public class NetworkServiceImpl implements NetworkService {
             }
         });
         thread.start();
-    }
-
-    @Override
-    public void getFavoriteParking(FavoriteParkingCallback callback) {
-        //todo change it!
-        ArrayList<Parking> result = new ArrayList<Parking>();
-        result.add(new Parking((long) 1, 100, 10, "parking 1", new Coordinates(20, 20), ""));
-        result.add(new Parking((long) 2, 100, 10, "parking 2", new Coordinates(20, 20), ""));
-        result.add(new Parking((long) 3, 100, 10, "parking 3", new Coordinates(20, 20), ""));
-        result.add(new Parking((long) 4, 100, 10, "parking 4", new Coordinates(20, 20), ""));
-        result.add(new Parking((long) 5, 100, 10, "parking 5", new Coordinates(20, 20), ""));
-
-        callback.onFavoriteParkingResult(result);
-
-    }
-
-    @Override
-    public void getParkingList(final LoginData loginData, final Coordinates coordinates, final ParkingListCallback parkingListCallback) {
-        final Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Log.d("MyApp_Service", "view attemptLogin invoked");
-
-                OkHttpClient okHttpClient = new OkHttpClient();
-                String json = null;
-                try {
-                    json = objectMapper.writeValueAsString(coordinates);
-                } catch (JsonProcessingException e) {
-                    e.printStackTrace();
-                    parkingListCallback.parkingListFailed("Failed to create Json Object");
-                }
-
-                HttpUrl url = new HttpUrl.Builder()
-                        .scheme("http")
-                        .host(SERVER_ADDRESS)
-                        .port(8080)
-                        .addPathSegments(PARKING_PATH)
-                        .addQueryParameter("radius", "100")
-                        .addQueryParameter("latitude", "51.752565")
-                        .addQueryParameter("longitude", "19.453313")
-                        .build();
-
-                Request request = new Request.Builder()
-                        .url(url)
-                        .addHeader("Authorization", "Bearer " + loginData.getAccess_token())
-                        .build();
-
-                Log.d("MyApp_Service", "NetworkServiceImpl getParkingList request " + request.toString() + "JSON: " + json);
-
-                Response response = null;
-                try {
-                    response = okHttpClient
-                            .newCall(request)
-                            .execute();
-
-                    String responseJson = response.body().string();
-                    //Log.d("MyApp_Service", "NetworkServiceImpl getParkingList result " + responseJson);
-
-                    List<Parking> list = objectMapper.readValue(responseJson, TypeFactory.defaultInstance().constructCollectionType(List.class,
-                            Parking.class));
-
-                    Log.d("MyApp_Service", "NetworkServiceImpl getParkingList list " + list.toString());
-
-                    parkingListCallback.getParkingListResult(list);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
-
     }
 
     @Override

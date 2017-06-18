@@ -1,6 +1,7 @@
 package com.jgos.hotelBooker.filter.interfaces;
 
-import com.jgos.hotelBooker.data.entity.HotelOffer;
+
+import com.jgos.hotelBooker.data.serverEntity.endpoint.HotelOffer;
 
 import java.util.List;
 

@@ -14,8 +14,6 @@ public interface LoginViewOps {
 
     void resetLoginErrors();
 
-    void showMapActivity(LoginData s);
-
     void showFilterActivity();
 }
 
