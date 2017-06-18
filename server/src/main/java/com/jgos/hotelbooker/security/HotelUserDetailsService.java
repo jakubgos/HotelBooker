@@ -1,7 +1,7 @@
 package com.jgos.hotelbooker.security;
 
 
-import com.jgos.hotelbooker.entity.UserDb;
+import com.jgos.hotelbooker.entity.user.UserDb;
 
 import com.jgos.hotelbooker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.jgos.hotelbooker.entity;
+package com.jgos.hotelbooker.entity.user;
 
 
 

@@ -1,5 +1,7 @@
-package com.jgos.hotelbooker.entity.shared;
+package com.jgos.hotelbooker.entity.endpoint;
 
+
+import com.jgos.hotelbooker.entity.hotel.HotelData;
 
 import java.util.ArrayList;
 import java.util.List;

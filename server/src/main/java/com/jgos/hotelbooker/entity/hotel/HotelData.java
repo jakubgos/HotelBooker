@@ -1,4 +1,6 @@
-package com.jgos.hotelbooker.entity.shared;
+package com.jgos.hotelbooker.entity.hotel;
+
+import com.jgos.hotelbooker.entity.room.Room;
 
 import java.util.List;
 

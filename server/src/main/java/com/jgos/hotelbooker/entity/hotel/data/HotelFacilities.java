@@ -1,14 +1,13 @@
-package com.jgos.hotelbooker.entity.shared;
-
-import javax.persistence.*;
+package com.jgos.hotelbooker.entity.hotel.data;
 
 /**
  * Created by Bos on 2017-06-17.
  */
-@Entity
-public class FoodOffer {
-    //none,breakfast,lunch,dinner
 
+import javax.persistence.*;
+
+@Entity
+public class HotelFacilities {
     //Dining,Vending,Exercise,Recreation,SwimmingPool,Parking
     @Id
     @GeneratedValue( strategy = GenerationType.TABLE )
@@ -17,12 +16,24 @@ public class FoodOffer {
     @Column(nullable = false)
     private String name;
 
-    public FoodOffer() {
+    public HotelFacilities() {
+    }
+
+    public HotelFacilities(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return "FoodOffer{" +
+        return "HotelFacilities{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

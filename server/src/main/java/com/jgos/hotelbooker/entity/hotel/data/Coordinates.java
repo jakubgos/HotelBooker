@@ -1,4 +1,4 @@
-package com.jgos.hotelbooker.entity.shared;
+package com.jgos.hotelbooker.entity.hotel.data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

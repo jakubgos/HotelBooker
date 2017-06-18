@@ -1,11 +1,9 @@
-package com.jgos.hotelbooker.entity.shared;
+package com.jgos.hotelbooker.entity.hotel.data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import static javax.persistence.GenerationType.SEQUENCE;
 
 /**
  * Created by Bos on 2017-05-20.

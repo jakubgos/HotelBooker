@@ -1,8 +1,8 @@
 package com.jgos.hotelbooker.controller;
 
-import com.jgos.hotelbooker.entity.shared.City;
-import com.jgos.hotelbooker.entity.shared.HotelOffer;
-import com.jgos.hotelbooker.entity.shared.SearchRequest;
+import com.jgos.hotelbooker.entity.hotel.data.City;
+import com.jgos.hotelbooker.entity.endpoint.HotelOffer;
+import com.jgos.hotelbooker.entity.endpoint.SearchRequest;
 import com.jgos.hotelbooker.repository.CityRepository;
 import com.jgos.hotelbooker.service.OfferSearchImpl;
 import org.slf4j.Logger;

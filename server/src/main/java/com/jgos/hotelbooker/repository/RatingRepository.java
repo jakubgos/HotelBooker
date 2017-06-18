@@ -1,7 +1,6 @@
 package com.jgos.hotelbooker.repository;
 
-import com.jgos.hotelbooker.entity.shared.Rating;
-import com.jgos.hotelbooker.entity.shared.RoomFacilities;
+import com.jgos.hotelbooker.entity.hotel.data.Rating;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

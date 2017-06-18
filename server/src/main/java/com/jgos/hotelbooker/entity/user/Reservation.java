@@ -1,6 +1,6 @@
-package com.jgos.hotelbooker.entity;
+package com.jgos.hotelbooker.entity.user;
 
-import com.jgos.hotelbooker.entity.shared.Room;
+import com.jgos.hotelbooker.entity.room.Room;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

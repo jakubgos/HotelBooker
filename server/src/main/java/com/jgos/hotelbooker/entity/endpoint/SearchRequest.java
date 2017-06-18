@@ -1,6 +1,6 @@
-package com.jgos.hotelbooker.entity.shared;
+package com.jgos.hotelbooker.entity.endpoint;
 
-import com.jgos.hotelbooker.entity.shared.City;
+import com.jgos.hotelbooker.entity.hotel.data.City;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;

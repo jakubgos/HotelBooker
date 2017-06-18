@@ -1,6 +1,6 @@
 package com.jgos.hotelbooker.repository;
 
-import com.jgos.hotelbooker.entity.Reservation;
+import com.jgos.hotelbooker.entity.user.Reservation;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

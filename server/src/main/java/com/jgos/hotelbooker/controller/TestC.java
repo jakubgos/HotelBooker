@@ -1,8 +1,8 @@
 package com.jgos.hotelbooker.controller;
 
-import com.jgos.hotelbooker.entity.Hotel;
-import com.jgos.hotelbooker.entity.Reservation;
-import com.jgos.hotelbooker.entity.UserDb;
+import com.jgos.hotelbooker.entity.hotel.Hotel;
+import com.jgos.hotelbooker.entity.user.Reservation;
+import com.jgos.hotelbooker.entity.user.UserDb;
 import com.jgos.hotelbooker.repository.HotelRepository;
 import com.jgos.hotelbooker.repository.ReservationRepository;
 import com.jgos.hotelbooker.repository.UserRepository;
