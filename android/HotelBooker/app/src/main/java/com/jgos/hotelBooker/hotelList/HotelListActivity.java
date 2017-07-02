@@ -12,18 +12,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jgos.hotelBooker.R;
 import com.jgos.hotelBooker.hotelList.interfaces.HotelListPresenterOps;
 import com.jgos.hotelBooker.hotelList.interfaces.HotelListViewOps;
+import com.jgos.hotelBooker.hotelList.list.HotelArrayAdapter;
 import com.jgos.hotelBooker.storage.Storage;
+
+import java.util.ArrayList;
 
 
 public class HotelListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, HotelListViewOps {
 
     private HotelListPresenterOps mPresenter;
+
+    private ListView hotelListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +40,7 @@ public class HotelListActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+      /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +49,7 @@ public class HotelListActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+        */
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -49,6 +59,9 @@ public class HotelListActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        hotelListView = (ListView) findViewById(R.id.hotelListView);
+
 
         setupMVP();
         mPresenter.onStartup();
@@ -117,5 +130,19 @@ public class HotelListActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void initHotelListView(ArrayList hotelData) {
+        HotelArrayAdapter adapter = new HotelArrayAdapter(this,  hotelData);
+        hotelListView.setAdapter(adapter);
+
+        hotelListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int pos, long id) {
+                Toast.makeText(getApplicationContext(),
+                        " " + pos,
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

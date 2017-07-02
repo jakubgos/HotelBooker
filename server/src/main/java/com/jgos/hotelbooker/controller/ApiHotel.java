@@ -4,6 +4,7 @@ import com.jgos.hotelbooker.entity.hotel.data.City;
 import com.jgos.hotelbooker.entity.endpoint.HotelOffer;
 import com.jgos.hotelbooker.entity.endpoint.SearchRequest;
 import com.jgos.hotelbooker.repository.CityRepository;
+import com.jgos.hotelbooker.service.OfferSearch;
 import com.jgos.hotelbooker.service.OfferSearchImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,7 @@ public class ApiHotel {
     private CityRepository cityRepository;
 
     @Autowired
-    private OfferSearchImpl offerSearch;
+    private OfferSearch offerSearch;
 
     @RequestMapping("/test")
     @ResponseBody

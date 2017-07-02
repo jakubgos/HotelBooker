@@ -38,4 +38,9 @@ public class Storage {
     public void save(HotelOffer hotelOffer) {
         this.hotelOffer=hotelOffer;
     }
+
+    public HotelOffer getHotelOffer() {
+        return hotelOffer;
+    }
+
 }

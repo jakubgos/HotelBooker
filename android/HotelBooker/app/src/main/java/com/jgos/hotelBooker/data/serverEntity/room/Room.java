@@ -12,9 +12,17 @@ public class Room {
     private String name;
     private String description;
     private int size;
+    private float price;
 
     private List<RoomFacilities> roomFacilities;
 
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
 
     public long getId() {
         return id;
@@ -56,6 +64,7 @@ public class Room {
         this.roomFacilities = roomFacilities;
     }
 
+
     public Room() {
     }
 
@@ -66,6 +75,7 @@ public class Room {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", size=" + size +
+                ", price=" + price +
                 ", roomFacilities=" + roomFacilities +
                 '}';
     }

@@ -8,4 +8,9 @@
     tools:context="com.jgos.hotelBooker.hotelList.HotelListActivity"
     tools:showIn="@layout/app_bar_hotel_list">
 
+    <ListView
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:id="@+id/hotelListView" />
+
 </android.support.constraint.ConstraintLayout>

@@ -42,7 +42,7 @@ import static com.jgos.hotelBooker.data.serverEntity.hotel.data.HotelResultStatu
 public class NetworkServiceImpl implements NetworkService {
 
     private static final String SERVER_ADDRESS =
-            "192.168.0.4";
+            "192.168.0.2";
     private static final int SERVER_PORT =
             8080;
     private static final String PARKING_PATH =
