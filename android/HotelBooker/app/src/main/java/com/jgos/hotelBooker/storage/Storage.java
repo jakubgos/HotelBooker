@@ -2,6 +2,7 @@ package com.jgos.hotelBooker.storage;
 
 import com.jgos.hotelBooker.data.entity.LoginData;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.HotelOffer;
+import com.jgos.hotelBooker.data.serverEntity.hotel.HotelData;
 import com.jgos.hotelBooker.data.serverEntity.hotel.data.HotelResultStatus;
 
 /**
@@ -13,7 +14,15 @@ public class Storage {
 
     private LoginData loginData;
     private HotelOffer hotelOffer;
+    private HotelData selectedHotelData;
 
+    public HotelData getSelectedHotelData() {
+        return selectedHotelData;
+    }
+
+    public void setSelectedHotelData(HotelData selectedHotelData) {
+        this.selectedHotelData = selectedHotelData;
+    }
 
     private Storage()
     {

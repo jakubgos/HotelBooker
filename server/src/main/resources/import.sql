@@ -50,9 +50,9 @@ insert into hotel (id, hotel_detail_id) values (1, 1);
 insert into hotel (id, hotel_detail_id) values (2, 2);
 
 
-insert into room (id,name,description,size ) values (1,'room_1_name','room_1_description',2);
-insert into room (id,name,description,size ) values (2,'room_2_name','room_2_description',2);
-insert into room (id,name,description,size ) values (3,'room_3_name','room_3_description',2);
+insert into room (id,name,description,price,size ) values (1,'room_1_name','room_1_description',100,2);
+insert into room (id,name,description,price,size ) values (2,'room_2_name','room_2_description',100.2);
+insert into room (id,name,description,price,size ) values (3,'room_3_name','room_3_description',400,2);
 
 insert into hotel_room_list (hotel_id, room_list_id) values (1,1);
 insert into hotel_room_list (hotel_id, room_list_id) values (1,2);

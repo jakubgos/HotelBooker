@@ -1,5 +1,6 @@
 package com.jgos.hotelBooker.hotelList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jgos.hotelBooker.R;
+import com.jgos.hotelBooker.data.serverEntity.hotel.HotelData;
 import com.jgos.hotelBooker.hotelList.interfaces.HotelListPresenterOps;
 import com.jgos.hotelBooker.hotelList.interfaces.HotelListViewOps;
 import com.jgos.hotelBooker.hotelList.list.HotelArrayAdapter;
@@ -139,10 +141,14 @@ public class HotelListActivity extends AppCompatActivity
 
         hotelListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int pos, long id) {
-                Toast.makeText(getApplicationContext(),
-                        " " + pos,
-                        Toast.LENGTH_SHORT).show();
+                mPresenter.listItemSelect((HotelData) parent.getAdapter().getItem(pos));
             }
         });
+    }
+
+    @Override
+    public void showHotelDetailView() {
+        Intent myIntent = new Intent(this, HotelListActivity.class);
+        this.startActivity(myIntent);
     }
 }

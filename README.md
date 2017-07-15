@@ -7,12 +7,11 @@ Done:
 - [A] możliwość sprecyzowania terminu oraz ilości miejsc w pokoju (do wyszukiwania) (domyślnie system szuka pokoju na najbliższą noc dla 2 osób)
 - [S] wystawienie Api umożlwiającego pobieranie listy hotelów (Hotele na sztywno zapisane w bazie danych, wysyłana jest informacja o hotelach/pokojach)
 - [S/ A] możliwość sprecyzowania terminu oraz ilości miejsc w pokoju (do wyszukiwania) (domyślnie system szuka pokoju na najbliższą noc dla 2 osób)
+- [A] wyświetlenie znalezionych wyników jako listView
 
 Backlog:
-
-- [A] wyświetlenie znalezionych wyników jako listView
-- [A] wyświetlenie hotelów na mapie z pozycją w obrębie X Km
 - [S/A] Wyświetlenie informacji o wybranym pokoju (ilość miejsc, standard, usługi hotelowe, udogodnienia itp)
+- [A] wyświetlenie hotelów na mapie z pozycją w obrębie X Km
 - [S/A] obsługa rezerwacji wybranego pokoju (oczekuje na weryfikację, oczekuje na wpłatę, zarezerwowane)
 - [S/A] Sprawdzenie swoich rezerwacji
 - [S/A] rejestracja dla użytkownika
@@ -30,6 +29,9 @@ Backlog:
 - [A] filtrowanie list/hoteli (np. tylko tam, gdzie basen, czy tylko pokoje w konkretnym hotelu)
 - [S/A] możliwość dodania hotelu do ulubionych
 - [S/A/I] wyszukanie hotelu w danym mieście
+
+Improvements:
+- Add room groups (Allow to add multiple room with same type), priority: Must Have
 
 
 S - Serwer, A - Android, I - Interface

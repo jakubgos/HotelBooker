@@ -8,4 +8,6 @@ import java.util.ArrayList;
 
 public interface HotelListViewOps {
     void initHotelListView(ArrayList hotelData);
+
+    void showHotelDetailView();
 }

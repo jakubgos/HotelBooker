@@ -1,6 +1,9 @@
 package com.jgos.hotelBooker.hotelList;
 
+import android.util.Log;
+
 import com.jgos.hotelBooker.data.NetworkServiceImpl;
+import com.jgos.hotelBooker.data.serverEntity.hotel.HotelData;
 import com.jgos.hotelBooker.hotelList.interfaces.HotelListModelOps;
 import com.jgos.hotelBooker.hotelList.interfaces.HotelListPresenterOps;
 import com.jgos.hotelBooker.hotelList.interfaces.HotelListViewOps;
@@ -31,5 +34,12 @@ public class HotelListPresenter implements HotelListPresenterOps {
     @Override
     public void onStartup() {
         getView().initHotelListView((ArrayList) Storage.getInstance().getHotelOffer().getHotelData());
+    }
+
+    @Override
+    public void listItemSelect(HotelData item) {
+        Log.d("MyApp_HotelList","onStartup invoked :" + item.toString());
+        Storage.getInstance().setSelectedHotelData(item);
+        getView().showHotelDetailView();
     }
 }
