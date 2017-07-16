@@ -33,6 +33,6 @@ public class HotelDetailPresenter implements HotelDetailPresenterOps {
     }
     @Override
     public void onStartup() {
-
+        getView().prepareHotelData(Storage.getInstance().getSelectedHotelData().getHotelDetail());
     }
 }

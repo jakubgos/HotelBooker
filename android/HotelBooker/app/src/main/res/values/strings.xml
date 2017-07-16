@@ -41,4 +41,8 @@
 
     <string name="action_settings">Settings</string>
     <string name="not_logged_in">Not logged in</string>
+    <string name="hotel_description">Opis Hotelu</string>
+    <string name="default_text">Default text</string>
+    <string name="food_offer_title">Posiłki</string>
+    <string name="hotel_facilities_title">Udogodnienia</string>
 </resources>

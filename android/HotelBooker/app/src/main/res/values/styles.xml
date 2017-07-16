@@ -57,23 +57,23 @@
 
 
     <!-- Text Styles -->
-    <style name="TextStyle" parent="TextAppearance.AppCompat"></style>
+    <style name="TextStyle" parent="TextAppearance.AppCompat" />
 
-    <style name="TextStyle.Title" parent="TextAppearance.AppCompat.Title"></style>
+    <style name="TextStyle.Title" parent="TextAppearance.AppCompat.Title" />
 
-    <style name="TextStyle.Body1" parent="TextAppearance.AppCompat.Body1"></style>
+    <style name="TextStyle.Body1" parent="TextAppearance.AppCompat.Body1" />
 
-    <style name="TextStyle.Body2" parent="TextAppearance.AppCompat.Body2"></style>
+    <style name="TextStyle.Body2" parent="TextAppearance.AppCompat.Body2" />
 
     <!-- Edit Text Styles -->
-    <style name="EditTextStyle" parent="Widget.AppCompat.EditText"></style>
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText" />
 
-    <style name="TextInputLayoutStyle" parent="Widget.Design.TextInputLayout"></style>
+    <style name="TextInputLayoutStyle" parent="Widget.Design.TextInputLayout" />
 
     <!-- Spinner Styles -->
-    <style name="SpinnerStyle" parent="Widget.AppCompat.Spinner"></style>
+    <style name="SpinnerStyle" parent="Widget.AppCompat.Spinner" />
 
-    <style name="SpinnerStyle.Underlined" parent="Widget.AppCompat.Spinner.Underlined"></style>
+    <style name="SpinnerStyle.Underlined" parent="Widget.AppCompat.Spinner.Underlined" />
 
 
     <style name="CardStyle" parent="CardView.Light">

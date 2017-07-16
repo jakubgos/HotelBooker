@@ -68,7 +68,7 @@
                 app:np_selectedTextColor="@color/colorPrimary"
                 app:np_textColor="@color/colorPrimary"
                 app:np_typeface="sans-serif-condensed"
-                app:np_value="3"
+                app:np_value="2"
                 app:np_textSize="30dp"
                 />
         </LinearLayout>

@@ -67,9 +67,4 @@ dependencies {
     compile 'com.github.dmytrodanylyk.android-process-button:library:1.0.0'
 
     compile 'com.shawnlin:number-picker:2.4.3'
-
-
-
-
-
-}
+    }

@@ -1,5 +1,7 @@
 package com.jgos.hotelBooker.hotelDetail.interfaces;
 
+import com.jgos.hotelBooker.data.serverEntity.hotel.HotelDetail;
+
 import java.util.ArrayList;
 
 /**
@@ -7,4 +9,5 @@ import java.util.ArrayList;
  */
 
 public interface HotelDetailViewOps {
+    void prepareHotelData(HotelDetail hotelDetail);
 }

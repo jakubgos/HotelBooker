@@ -7,11 +7,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.jgos.hotelBooker.R;
+import com.jgos.hotelBooker.data.serverEntity.hotel.HotelDetail;
+import com.jgos.hotelBooker.data.serverEntity.hotel.data.FoodOffer;
+import com.jgos.hotelBooker.data.serverEntity.hotel.data.HotelFacilities;
 import com.jgos.hotelBooker.storage.Storage;
 import com.jgos.hotelBooker.hotelDetail.interfaces.HotelDetailPresenterOps;
 import com.jgos.hotelBooker.hotelDetail.interfaces.HotelDetailViewOps;
@@ -21,6 +25,12 @@ public class HotelDetailActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, HotelDetailViewOps {
 
     private HotelDetailPresenterOps mPresenter;
+
+    private TextView hotelName;
+    private TextView hotelAddress;
+    private TextView hotelDescription;
+    private TextView foodOffer;
+    private TextView facilities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +59,11 @@ public class HotelDetailActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        hotelName = (TextView)  findViewById(R.id.hd_hotel_name);
+        hotelAddress = (TextView)  findViewById(R.id.hd_hotel_address);
+        hotelDescription = (TextView)  findViewById(R.id.hd_hotel_description);
+        foodOffer = (TextView) findViewById(R.id.hd_food_offer);
+        facilities = (TextView) findViewById(R.id.hd_hotel_facilities);
         setupMVP();
         mPresenter.onStartup();
 
@@ -117,4 +132,24 @@ public class HotelDetailActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    public void prepareHotelData(HotelDetail hotelDetail) {
+        hotelName.setText(hotelDetail.getName());
+        hotelAddress.setText(hotelDetail.getAddress());
+        hotelDescription.setText(Html.fromHtml(hotelDetail.getDescription()));
+        String tmpString = "";
+
+        for (FoodOffer fo: hotelDetail.getFoodOffer()) {
+            tmpString = new StringBuilder(tmpString).append("&#8226;").append(fo.getName()).append("<br/>").toString();
+        }
+
+        foodOffer.setText(Html.fromHtml(tmpString));
+
+        tmpString = "";
+        for (HotelFacilities fo: hotelDetail.getHotelFacilities()) {
+            tmpString = new StringBuilder(tmpString).append("&#8226;").append(fo.getName()).append("<br/>").toString();
+        }
+        facilities.setText(Html.fromHtml(tmpString));
     }
+}
