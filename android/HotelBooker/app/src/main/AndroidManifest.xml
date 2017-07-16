@@ -77,6 +77,11 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
             android:name=".hotelDetail.HotelDetailActivity"
             android:label="@string/title_activity_hotel_list"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".reservation.ReservationActivity"
+            android:label="@string/title_activity_reservation"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

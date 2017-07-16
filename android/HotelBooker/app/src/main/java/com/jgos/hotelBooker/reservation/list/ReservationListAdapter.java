@@ -1,4 +1,4 @@
-package com.jgos.hotelBooker.hotelDetail.list;
+package com.jgos.hotelBooker.reservation.list;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Created by Bos on 2017-07-02.
  */
 
-public class HotelArrayAdapter extends ArrayAdapter<HotelData> {
+public class ReservationListAdapter extends ArrayAdapter<HotelData> {
 
     static class ViewHolder {
         public TextView hotelName;
@@ -27,7 +27,7 @@ public class HotelArrayAdapter extends ArrayAdapter<HotelData> {
 
     }
 
-    public HotelArrayAdapter(Context context, ArrayList<HotelData> hotelData) {
+    public ReservationListAdapter(Context context, ArrayList<HotelData> hotelData) {
         super(context, 0, hotelData);
     }
 

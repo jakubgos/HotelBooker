@@ -34,8 +34,10 @@
     <string name="Kryteria">Kryteria</string>
     <string name="Ilosc_miejsc">Osoby</string>
     <string name="Szukaj">Szukaj</string>
-    <string name="title_activity_hotel_list">HotelList</string>
-    <string name="title_activity_hotel_detail">HotelDetail</string>
+    <string name="title_activity_hotel_list">Lista Hoteli</string>
+    <string name="title_activity_hotel_detail">Szczegóły pokoju</string>
+    <string name="title_activity_reservation">Twoje Rezerwacje</string>
+
 
     <string name="action_settings">Settings</string>
     <string name="not_logged_in">Not logged in</string>

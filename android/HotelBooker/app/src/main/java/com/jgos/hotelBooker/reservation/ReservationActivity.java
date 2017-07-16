@@ -1,10 +1,6 @@
-package com.jgos.hotelBooker.hotelList;
+package com.jgos.hotelBooker.reservation;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,34 +9,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jgos.hotelBooker.R;
-import com.jgos.hotelBooker.data.serverEntity.hotel.HotelData;
-import com.jgos.hotelBooker.hotelDetail.HotelDetailActivity;
-import com.jgos.hotelBooker.hotelList.interfaces.HotelListPresenterOps;
-import com.jgos.hotelBooker.hotelList.interfaces.HotelListViewOps;
-import com.jgos.hotelBooker.hotelList.list.HotelArrayAdapter;
-import com.jgos.hotelBooker.reservation.ReservationActivity;
 import com.jgos.hotelBooker.storage.Storage;
+import com.jgos.hotelBooker.reservation.interfaces.ReservationPresenterOps;
+import com.jgos.hotelBooker.reservation.interfaces.ReservationViewOps;
 
-import java.util.ArrayList;
 
+public class ReservationActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, ReservationViewOps {
 
-public class HotelListActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, HotelListViewOps {
-
-    private HotelListPresenterOps mPresenter;
-
-    private ListView hotelListView;
+    private ReservationPresenterOps mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hotel_list);
+        setContentView(R.layout.activity_hotel_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -64,16 +49,13 @@ public class HotelListActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        hotelListView = (ListView) findViewById(R.id.hotelListView);
-
-
         setupMVP();
         mPresenter.onStartup();
 
     }
 
     private void setupMVP() {
-        mPresenter = new HotelListPresenter(this);
+        mPresenter = new ReservationPresenter(this);
     }
 
 
@@ -135,22 +117,4 @@ public class HotelListActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    @Override
-    public void initHotelListView(ArrayList hotelData) {
-        HotelArrayAdapter adapter = new HotelArrayAdapter(this,  hotelData);
-        hotelListView.setAdapter(adapter);
-
-        hotelListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v, int pos, long id) {
-                mPresenter.listItemSelect((HotelData) parent.getAdapter().getItem(pos));
-            }
-        });
     }
-
-    @Override
-    public void showHotelDetailView() {
-        Intent myIntent = new Intent(this, HotelDetailActivity.class);
-        this.startActivity(myIntent);
-    }
-}
