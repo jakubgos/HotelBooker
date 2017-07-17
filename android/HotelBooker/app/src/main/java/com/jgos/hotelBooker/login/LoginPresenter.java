@@ -22,16 +22,17 @@ import static com.jgos.hotelBooker.login.entity.Result.AuthFailed;
  */
 public class LoginPresenter implements LoginPresenterOps, LoginModelPresenterOps {
 
-    private WeakReference<LoginViewOps> loginViewOps;
     private final LoginModelOps loginModelOps;
     private final Handler handler = new Handler();
+    private WeakReference<LoginViewOps> loginViewOps;
+
     public LoginPresenter(LoginViewOps loginViewOps) {
         this.loginViewOps = new WeakReference<>(loginViewOps);
         this.loginModelOps = new LoginModel(this, new NetworkServiceImpl());
     }
 
-    private LoginViewOps  getView() throws NullPointerException {
-        if ( loginViewOps != null )
+    private LoginViewOps getView() throws NullPointerException {
+        if (loginViewOps != null)
             return loginViewOps.get();
         else
             throw new NullPointerException("View is unavailable");
@@ -39,7 +40,7 @@ public class LoginPresenter implements LoginPresenterOps, LoginModelPresenterOps
 
     @Override
     public void attemptLogin(LoginReqParam loginReqParam) {
-        Log.d("MyApp_Login","presenter attemptLogin invoked");
+        Log.d("MyApp_Login", "presenter attemptLogin invoked");
 
         getView().resetLoginErrors();
 
@@ -58,11 +59,11 @@ public class LoginPresenter implements LoginPresenterOps, LoginModelPresenterOps
     @Override
     public void onStartup() {
 
-}
+    }
 
     @Override
     public void loginSuccess(final LoginData s) {
-        Log.d("MyApp_Login","Login OK!!!!");
+        Log.d("MyApp_Login", "Login OK!!!!");
         Storage.getInstance().setLoginData(s);
 
         //NetworkServiceImpl temp = new NetworkServiceImpl();
@@ -84,7 +85,7 @@ public class LoginPresenter implements LoginPresenterOps, LoginModelPresenterOps
         handler.post(new Runnable() {
             @Override
             public void run() {
-        getView().showLoginError(AuthFailed, loginInvalid.getMessage());
+                getView().showLoginError(AuthFailed, loginInvalid.getMessage());
                 getView().showProgress(false);
 
             }

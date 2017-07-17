@@ -7,9 +7,10 @@ package com.jgos.hotelBooker.login.entity;
 public class LoginReqParam {
     String email;
     String password;
+
     public LoginReqParam(String email, String password) {
-        this.email=email;
-        this.password=password;
+        this.email = email;
+        this.password = password;
     }
 
     public String getLogin() {

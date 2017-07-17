@@ -12,9 +12,9 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.jgos.hotelBooker.R;
-import com.jgos.hotelBooker.storage.Storage;
 import com.jgos.hotelBooker.reservation.interfaces.ReservationPresenterOps;
 import com.jgos.hotelBooker.reservation.interfaces.ReservationViewOps;
+import com.jgos.hotelBooker.storage.Storage;
 
 
 public class ReservationActivity extends AppCompatActivity
@@ -117,4 +117,4 @@ public class ReservationActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    }
+}

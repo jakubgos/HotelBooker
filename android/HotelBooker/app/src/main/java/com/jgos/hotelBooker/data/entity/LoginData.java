@@ -14,13 +14,16 @@ public class LoginData {
 
     public Long expires_in;
     public String scope;
-    public long status =-1;
+    public long status = -1;
     public String error;
     public String message;
     private String login;
 
     public LoginData(String s) {
-        this.message=s;
+        this.message = s;
+    }
+
+    public LoginData() {
     }
 
     public long getStatus() {
@@ -45,9 +48,6 @@ public class LoginData {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public LoginData() {
     }
 
     public String getAccess_token() {
@@ -105,11 +105,11 @@ public class LoginData {
                 '}';
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
     public String getLogin() {
         return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 }

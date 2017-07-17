@@ -1,104 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/CardStyle.Home"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="50dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/Kryteria"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textAppearance="@style/TextStyle.Title"
-                android:layout_weight="1"/>
+                android:text="@string/Kryteria"
+                android:textAppearance="@style/TextStyle.Title" />
 
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="50dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/view_spacing_medium"
-            android:text="@string/miasto"
-            android:textAppearance="@style/TextStyle.Body2"/>
-
-        <Spinner
-            android:id="@+id/citySpinner"
-            style="@style/SpinnerStyle.Underlined"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/view_spacing_small"
-            android:spinnerMode="dropdown"/>
-    </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/view_spacing_medium"
+                android:text="@string/miasto"
+                android:textAppearance="@style/TextStyle.Body2" />
+
+            <Spinner
+                android:id="@+id/citySpinner"
+                style="@style/SpinnerStyle.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/view_spacing_small"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/view_spacing_medium"
                 android:text="@string/Ilosc_miejsc"
-                android:textAppearance="@style/TextStyle.Body2"/>
+                android:textAppearance="@style/TextStyle.Body2" />
 
-            <com.shawnlin.numberpicker.NumberPicker
+            <com.shawnlin.numberpicker.NumberPicker xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/filter_number_picker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                app:np_height="35dp"
                 app:np_dividerColor="@color/colorAccent"
                 app:np_formatter="%01d"
+                app:np_height="35dp"
                 app:np_max="5"
                 app:np_min="1"
                 app:np_orientation="horizontal"
                 app:np_selectedTextColor="@color/colorPrimary"
                 app:np_textColor="@color/colorPrimary"
-                app:np_typeface="sans-serif-condensed"
-                app:np_value="2"
                 app:np_textSize="30dp"
-                />
+                app:np_typeface="sans-serif-condensed"
+                app:np_value="2" />
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="0dp">
 
-        <ProgressBar
-            android:id="@+id/city_load_progress"
-            style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:indeterminate="true"
-            android:visibility="visible"/>
+            android:paddingBottom="0dp">
 
-        <Button
-            android:id="@+id/filter_select_button"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/Szukaj"
-            android:textStyle="bold"
-            android:layout_gravity="right"
-            android:layout_weight="1"
-            android:layout_margin="0dp"
-            android:layout_width="0dp" />
+            <ProgressBar
+                android:id="@+id/city_load_progress"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:indeterminate="true"
+                android:visibility="visible" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/filter_select_button"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:text="@string/Szukaj"
+                android:textStyle="bold" />
+
+        </LinearLayout>
     </LinearLayout>
 
 

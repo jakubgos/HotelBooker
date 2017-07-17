@@ -16,6 +16,6 @@ class ReservationModel implements ReservationModelOps {
 
     public ReservationModel(ReservationPresenterOps ReservationPresenterOps, NetworkServiceImpl networkService) {
         this.reservationPresenter = ReservationPresenterOps;
-        this.networkService=networkService;
+        this.networkService = networkService;
     }
 }

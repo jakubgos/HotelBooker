@@ -12,6 +12,9 @@ public class FoodOffer {
 
     private String name;
 
+    public FoodOffer() {
+    }
+
     public long getId() {
         return id;
     }
@@ -26,9 +29,6 @@ public class FoodOffer {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public FoodOffer() {
     }
 
     @Override

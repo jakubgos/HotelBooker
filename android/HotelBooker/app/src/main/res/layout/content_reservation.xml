@@ -8,10 +8,9 @@
     tools:context="com.jgos.hotelBooker.hotelDetail.HotelDetailActivity"
     tools:showIn="@layout/app_bar_hotel_detail">
 
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:text="reservation"
-    />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="reservation" />
 
 </android.support.constraint.ConstraintLayout>

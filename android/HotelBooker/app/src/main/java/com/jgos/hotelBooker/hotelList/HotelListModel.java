@@ -15,6 +15,6 @@ class HotelListModel implements HotelListModelOps {
 
     public HotelListModel(HotelListPresenter hotelListPresenter, NetworkServiceImpl networkService) {
         this.hotelListPresenter = hotelListPresenter;
-        this.networkService=networkService;
+        this.networkService = networkService;
     }
 }

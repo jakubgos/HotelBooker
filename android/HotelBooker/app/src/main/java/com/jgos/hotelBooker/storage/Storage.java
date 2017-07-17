@@ -10,11 +10,22 @@ import com.jgos.hotelBooker.data.serverEntity.hotel.data.HotelResultStatus;
  */
 
 public class Storage {
-    private static Storage instance=null;
+    private static Storage instance = null;
 
     private LoginData loginData;
     private HotelOffer hotelOffer;
     private HotelData selectedHotelData;
+
+    private Storage() {
+        this.hotelOffer = new HotelOffer(HotelResultStatus.NOT_INITIALED);
+    }
+
+    public static Storage getInstance() {
+        if (instance == null) {
+            instance = new Storage();
+        }
+        return instance;
+    }
 
     public HotelData getSelectedHotelData() {
         return selectedHotelData;
@@ -22,18 +33,6 @@ public class Storage {
 
     public void setSelectedHotelData(HotelData selectedHotelData) {
         this.selectedHotelData = selectedHotelData;
-    }
-
-    private Storage()
-    {
-        this.hotelOffer= new HotelOffer(HotelResultStatus.NOT_INITIALED);
-    }
-
-    public static Storage getInstance() {
-        if(instance == null) {
-            instance = new Storage();
-        }
-        return instance;
     }
 
     public LoginData getLoginData() {
@@ -45,7 +44,7 @@ public class Storage {
     }
 
     public void save(HotelOffer hotelOffer) {
-        this.hotelOffer=hotelOffer;
+        this.hotelOffer = hotelOffer;
     }
 
     public HotelOffer getHotelOffer() {

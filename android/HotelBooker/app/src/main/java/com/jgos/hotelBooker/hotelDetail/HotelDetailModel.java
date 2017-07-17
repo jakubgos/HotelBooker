@@ -16,6 +16,6 @@ class HotelDetailModel implements HotelDetailModelOps {
 
     public HotelDetailModel(HotelDetailPresenterOps hotelDetailPresenterOps, NetworkServiceImpl networkService) {
         this.hoteDetailPresenter = hotelDetailPresenterOps;
-        this.networkService=networkService;
+        this.networkService = networkService;
     }
 }

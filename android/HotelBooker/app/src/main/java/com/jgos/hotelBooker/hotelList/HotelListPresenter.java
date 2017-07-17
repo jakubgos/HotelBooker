@@ -21,16 +21,17 @@ public class HotelListPresenter implements HotelListPresenterOps {
     private final HotelListModelOps hotelListModelOps;
 
     public HotelListPresenter(HotelListViewOps hotelListViewOps) {
-        this.HotelListViewOps=new WeakReference<>(hotelListViewOps);
+        this.HotelListViewOps = new WeakReference<>(hotelListViewOps);
         this.hotelListModelOps = new HotelListModel(this, new NetworkServiceImpl());
     }
 
-    private HotelListViewOps  getView() throws NullPointerException {
-        if ( HotelListViewOps != null )
+    private HotelListViewOps getView() throws NullPointerException {
+        if (HotelListViewOps != null)
             return HotelListViewOps.get();
         else
             throw new NullPointerException("View is unavailable");
     }
+
     @Override
     public void onStartup() {
         getView().initHotelListView((ArrayList) Storage.getInstance().getHotelOffer().getHotelData());
@@ -38,7 +39,7 @@ public class HotelListPresenter implements HotelListPresenterOps {
 
     @Override
     public void listItemSelect(HotelData item) {
-        Log.d("MyApp_HotelList","onStartup invoked :" + item.toString());
+        Log.d("MyApp_HotelList", "onStartup invoked :" + item.toString());
         Storage.getInstance().setSelectedHotelData(item);
         getView().showHotelDetailView();
     }

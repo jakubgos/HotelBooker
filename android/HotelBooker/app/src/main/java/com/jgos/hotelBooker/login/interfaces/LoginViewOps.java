@@ -1,6 +1,5 @@
 package com.jgos.hotelBooker.login.interfaces;
 
-import com.jgos.hotelBooker.data.entity.LoginData;
 import com.jgos.hotelBooker.login.entity.Result;
 
 /**

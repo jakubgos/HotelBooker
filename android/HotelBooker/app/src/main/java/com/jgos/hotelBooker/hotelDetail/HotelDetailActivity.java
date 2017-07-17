@@ -16,9 +16,9 @@ import com.jgos.hotelBooker.R;
 import com.jgos.hotelBooker.data.serverEntity.hotel.HotelDetail;
 import com.jgos.hotelBooker.data.serverEntity.hotel.data.FoodOffer;
 import com.jgos.hotelBooker.data.serverEntity.hotel.data.HotelFacilities;
-import com.jgos.hotelBooker.storage.Storage;
 import com.jgos.hotelBooker.hotelDetail.interfaces.HotelDetailPresenterOps;
 import com.jgos.hotelBooker.hotelDetail.interfaces.HotelDetailViewOps;
+import com.jgos.hotelBooker.storage.Storage;
 
 
 public class HotelDetailActivity extends AppCompatActivity
@@ -59,9 +59,9 @@ public class HotelDetailActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        hotelName = (TextView)  findViewById(R.id.hd_hotel_name);
-        hotelAddress = (TextView)  findViewById(R.id.hd_hotel_address);
-        hotelDescription = (TextView)  findViewById(R.id.hd_hotel_description);
+        hotelName = (TextView) findViewById(R.id.hd_hotel_name);
+        hotelAddress = (TextView) findViewById(R.id.hd_hotel_address);
+        hotelDescription = (TextView) findViewById(R.id.hd_hotel_description);
         foodOffer = (TextView) findViewById(R.id.hd_food_offer);
         facilities = (TextView) findViewById(R.id.hd_hotel_facilities);
         setupMVP();
@@ -140,14 +140,14 @@ public class HotelDetailActivity extends AppCompatActivity
         hotelDescription.setText(Html.fromHtml(hotelDetail.getDescription()));
         String tmpString = "";
 
-        for (FoodOffer fo: hotelDetail.getFoodOffer()) {
+        for (FoodOffer fo : hotelDetail.getFoodOffer()) {
             tmpString = new StringBuilder(tmpString).append("&#8226;").append(fo.getName()).append("<br/>").toString();
         }
 
         foodOffer.setText(Html.fromHtml(tmpString));
 
         tmpString = "";
-        for (HotelFacilities fo: hotelDetail.getHotelFacilities()) {
+        for (HotelFacilities fo : hotelDetail.getHotelFacilities()) {
             tmpString = new StringBuilder(tmpString).append("&#8226;").append(fo.getName()).append("<br/>").toString();
         }
         facilities.setText(Html.fromHtml(tmpString));

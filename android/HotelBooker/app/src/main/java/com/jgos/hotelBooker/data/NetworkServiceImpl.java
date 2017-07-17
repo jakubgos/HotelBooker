@@ -7,22 +7,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-
 import com.jgos.hotelBooker.data.entity.LoginData;
-
+import com.jgos.hotelBooker.data.interfaces.NetworkService;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.HotelOffer;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.SearchRequest;
 import com.jgos.hotelBooker.data.serverEntity.hotel.data.City;
-import com.jgos.hotelBooker.data.serverEntity.hotel.data.HotelResultStatus;
 import com.jgos.hotelBooker.filter.interfaces.LoginServiceCityListResult;
 import com.jgos.hotelBooker.filter.interfaces.SearchRequestResult;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
-import com.jgos.hotelBooker.data.interfaces.NetworkService;
 import com.jgos.hotelBooker.login.interfaces.LoginServiceLoginResult;
 
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Credentials;
@@ -33,24 +28,21 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.jgos.hotelBooker.data.serverEntity.hotel.data.HotelResultStatus.NO_DATA;
-
 /**
  * Created by Bos on 2017-03-04.
  */
 
 public class NetworkServiceImpl implements NetworkService {
 
+    public static final String UNKNOWN_ERROR = "Błąd:";
     private static final String SERVER_ADDRESS =
             "192.168.0.2";
     private static final int SERVER_PORT =
             8080;
     private static final String PARKING_PATH =
             "api/parkings";
-
     private static final String SEARCH_PATH =
             "api/searchOffer";
-
     private static final String CITY_LIST_PATH =
             "api/getCityList";
     private static final String GRANT_TYPE =
@@ -59,15 +51,10 @@ public class NetworkServiceImpl implements NetworkService {
             "client";
     private static final String CLIENT_SECRET =
             "secret";
-
-
     private static final String SERVER_LOGIN_PATH =
             "oauth/token";
+    private static final String NO_DATA_ERROR = "Nie znaleźiono żadnych wyników";
     private ObjectMapper objectMapper = new ObjectMapper();
-    private static final String NO_DATA_ERROR ="Nie znaleźiono żadnych wyników";
-
-    public static final String UNKNOWN_ERROR = "Błąd:" ;
-
 
     @Override
     public void login(final LoginReqParam loginReqParam, final LoginServiceLoginResult callBack) {
@@ -221,8 +208,7 @@ public class NetworkServiceImpl implements NetworkService {
                     //Log.d("MyApp_Service", "NetworkServiceImpl getParkingList list " + list.toString());
                     Log.d("MyApp_Service", "NetworkServiceImpl searchRequest result " + hotelOffer.toString());
 
-                    switch (  hotelOffer.getStatus())
-                    {
+                    switch (hotelOffer.getStatus()) {
                         case NO_DATA:
                             searchRequestResult.searchRequestFailure(NO_DATA_ERROR);
                             break;

@@ -6,13 +6,12 @@ import android.util.Log;
 
 import com.jgos.hotelBooker.data.NetworkServiceImpl;
 import com.jgos.hotelBooker.data.entity.DialogChoice;
-
 import com.jgos.hotelBooker.data.serverEntity.endpoint.HotelOffer;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.SearchRequest;
 import com.jgos.hotelBooker.data.serverEntity.hotel.data.City;
+import com.jgos.hotelBooker.filter.interfaces.FilterModelOps;
 import com.jgos.hotelBooker.filter.interfaces.FilterPresenterOps;
 import com.jgos.hotelBooker.filter.interfaces.FilterViewOps;
-import com.jgos.hotelBooker.filter.interfaces.FilterModelOps;
 import com.jgos.hotelBooker.storage.Storage;
 
 import java.lang.ref.WeakReference;
@@ -32,13 +31,13 @@ class FilterPresenter implements FilterPresenterOps {
     private Calendar arrivalCalendar = null;
     private Calendar departureCalendar = null;
 
-    public FilterPresenter(FilterViewOps filterViewOps ) {
-        this.filterViewOps=new WeakReference<>(filterViewOps);
+    public FilterPresenter(FilterViewOps filterViewOps) {
+        this.filterViewOps = new WeakReference<>(filterViewOps);
         this.filterModelOps = new FilterModel(this, new NetworkServiceImpl());
     }
 
-    private FilterViewOps  getView() throws NullPointerException {
-        if ( filterViewOps != null )
+    private FilterViewOps getView() throws NullPointerException {
+        if (filterViewOps != null)
             return filterViewOps.get();
         else
             throw new NullPointerException("View is unavailable");
@@ -60,8 +59,8 @@ class FilterPresenter implements FilterPresenterOps {
         departureCalendar.add(Calendar.DATE, 1);
         departureDate = departureCalendar.getTime();
 
-        getView().displayArrivalDate( DateFormat.format(DATA_FORMAT,arrivalDate).toString());
-        getView().displayDepartureDate( DateFormat.format(DATA_FORMAT,departureDate).toString());
+        getView().displayArrivalDate(DateFormat.format(DATA_FORMAT, arrivalDate).toString());
+        getView().displayDepartureDate(DateFormat.format(DATA_FORMAT, departureDate).toString());
 
         filterModelOps.getCityList(Storage.getInstance().getLoginData());
 
@@ -98,7 +97,7 @@ class FilterPresenter implements FilterPresenterOps {
 
     @Override
     public void departureDateClick() {
-        Calendar minCalendarTime= Calendar.getInstance();
+        Calendar minCalendarTime = Calendar.getInstance();
         minCalendarTime.setTime(arrivalCalendar.getTime());
         minCalendarTime.add(Calendar.DATE, 1);
 
@@ -109,14 +108,13 @@ class FilterPresenter implements FilterPresenterOps {
     @Override
     public void arrivalDateChange(Date date) {
         arrivalCalendar.setTime(date);
-        getView().displayArrivalDate( DateFormat.format(DATA_FORMAT,date).toString());
-        if(arrivalCalendar.getTime().compareTo(departureCalendar.getTime()) >= 0)
-        {
-            Log.d("MyApp_filter","arrivalCalendar > departureCalendar, update departureCalendar ");
+        getView().displayArrivalDate(DateFormat.format(DATA_FORMAT, date).toString());
+        if (arrivalCalendar.getTime().compareTo(departureCalendar.getTime()) >= 0) {
+            Log.d("MyApp_filter", "arrivalCalendar > departureCalendar, update departureCalendar ");
             departureCalendar.setTime(arrivalCalendar.getTime());
             departureCalendar.add(Calendar.DATE, 1);
 
-            getView().displayDepartureDate( DateFormat.format(DATA_FORMAT,departureCalendar.getTime()).toString());
+            getView().displayDepartureDate(DateFormat.format(DATA_FORMAT, departureCalendar.getTime()).toString());
         }
 
     }
@@ -124,15 +122,15 @@ class FilterPresenter implements FilterPresenterOps {
     @Override
     public void departureDateChange(Date date) {
         departureCalendar.setTime(date);
-        getView().displayDepartureDate( DateFormat.format(DATA_FORMAT,date).toString());
+        getView().displayDepartureDate(DateFormat.format(DATA_FORMAT, date).toString());
 
     }
 
     @Override
     public void search(City city, int numberOfPeople) {
         getView().showCityLoadProgressBar(true);
-        SearchRequest searchRequest = new SearchRequest(city,arrivalCalendar.getTime().getTime(),departureCalendar.getTime().getTime(), numberOfPeople);
-        filterModelOps.searchRequest(searchRequest, Storage.getInstance().getLoginData() , this);
+        SearchRequest searchRequest = new SearchRequest(city, arrivalCalendar.getTime().getTime(), departureCalendar.getTime().getTime(), numberOfPeople);
+        filterModelOps.searchRequest(searchRequest, Storage.getInstance().getLoginData(), this);
 
     }
 

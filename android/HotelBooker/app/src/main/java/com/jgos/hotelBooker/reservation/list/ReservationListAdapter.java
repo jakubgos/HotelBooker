@@ -18,15 +18,6 @@ import java.util.ArrayList;
 
 public class ReservationListAdapter extends ArrayAdapter<HotelData> {
 
-    static class ViewHolder {
-        public TextView hotelName;
-        public TextView hotelAdress;
-        public TextView price;
-        public TextView rating;
-        public TextView roomName;
-
-    }
-
     public ReservationListAdapter(Context context, ArrayList<HotelData> hotelData) {
         super(context, 0, hotelData);
     }
@@ -36,7 +27,7 @@ public class ReservationListAdapter extends ArrayAdapter<HotelData> {
 
         ViewHolder viewHolder;
         View rowView = convertView;
-        if(rowView == null) {
+        if (rowView == null) {
             rowView = LayoutInflater.from(getContext()).inflate(R.layout.custom_hotel_list_item, parent, false);
 
             viewHolder = new ViewHolder();
@@ -59,6 +50,15 @@ public class ReservationListAdapter extends ArrayAdapter<HotelData> {
         viewHolder.roomName.setText(hotelData.getRoomList().get(0).getName());
 
         return rowView;
+    }
+
+    static class ViewHolder {
+        public TextView hotelName;
+        public TextView hotelAdress;
+        public TextView price;
+        public TextView rating;
+        public TextView roomName;
+
     }
 
 }

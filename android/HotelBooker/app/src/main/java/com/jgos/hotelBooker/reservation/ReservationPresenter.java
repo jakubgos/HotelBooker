@@ -16,16 +16,17 @@ public class ReservationPresenter implements ReservationPresenterOps {
     private final ReservationModelOps hotelDetailModelOps;
 
     public ReservationPresenter(ReservationViewOps hotelListViewOps) {
-        this.HotelDetailViewOps =new WeakReference<>(hotelListViewOps);
+        this.HotelDetailViewOps = new WeakReference<>(hotelListViewOps);
         this.hotelDetailModelOps = new ReservationModel(this, new NetworkServiceImpl());
     }
 
     private ReservationViewOps getView() throws NullPointerException {
-        if ( HotelDetailViewOps != null )
+        if (HotelDetailViewOps != null)
             return HotelDetailViewOps.get();
         else
             throw new NullPointerException("View is unavailable");
     }
+
     @Override
     public void onStartup() {
 

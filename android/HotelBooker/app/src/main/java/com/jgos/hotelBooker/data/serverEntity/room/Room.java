@@ -16,6 +16,9 @@ public class Room {
 
     private List<RoomFacilities> roomFacilities;
 
+    public Room() {
+    }
+
     public float getPrice() {
         return price;
     }
@@ -62,10 +65,6 @@ public class Room {
 
     public void setRoomFacilities(List<RoomFacilities> roomFacilities) {
         this.roomFacilities = roomFacilities;
-    }
-
-
-    public Room() {
     }
 
     @Override

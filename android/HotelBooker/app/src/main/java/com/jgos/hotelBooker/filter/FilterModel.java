@@ -26,7 +26,7 @@ class FilterModel implements FilterModelOps {
 
     public FilterModel(FilterPresenterOps filterPresenterOps, NetworkService networkService) {
         this.networkService = networkService;
-        this.filterPresenterOps=filterPresenterOps;
+        this.filterPresenterOps = filterPresenterOps;
     }
 
     @Override
@@ -58,5 +58,5 @@ class FilterModel implements FilterModelOps {
                 filterPresenterOps.getSearchRequestFailure(s);
             }
         });
-}
+    }
 }

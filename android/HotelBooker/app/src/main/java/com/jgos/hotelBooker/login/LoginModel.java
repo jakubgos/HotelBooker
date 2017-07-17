@@ -1,11 +1,11 @@
 package com.jgos.hotelBooker.login;
 
 import com.jgos.hotelBooker.data.entity.LoginData;
+import com.jgos.hotelBooker.data.interfaces.NetworkService;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
 import com.jgos.hotelBooker.login.entity.Result;
 import com.jgos.hotelBooker.login.interfaces.LoginModelOps;
 import com.jgos.hotelBooker.login.interfaces.LoginModelPresenterOps;
-import com.jgos.hotelBooker.data.interfaces.NetworkService;
 import com.jgos.hotelBooker.login.interfaces.LoginServiceLoginResult;
 
 /**
@@ -21,8 +21,8 @@ public class LoginModel implements LoginModelOps {
 
 
     public LoginModel(LoginModelPresenterOps loginPresenter, NetworkService loginService) {
-        this.loginPresenter=loginPresenter;
-        this.loginService=loginService;
+        this.loginPresenter = loginPresenter;
+        this.loginService = loginService;
     }
 
 
@@ -43,17 +43,17 @@ public class LoginModel implements LoginModelOps {
 
     @Override
     public void validateLoginParameters(LoginReqParam loginReqParam) {
-        boolean error= false;
+        boolean error = false;
         if (!isEmailValid(loginReqParam.getLogin())) {
             error = true;
             loginPresenter.validateLoginParamFailed(Result.LoginInvalid);
         }
-        if(!isPasswordValid(loginReqParam.getPassword())) {
+        if (!isPasswordValid(loginReqParam.getPassword())) {
             error = true;
             loginPresenter.validateLoginParamFailed(Result.PasswordInvalid);
         }
         if (!error) {
-                loginPresenter.validateLoginParamSuccess(loginReqParam);
+            loginPresenter.validateLoginParamSuccess(loginReqParam);
         }
 
     }

@@ -1,8 +1,8 @@
 package com.jgos.hotelBooker.filter;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -37,19 +37,18 @@ public class FilterActivity extends AppCompatActivity implements FilterViewOps, 
     LinearLayout departureLayout;
     TextView viewDepartureDate;
     TextView viewArrivalDate;
-    private View mCityLoadProgressView;
     NumberPicker numberPicker;
     Button mSearchButton;
-
+    private View mCityLoadProgressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("MyApp_Filter"," FilterActivity onCreate invoked");
+        Log.d("MyApp_Filter", " FilterActivity onCreate invoked");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter);
-        citySpinner = (Spinner)this.findViewById(R.id.citySpinner);
+        citySpinner = (Spinner) this.findViewById(R.id.citySpinner);
         viewDepartureDate = (TextView) findViewById(R.id.filter_departure_date);
-        viewArrivalDate = (TextView)findViewById(R.id.filter_arrival_date);
+        viewArrivalDate = (TextView) findViewById(R.id.filter_arrival_date);
 
         mCityLoadProgressView = findViewById(R.id.city_load_progress);
 
@@ -58,14 +57,16 @@ public class FilterActivity extends AppCompatActivity implements FilterViewOps, 
             @Override
             public void onClick(View v) {
                 mPresenter.arrivalDateClick();
-            }});
+            }
+        });
 
         departureLayout = (LinearLayout) this.findViewById(R.id.departure_linear);
         departureLayout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPresenter.departureDateClick();
-            }});
+            }
+        });
 
         numberPicker = (NumberPicker) findViewById(R.id.filter_number_picker);
 
@@ -89,8 +90,8 @@ public class FilterActivity extends AppCompatActivity implements FilterViewOps, 
 
     @Override
     public void initSpinner(List<City> list) {
-        Log.d("MyApp_Filter","initSpinner invoked");
-        citySpinner = (Spinner)this.findViewById(R.id.citySpinner);
+        Log.d("MyApp_Filter", "initSpinner invoked");
+        citySpinner = (Spinner) this.findViewById(R.id.citySpinner);
         ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_dropdown_item, list);
 
@@ -144,27 +145,22 @@ public class FilterActivity extends AppCompatActivity implements FilterViewOps, 
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        Log.d("MyApp_filter","onDateSet return the following date: "+dayOfMonth+"/"+(monthOfYear+1)+"/"+year + " tag " + view.getTag());
+        Log.d("MyApp_filter", "onDateSet return the following date: " + dayOfMonth + "/" + (monthOfYear + 1) + "/" + year + " tag " + view.getTag());
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date d = new Date(0);
         try {
-            d = sdf.parse(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
+            d = sdf.parse(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        if(view.getTag().equals(DialogChoice.ARRIVAL.name()))
-        {
-            Log.d("MyApp_filter","arrival change sent");
+        if (view.getTag().equals(DialogChoice.ARRIVAL.name())) {
+            Log.d("MyApp_filter", "arrival change sent");
             mPresenter.arrivalDateChange(d);
-        }
-        else if(view.getTag().equals(DialogChoice.DEPARTURE.name()))
-        {
+        } else if (view.getTag().equals(DialogChoice.DEPARTURE.name())) {
             mPresenter.departureDateChange(d);
-        }
-        else
-        {
-            Log.e("MyApp_filter","onDateSet received incorrect tag: " +  view.getTag());
+        } else {
+            Log.e("MyApp_filter", "onDateSet received incorrect tag: " + view.getTag());
         }
     }
 
@@ -174,7 +170,7 @@ public class FilterActivity extends AppCompatActivity implements FilterViewOps, 
         City city = (City) citySpinner.getSelectedItem();
         int value = numberPicker.getValue();
 
-        mPresenter.search(city , numberPicker.getValue());
+        mPresenter.search(city, numberPicker.getValue());
         Log.d("MyApp_search", city.toString() + "  " + value);
     }
 

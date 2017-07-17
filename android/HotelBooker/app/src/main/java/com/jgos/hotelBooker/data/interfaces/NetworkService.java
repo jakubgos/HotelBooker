@@ -2,7 +2,6 @@ package com.jgos.hotelBooker.data.interfaces;
 
 import com.jgos.hotelBooker.data.entity.LoginData;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.SearchRequest;
-import com.jgos.hotelBooker.data.serverEntity.hotel.data.Coordinates;
 import com.jgos.hotelBooker.filter.interfaces.LoginServiceCityListResult;
 import com.jgos.hotelBooker.filter.interfaces.SearchRequestResult;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
