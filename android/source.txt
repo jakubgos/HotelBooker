@@ -35,3 +35,6 @@ http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html		//thymeleaf
  https://stackoverflow.com/questions/2990799/difference-between-fetchtype-lazy-and-eager-in-java-persistence-api
  
  http://docs.spring.io/spring-data/jpa/docs/current/reference/html/#specifications
+ 
+http://www.android4devs.pl/2011/07/listview-pierwsze-kroki/
+https://www.raywenderlich.com/124438/android-listview-tutorial

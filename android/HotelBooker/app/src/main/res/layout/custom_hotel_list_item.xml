@@ -58,7 +58,6 @@
                 android:text="Room Name"
                 android:textAlignment="textEnd"
                 android:textColor="@color/md_black_1000"
-
                 />
 
             <TextView
