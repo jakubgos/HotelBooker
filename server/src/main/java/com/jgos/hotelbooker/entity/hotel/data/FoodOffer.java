@@ -11,11 +11,14 @@ public class FoodOffer {
 
     //Dining,Vending,Exercise,Recreation,SwimmingPool,Parking
     @Id
-    @GeneratedValue( strategy = GenerationType.TABLE )
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
 
     @Column(nullable = false)
     private String name;
+
+    public FoodOffer() {
+    }
 
     public long getId() {
         return id;
@@ -31,9 +34,6 @@ public class FoodOffer {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public FoodOffer() {
     }
 
     @Override

@@ -13,7 +13,7 @@ public class City {
 
     @Id
     @Min(1)
-    @GeneratedValue( strategy = GenerationType.SEQUENCE )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
     @Column

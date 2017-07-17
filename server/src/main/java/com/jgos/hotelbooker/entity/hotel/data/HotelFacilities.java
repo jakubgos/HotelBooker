@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class HotelFacilities {
     //Dining,Vending,Exercise,Recreation,SwimmingPool,Parking
     @Id
-    @GeneratedValue( strategy = GenerationType.TABLE )
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
 
     @Column(nullable = false)

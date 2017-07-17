@@ -16,8 +16,4 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
     List<Reservation> findByDateBetween(Date from, Date to);
 
 
-
-
-
-
 }

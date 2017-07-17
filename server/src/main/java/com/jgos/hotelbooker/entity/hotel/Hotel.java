@@ -1,6 +1,5 @@
 package com.jgos.hotelbooker.entity.hotel;
 
-import com.jgos.hotelbooker.entity.hotel.HotelDetail;
 import com.jgos.hotelbooker.entity.room.Room;
 
 import javax.persistence.*;
@@ -14,7 +13,7 @@ import java.util.List;
 public class Hotel {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.TABLE )
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
 
     @OneToOne

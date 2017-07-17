@@ -17,7 +17,7 @@ public class WebHotel {
 
     @RequestMapping("/test")
     @ResponseBody
-    public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
+    public String greeting(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
         return "OK!";
     }
 

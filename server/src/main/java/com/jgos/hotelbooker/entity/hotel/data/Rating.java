@@ -13,10 +13,10 @@ import javax.validation.constraints.Size;
 public class Rating {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.TABLE )
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
 
-    @Size(min = 1,max = 5)
+    @Size(min = 1, max = 5)
     private int value;
 
     public Rating() {

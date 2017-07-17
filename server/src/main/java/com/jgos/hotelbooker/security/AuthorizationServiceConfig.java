@@ -3,12 +3,9 @@ package com.jgos.hotelbooker.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -41,8 +38,8 @@ public class AuthorizationServiceConfig extends AuthorizationServerConfigurerAda
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-      //  endpoints.authenticationManager(authenticationManager)
-       //         .userDetailsService(userDetailsService)
+        //  endpoints.authenticationManager(authenticationManager)
+        //         .userDetailsService(userDetailsService)
         //        .tokenStore(tokenStore());
 
         endpoints
@@ -52,13 +49,13 @@ public class AuthorizationServiceConfig extends AuthorizationServerConfigurerAda
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-       //clients.jdbc(dataSource);
+        //clients.jdbc(dataSource);
 
-       clients.
+        clients.
                 inMemory()
                 .withClient("client")
                 .scopes("read", "write")
-                .authorities(Authorities.ROLE_WEB.name(),Authorities.ROLE_USER.name())
+                .authorities(Authorities.ROLE_WEB.name(), Authorities.ROLE_USER.name())
                 .authorizedGrantTypes("password", "refresh_token")
                 .secret("secret")
                 .accessTokenValiditySeconds(1800);

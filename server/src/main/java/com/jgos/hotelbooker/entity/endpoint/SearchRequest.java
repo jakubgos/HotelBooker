@@ -23,22 +23,21 @@ public class SearchRequest {
 
     public SearchRequest(City city, long arrivalTime, long departureTime, int numberOfPeople) {
         this.city = city;
-        this.arrivalTime =arrivalTime;
-        this.departureTime=departureTime;
-        this.numberOfPeople=numberOfPeople;
+        this.arrivalTime = arrivalTime;
+        this.departureTime = departureTime;
+        this.numberOfPeople = numberOfPeople;
     }
 
     public SearchRequest() {
-        city= new City();
-        arrivalTime=0;
-        departureTime=0;
-        numberOfPeople=-1;
+        city = new City();
+        arrivalTime = 0;
+        departureTime = 0;
+        numberOfPeople = -1;
     }
 
     public int getNumberOfPeople() {
         return numberOfPeople;
     }
-
 
 
     public City getCity() {

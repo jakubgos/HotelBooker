@@ -10,7 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 
@@ -35,15 +37,15 @@ public class TestC {
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     @ResponseBody
     public String searchOffer(
-    //        @RequestBody City city
+            //        @RequestBody City city
     )
             throws InterruptedException {
 
 
         UserDb user = users.findOne((long) 1);
-        Hotel hotel = hotels.findOne((long)1);
+        Hotel hotel = hotels.findOne((long) 1);
 
-        Reservation reservation = new Reservation(hotel.getRoomList().get(0),user,new Date());
+        Reservation reservation = new Reservation(hotel.getRoomList().get(0), user, new Date());
 
         log.info(user.toString());
         log.info(hotel.toString());
@@ -53,9 +55,8 @@ public class TestC {
         Reservation newRes = reservationRepository.findOne((long) 1);
 
 
-
         //return user+"\n "+hotel +"\nOLD::" +reservation + "\n NEW:: " + newRes + "\n";
-    return "!: " +hotels.findOne((long)1).getRoomList() + "\n 2:"+ hotels.findOne((long)2).getRoomList();
+        return "!: " + hotels.findOne((long) 1).getRoomList() + "\n 2:" + hotels.findOne((long) 2).getRoomList();
     }
 
 }

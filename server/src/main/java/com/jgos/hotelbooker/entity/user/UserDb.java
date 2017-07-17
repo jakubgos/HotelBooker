@@ -1,8 +1,10 @@
 package com.jgos.hotelbooker.entity.user;
 
 
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +55,7 @@ public class UserDb {
 
     public void setAuthorities(List<String> authorities) {
         this.authorities = authorities;
-   }
+    }
 
 
     @Override

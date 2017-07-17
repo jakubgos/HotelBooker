@@ -12,24 +12,21 @@ import java.util.Date;
 
 @Entity
 public class Reservation {
-    public Reservation() {
-    }
-
+    @NotNull
+    @ManyToOne
+    UserDb user;
+    @NotNull
+    @Temporal(TemporalType.DATE)
+    Date date;
     @Id
-    @GeneratedValue( strategy = GenerationType.TABLE )
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-
     @NotNull
     @ManyToOne
     private Room room;
 
-    @NotNull
-    @ManyToOne
-    UserDb user;
-
-    @NotNull
-    @Temporal(TemporalType.DATE)
-    Date date;
+    public Reservation() {
+    }
 
     public Reservation(Room room, UserDb user, Date date) {
         this.room = room;
@@ -41,12 +38,12 @@ public class Reservation {
         return room;
     }
 
-    public long getId() {
-        return id;
-    }
-
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public UserDb getUser() {
