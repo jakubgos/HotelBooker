@@ -6,4 +6,6 @@ package com.jgos.hotelBooker.hotelDetail.interfaces;
 
 public interface HotelDetailPresenterOps {
     void onStartup();
+
+    void reservation(long roomId);
 }

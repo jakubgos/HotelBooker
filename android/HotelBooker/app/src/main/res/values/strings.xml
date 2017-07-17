@@ -45,4 +45,14 @@
     <string name="default_text">Default text</string>
     <string name="food_offer_title">Posiłki</string>
     <string name="hotel_facilities_title">Udogodnienia</string>
+    <string name="reservation_button">Zarezerwuj ten pokój</string>
+    <string name="reservation">Rezerwacja</string>
+
+    <string-array name="numerOfPeople">
+        <item>1 Osoba</item>
+        <item>2 Osoby</item>
+        <item>3 Osoby</item>
+        <item>4 Osoby</item>
+        <item>5 Osób</item>
+    </string-array>
 </resources>
