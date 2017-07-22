@@ -2,8 +2,9 @@ package com.jgos.hotelBooker.storage;
 
 import com.jgos.hotelBooker.data.entity.LoginData;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.HotelOffer;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.SearchRequest;
 import com.jgos.hotelBooker.data.serverEntity.hotel.HotelData;
-import com.jgos.hotelBooker.data.serverEntity.hotel.data.HotelResultStatus;
+import com.jgos.hotelBooker.data.serverEntity.hotel.data.ResultStatus;
 
 /**
  * Created by Bos on 2017-05-18.
@@ -16,8 +17,24 @@ public class Storage {
     private HotelOffer hotelOffer;
     private HotelData selectedHotelData;
 
+    public void setHotelOffer(HotelOffer hotelOffer) {
+        this.hotelOffer = hotelOffer;
+    }
+
+    public boolean isKillListActivity() {
+        return killListActivity;
+    }
+
+    private boolean killListActivity;
+
+    public SearchRequest getSelectedSearchRequest() {
+        return selectedSearchRequest;
+    }
+
+    private SearchRequest selectedSearchRequest;
+
     private Storage() {
-        this.hotelOffer = new HotelOffer(HotelResultStatus.NOT_INITIALED);
+        this.hotelOffer = new HotelOffer(ResultStatus.NOT_INITIALED);
     }
 
     public static Storage getInstance() {
@@ -51,4 +68,11 @@ public class Storage {
         return hotelOffer;
     }
 
+    public void setSelectedSearchRequest(SearchRequest selectedSearchRequest) {
+        this.selectedSearchRequest = selectedSearchRequest;
+    }
+
+    public void setKillListActivity(boolean b) {
+        this.killListActivity = b;
+    }
 }

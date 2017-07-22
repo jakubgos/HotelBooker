@@ -1,6 +1,7 @@
 package com.jgos.hotelBooker.hotelDetail;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +16,8 @@ import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.jgos.hotelBooker.R;
 import com.jgos.hotelBooker.data.serverEntity.hotel.HotelDetail;
 import com.jgos.hotelBooker.data.serverEntity.hotel.data.FoodOffer;
@@ -41,6 +44,7 @@ public class HotelDetailActivity extends AppCompatActivity
     private TextView roomCount;
     private TextView roomDescription;
     private long roomId;
+    private MaterialDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,21 +163,21 @@ public class HotelDetailActivity extends AppCompatActivity
         for (FoodOffer fo : hotelDetail.getFoodOffer()) {
             tmpString = new StringBuilder(tmpString).append("&#8226;").append(fo.getName()).append("<br/><br/>").toString();
         }
-        tmpString = tmpString.substring(0,tmpString.length()-8);
+        tmpString = tmpString.substring(0, tmpString.length() - 8);
         foodOffer.setText(Html.fromHtml(tmpString));
 
         tmpString = "";
         for (HotelFacilities fo : hotelDetail.getHotelFacilities()) {
             tmpString = new StringBuilder(tmpString).append("&#8226;").append(fo.getName()).append("<br/><br/>").toString();
         }
-        tmpString = tmpString.substring(0,tmpString.length()-8);
+        tmpString = tmpString.substring(0, tmpString.length() - 8);
 
         facilities.setText(Html.fromHtml(tmpString));
     }
 
     @Override
     public void prepareRoomData(Room room) {
-        this.roomId=room.getId();
+        this.roomId = room.getId();
         roomNAme.setText(room.getName());
         roomPrice.setText(String.valueOf(room.getPrice()));
         String[] coName = getResources().getStringArray(R.array.numerOfPeople);
@@ -194,5 +198,56 @@ public class HotelDetailActivity extends AppCompatActivity
                 });
 
         bar.show();
+    }
+
+    @Override
+    public void showConfirmDialog() {
+        new MaterialDialog.Builder(this)
+                .title(R.string.title_dialog_reservation)
+                .content(R.string.content_dialog_reservation)
+                .positiveText(R.string.longer_positive)
+                .negativeText(R.string.negative)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        mPresenter.confirmReservation();
+                    }
+                })
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        mPresenter.rejectReservation();
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    public void showAlertDialog(String s, boolean b) {
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title(R.string.error)
+                .content(s)
+                .positiveText(R.string.ok)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        finish();
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    public void showProgressDialog() {
+        progressDialog = new MaterialDialog.Builder(this)
+                .title(R.string.please_wait)
+                .content(R.string.process_request)
+                .progress(true, 0)
+                .show();
+    }
+
+    @Override
+    public void dismissProgressDialog() {
+        progressDialog.dismiss();
     }
 }

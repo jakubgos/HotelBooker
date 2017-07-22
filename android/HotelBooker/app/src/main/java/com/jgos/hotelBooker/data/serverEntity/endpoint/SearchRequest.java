@@ -1,6 +1,7 @@
 package com.jgos.hotelBooker.data.serverEntity.endpoint;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jgos.hotelBooker.data.serverEntity.hotel.data.City;
 
 /**
@@ -13,6 +14,15 @@ public class SearchRequest {
     private final long departureTime;
     private final int numberOfPeople;
 
+    @Override
+    public String toString() {
+        return "SearchRequest{" +
+                "city=" + city +
+                ", arrivalTime=" + arrivalTime +
+                ", departureTime=" + departureTime +
+                ", numberOfPeople=" + numberOfPeople +
+                '}';
+    }
 
     public SearchRequest(City city, long arrivalTime, long departureTime, int numberOfPeople) {
         this.city = city;
@@ -45,13 +55,4 @@ public class SearchRequest {
         return departureTime;
     }
 
-    @Override
-    public String toString() {
-        return "SearchRequest{" +
-                "city=" + city +
-                ", arrivalTime=" + arrivalTime +
-                ", departureTime=" + departureTime +
-                ", numberOfPeople=" + numberOfPeople +
-                '}';
-    }
 }

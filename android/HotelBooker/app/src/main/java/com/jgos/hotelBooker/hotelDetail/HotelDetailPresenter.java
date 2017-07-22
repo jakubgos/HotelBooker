@@ -1,6 +1,11 @@
 package com.jgos.hotelBooker.hotelDetail;
 
+import android.os.Handler;
+
 import com.jgos.hotelBooker.data.NetworkServiceImpl;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.ReservationRequest;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.ReservationResponse;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.SearchRequest;
 import com.jgos.hotelBooker.hotelDetail.interfaces.HotelDetailModelOps;
 import com.jgos.hotelBooker.hotelDetail.interfaces.HotelDetailPresenterOps;
 import com.jgos.hotelBooker.hotelDetail.interfaces.HotelDetailViewOps;
@@ -15,6 +20,9 @@ import java.lang.ref.WeakReference;
 public class HotelDetailPresenter implements HotelDetailPresenterOps {
     private final WeakReference<HotelDetailViewOps> HotelDetailViewOps;
     private final HotelDetailModelOps hotelDetailModelOps;
+    long reservationRoomId = -1;
+    private final Handler handler = new Handler();
+
 
     public HotelDetailPresenter(HotelDetailViewOps hotelListViewOps) {
         this.HotelDetailViewOps = new WeakReference<>(hotelListViewOps);
@@ -37,6 +45,66 @@ public class HotelDetailPresenter implements HotelDetailPresenterOps {
 
     @Override
     public void reservation(long roomId) {
-        
+        this.reservationRoomId = roomId;
+        getView().showConfirmDialog();
+    }
+
+    @Override
+    public void confirmReservation() {
+        SearchRequest searchRequest = Storage.getInstance().getSelectedSearchRequest();
+        if (reservationRoomId >= 0) {
+            hotelDetailModelOps.reserveRoom(new ReservationRequest(searchRequest.getArrivalTime(), searchRequest.getDepartureTime(), reservationRoomId), Storage.getInstance().getLoginData());
+            getView().showProgressDialog();
+        } else {
+            getView().showAlertDialog("Unexpected reservationRoomId: ," + reservationRoomId, true);
+            Storage.getInstance().setKillListActivity(true);
+
+        }
+
+    }
+
+    //From Activity
+    @Override
+    public void rejectReservation() {
+        this.reservationRoomId = -1;
+        getView().showSnackBar();
+    }
+
+    @Override
+    public void reservationRequestReject(ReservationResponse reservationResponse) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                getView().dismissProgressDialog();
+                Storage.getInstance().setKillListActivity(true);
+                getView().showAlertDialog("Nie możemy zrealizować twoiej rezerwacji, Wybierz inny termin.", true);
+
+            }
+        });
+    }
+
+    @Override
+    public void reservationRequestResult(ReservationRequest reservationRequest) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                getView().dismissProgressDialog();
+
+
+            }
+        });
+    }
+
+    @Override
+    public void reservationRequestFailure(final String s) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                getView().dismissProgressDialog();
+                getView().showAlertDialog("Napotkaliśmy niespodziewany błąd: " + s, true);
+                Storage.getInstance().setKillListActivity(true);
+
+            }
+        });
     }
 }

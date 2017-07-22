@@ -2,7 +2,7 @@ package com.jgos.hotelBooker.data.serverEntity.endpoint;
 
 
 import com.jgos.hotelBooker.data.serverEntity.hotel.HotelData;
-import com.jgos.hotelBooker.data.serverEntity.hotel.data.HotelResultStatus;
+import com.jgos.hotelBooker.data.serverEntity.hotel.data.ResultStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,22 +12,22 @@ import java.util.List;
  */
 public class HotelOffer {
 
-    HotelResultStatus status;
+    ResultStatus status;
 
     private List<HotelData> hotelData = new ArrayList<>();
 
     public HotelOffer() {
     }
 
-    public HotelOffer(HotelResultStatus status) {
+    public HotelOffer(ResultStatus status) {
         this.status = status;
     }
 
-    public HotelResultStatus getStatus() {
+    public ResultStatus getStatus() {
         return status;
     }
 
-    public void setStatus(HotelResultStatus status) {
+    public void setStatus(ResultStatus status) {
         this.status = status;
     }
 

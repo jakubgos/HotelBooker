@@ -10,10 +10,13 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.jgos.hotelBooker.data.entity.LoginData;
 import com.jgos.hotelBooker.data.interfaces.NetworkService;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.HotelOffer;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.ReservationRequest;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.ReservationResponse;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.SearchRequest;
 import com.jgos.hotelBooker.data.serverEntity.hotel.data.City;
 import com.jgos.hotelBooker.filter.interfaces.LoginServiceCityListResult;
 import com.jgos.hotelBooker.filter.interfaces.SearchRequestResult;
+import com.jgos.hotelBooker.hotelList.interfaces.ReservationRequestResult;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
 import com.jgos.hotelBooker.login.interfaces.LoginServiceLoginResult;
 
@@ -39,10 +42,10 @@ public class NetworkServiceImpl implements NetworkService {
             "192.168.0.2";
     private static final int SERVER_PORT =
             8080;
-    private static final String PARKING_PATH =
-            "api/parkings";
     private static final String SEARCH_PATH =
             "api/searchOffer";
+    private static final String MAKE_RESERVATION_PATH =
+            "api/reservation";
     private static final String CITY_LIST_PATH =
             "api/getCityList";
     private static final String GRANT_TYPE =
@@ -231,44 +234,80 @@ public class NetworkServiceImpl implements NetworkService {
         thread.start();
     }
 
+    @Override
+    public void reservationRequest(final ReservationRequest reservationRequest, final LoginData loginData, final ReservationRequestResult reservationRequestResult) {
+        final Thread thread = new Thread(new Runnable() {
 
-    public void testMsg(LoginData s) {
+            @Override
+            public void run() {
+                Log.d("MyApp_Service", "reservationRequest invoked");
 
-        OkHttpClient okHttpClient = new OkHttpClient();
-        String json = null;
+                OkHttpClient okHttpClient = new OkHttpClient();
+                String json = null;
+                try {
+                    json = objectMapper.writeValueAsString(reservationRequest);
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                    reservationRequestResult.reservationRequestFailure("Failed to create Json Object");
+                    return;
+                }
 
-        HttpUrl url = new HttpUrl.Builder()
-                .scheme("http")
-                .host(SERVER_ADDRESS)
-                .port(8080)
-                .addPathSegments("api/test")
+                HttpUrl url = new HttpUrl.Builder()
+                        .scheme("http")
+                        .host(SERVER_ADDRESS)
+                        .port(8080)
+                        .addPathSegments(MAKE_RESERVATION_PATH)
+                        .build();
 
-                .build();
+                Request request = new Request.Builder()
+                        .url(url)
+                        .addHeader("Authorization", "Bearer " + loginData.getAccess_token())
+                        .post(RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json))
+                        .build();
 
-        Request request = new Request.Builder()
-                .url(url)
-                .addHeader("Authorization", "Bearer " + s.getAccess_token())
-                .build();
+                Log.d("MyApp_Service", "NetworkServiceImpl reservationRequest request " + request.toString() + "JSON: " + json);
 
-        Log.d("MyApp_Service", "NetworkServiceImpl testMsg request " + request.toString() + "JSON: " + json);
+                Response response = null;
+                try {
+                    response = okHttpClient
+                            .newCall(request)
+                            .execute();
 
-        Response response = null;
-        try {
-            response = okHttpClient
-                    .newCall(request)
-                    .execute();
+                    String responseJson = response.body().string();
+                    Log.d("MyApp_Service", "NetworkServiceImpl searchRequest response string:" + responseJson);
+                    if(response.code()==404)
+                    {
+                        reservationRequestResult.reservationRequestFailure("404: " + responseJson );
+                        return;
 
-            String responseJson = response.body().string();
-            Log.d("MyApp_Service", "NetworkServiceImpl testMsg result " + responseJson);
+                    }
 
+                    ReservationResponse reservationResponse = objectMapper.readValue(responseJson, TypeFactory.defaultInstance().constructType(ReservationResponse.class));
 
-        } catch (JsonParseException e) {
-            e.printStackTrace();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                    //Log.d("MyApp_Service", "NetworkServiceImpl getParkingList list " + list.toString());
+                    Log.d("MyApp_Service", "NetworkServiceImpl reservationRequest result " + reservationResponse.toString());
+
+                    switch (reservationResponse.getStatus()) {
+                        case NO_DATA:
+                            reservationRequestResult.reservationRequestFailure(NO_DATA_ERROR);
+                            break;
+                        case RESERVATION_NOT_POSSIBLE:
+                            reservationRequestResult.reservationRequestReject(reservationResponse);
+                            break;
+                        case OK:
+                            reservationRequestResult.reservationRequestResult(reservationResponse);
+                            break;
+                        default:
+                            reservationRequestResult.reservationRequestFailure(UNKNOWN_ERROR + reservationResponse.getStatus().getValue());
+
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    reservationRequestResult.reservationRequestFailure(UNKNOWN_ERROR + e.getMessage());
+
+                }
+            }
+        });
+        thread.start();
     }
-
-}
+    }

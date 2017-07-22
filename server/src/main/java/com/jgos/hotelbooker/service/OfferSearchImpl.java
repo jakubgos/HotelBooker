@@ -5,7 +5,7 @@ import com.jgos.hotelbooker.entity.endpoint.HotelOffer;
 import com.jgos.hotelbooker.entity.endpoint.SearchRequest;
 import com.jgos.hotelbooker.entity.hotel.Hotel;
 import com.jgos.hotelbooker.entity.hotel.HotelData;
-import com.jgos.hotelbooker.entity.hotel.data.HotelResultStatus;
+import com.jgos.hotelbooker.entity.hotel.data.ResultStatus;
 import com.jgos.hotelbooker.entity.room.Room;
 import com.jgos.hotelbooker.entity.user.Reservation;
 import com.jgos.hotelbooker.repository.HotelRepository;
@@ -50,7 +50,7 @@ public class OfferSearchImpl implements OfferSearch {
         }
         List<Hotel> hotelList = hotelRepository.findByHotelDetailCity(searchRequest.getCity());
 
-        HotelOffer hotelOffer = new HotelOffer(HotelResultStatus.NO_DATA);
+        HotelOffer hotelOffer = new HotelOffer(ResultStatus.NO_DATA);
         for (Hotel hotel : hotelList) {
             List<Room> roomList = new ArrayList<>();
             for (Room room : hotel.getRoomList()) {
@@ -60,7 +60,7 @@ public class OfferSearchImpl implements OfferSearch {
             }
             if (!roomList.isEmpty()) {
                 hotelOffer.addHotelData(new HotelData(hotel.getHotelDetail(), roomList));
-                hotelOffer.setStatus(HotelResultStatus.OK);
+                hotelOffer.setStatus(ResultStatus.OK);
             }
         }
         return hotelOffer;

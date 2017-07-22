@@ -131,6 +131,8 @@ class FilterPresenter implements FilterPresenterOps {
         getView().showCityLoadProgressBar(true);
         SearchRequest searchRequest = new SearchRequest(city, arrivalCalendar.getTime().getTime(), departureCalendar.getTime().getTime(), numberOfPeople);
         filterModelOps.searchRequest(searchRequest, Storage.getInstance().getLoginData(), this);
+        Storage.getInstance().setSelectedSearchRequest(searchRequest);
+
 
     }
 

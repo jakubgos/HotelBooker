@@ -33,6 +33,7 @@ Backlog:
 Improvements:
 - Add room groups (Allow to add multiple room with same type), priority: Must Have
 - add drawer lay to filter
+- refactor NetworkServiceImpl class
 
 S - Serwer, A - Android, I - Interface
 

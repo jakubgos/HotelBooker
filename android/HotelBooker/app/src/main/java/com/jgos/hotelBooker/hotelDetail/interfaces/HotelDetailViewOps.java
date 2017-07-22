@@ -13,4 +13,12 @@ public interface HotelDetailViewOps {
     void prepareRoomData(Room room);
 
     void showSnackBar();
+
+    void showConfirmDialog();
+
+    void showAlertDialog(String s, boolean b);
+
+    void showProgressDialog();
+
+    void dismissProgressDialog();
 }
