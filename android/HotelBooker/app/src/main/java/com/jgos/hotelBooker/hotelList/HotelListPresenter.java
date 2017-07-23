@@ -1,8 +1,10 @@
 package com.jgos.hotelBooker.hotelList;
 
+import android.os.Handler;
 import android.util.Log;
 
 import com.jgos.hotelBooker.data.NetworkServiceImpl;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.HotelOffer;
 import com.jgos.hotelBooker.data.serverEntity.hotel.HotelData;
 import com.jgos.hotelBooker.hotelList.interfaces.HotelListModelOps;
 import com.jgos.hotelBooker.hotelList.interfaces.HotelListPresenterOps;
@@ -19,6 +21,8 @@ import java.util.ArrayList;
 public class HotelListPresenter implements HotelListPresenterOps {
     private final WeakReference<HotelListViewOps> HotelListViewOps;
     private final HotelListModelOps hotelListModelOps;
+    private final Handler handler = new Handler();
+    private boolean updateOngoing = false;
 
     public HotelListPresenter(HotelListViewOps hotelListViewOps) {
         this.HotelListViewOps = new WeakReference<>(hotelListViewOps);
@@ -34,7 +38,9 @@ public class HotelListPresenter implements HotelListPresenterOps {
 
     @Override
     public void onStartup() {
-        getView().initHotelListView((ArrayList) Storage.getInstance().getHotelOffer().getHotelData());
+        getView().showProgressBar();
+        hotelListModelOps.searchRequest(Storage.getInstance().getSelectedSearchRequest(), Storage.getInstance().getLoginData());
+        //getView().initHotelListView((ArrayList) Storage.getInstance().getHotelOffer().getHotelData());
     }
 
     @Override
@@ -42,5 +48,46 @@ public class HotelListPresenter implements HotelListPresenterOps {
         Log.d("MyApp_HotelList", "onStartup invoked :" + item.toString());
         Storage.getInstance().setSelectedHotelData(item);
         getView().showHotelDetailView();
+    }
+
+    @Override
+    public void getSearchRequestResult(final HotelOffer hotelOffer) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                getView().stopProgressBar();
+                Storage.getInstance().save(hotelOffer);
+                if (updateOngoing) {
+                    getView().updateListView(hotelOffer.getHotelData());
+                } else {
+                    getView().initHotelListView((ArrayList) hotelOffer.getHotelData());
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getSearchRequestFailure(final String s) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                getView().stopProgressBar();
+                getView().showAlertDialogAndFinish(s);
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+
+        if (Storage.getInstance().isUpdateListView()) {
+            Log.d("MyApp_filter", "onResume invoked");
+
+            getView().showProgressBar();
+            Storage.getInstance().setUpdateListView(false);
+            hotelListModelOps.searchRequest(Storage.getInstance().getSelectedSearchRequest(), Storage.getInstance().getLoginData());
+            updateOngoing = true;
+        }
+
     }
 }

@@ -34,7 +34,7 @@ class HotelDetailModel implements HotelDetailModelOps {
 
             @Override
             public void reservationRequestResult(ReservationResponse reservationResponse) {
-                hoteDetailPresenter.reservationRequestResult(reservationRequest);
+                hoteDetailPresenter.reservationRequestResult(reservationResponse);
             }
 
             @Override

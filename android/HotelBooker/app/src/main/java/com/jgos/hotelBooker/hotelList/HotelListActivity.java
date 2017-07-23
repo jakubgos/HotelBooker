@@ -2,6 +2,7 @@ package com.jgos.hotelBooker.hotelList;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +17,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.jgos.hotelBooker.R;
 import com.jgos.hotelBooker.data.serverEntity.hotel.HotelData;
 import com.jgos.hotelBooker.hotelDetail.HotelDetailActivity;
@@ -25,6 +28,7 @@ import com.jgos.hotelBooker.hotelList.list.HotelArrayAdapter;
 import com.jgos.hotelBooker.storage.Storage;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class HotelListActivity extends AppCompatActivity
@@ -33,7 +37,8 @@ public class HotelListActivity extends AppCompatActivity
     private HotelListPresenterOps mPresenter;
 
     private ListView hotelListView;
-
+    private MaterialDialog progressDialog;
+    HotelArrayAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,10 +78,7 @@ public class HotelListActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        if (Storage.getInstance().isKillListActivity()) {
-            Storage.getInstance().setKillListActivity(false);
-            finish();
-        }
+        mPresenter.onResume();
     }
 
     private void setupMVP() {
@@ -145,7 +147,7 @@ public class HotelListActivity extends AppCompatActivity
 
     @Override
     public void initHotelListView(ArrayList hotelData) {
-        HotelArrayAdapter adapter = new HotelArrayAdapter(this, hotelData);
+        adapter = new HotelArrayAdapter(this, hotelData);
         hotelListView.setAdapter(adapter);
 
         hotelListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -159,5 +161,41 @@ public class HotelListActivity extends AppCompatActivity
     public void showHotelDetailView() {
         Intent myIntent = new Intent(this, HotelDetailActivity.class);
         this.startActivity(myIntent);
+    }
+
+    @Override
+    public void showProgressBar() {
+        progressDialog = new MaterialDialog.Builder(this)
+                .title(R.string.please_wait)
+                .content(R.string.process_request)
+                .progress(true, 0)
+                .show();
+    }
+
+    @Override
+    public void stopProgressBar() {
+        progressDialog.dismiss();
+    }
+
+    @Override
+    public void showAlertDialogAndFinish(String s) {
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title(R.string.error)
+                .content(s)
+                .positiveText(R.string.ok)
+                .onAny(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    public void updateListView(List<HotelData> items) {
+        Log.d("MyApp_list", "updateListView invoked");
+        adapter.swapItems(items);
     }
 }

@@ -9,6 +9,4 @@ import com.jgos.hotelBooker.data.serverEntity.endpoint.SearchRequest;
 
 public interface FilterModelOps {
     void getCityList(LoginData loginData);
-
-    void searchRequest(SearchRequest searchRequest, LoginData loginData, FilterPresenterOps filterPresenterOps);
 }

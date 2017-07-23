@@ -11,6 +11,7 @@ import com.jgos.hotelBooker.R;
 import com.jgos.hotelBooker.data.serverEntity.hotel.HotelData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Bos on 2017-07-02.
@@ -20,6 +21,13 @@ public class HotelArrayAdapter extends ArrayAdapter<HotelData> {
 
     public HotelArrayAdapter(Context context, ArrayList<HotelData> hotelData) {
         super(context, 0, hotelData);
+    }
+
+
+    public void swapItems(List<HotelData> items) {
+        clear();
+        addAll(items);
+        notifyDataSetChanged();
     }
 
     @Override

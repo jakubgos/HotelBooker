@@ -18,7 +18,9 @@ public interface HotelDetailPresenterOps {
 
     void reservationRequestReject(ReservationResponse reservationResponse);
 
-    void reservationRequestResult(ReservationRequest reservationRequest);
+    void reservationRequestResult(ReservationResponse reservationRequest);
 
     void reservationRequestFailure(String s);
+
+    void ReservationSuccessDialogDisappear();
 }

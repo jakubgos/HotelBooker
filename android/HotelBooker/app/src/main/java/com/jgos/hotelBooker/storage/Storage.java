@@ -21,11 +21,11 @@ public class Storage {
         this.hotelOffer = hotelOffer;
     }
 
-    public boolean isKillListActivity() {
-        return killListActivity;
+    public boolean isUpdateListView() {
+        return updateListView;
     }
 
-    private boolean killListActivity;
+    private boolean updateListView = false;
 
     public SearchRequest getSelectedSearchRequest() {
         return selectedSearchRequest;
@@ -72,7 +72,7 @@ public class Storage {
         this.selectedSearchRequest = selectedSearchRequest;
     }
 
-    public void setKillListActivity(boolean b) {
-        this.killListActivity = b;
+    public void setUpdateListView(boolean b) {
+        this.updateListView = b;
     }
 }

@@ -55,6 +55,8 @@
     <string name="ok">Ok</string>
     <string name="please_wait">Prosze czekać</string>
     <string name="process_request">Realizujemy twoje żądanie</string>
+    <string name="your_resercation">Twoja Rezerwacja</string>
+    <string name="reservation_success">Pokój został zarezerwowany</string>
 
     <string-array name="numerOfPeople">
         <item>1 Osoba</item>

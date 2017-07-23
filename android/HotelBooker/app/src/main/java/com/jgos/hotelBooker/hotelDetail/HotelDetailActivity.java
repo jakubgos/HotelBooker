@@ -1,5 +1,6 @@
 package com.jgos.hotelBooker.hotelDetail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -25,6 +26,7 @@ import com.jgos.hotelBooker.data.serverEntity.hotel.data.HotelFacilities;
 import com.jgos.hotelBooker.data.serverEntity.room.Room;
 import com.jgos.hotelBooker.hotelDetail.interfaces.HotelDetailPresenterOps;
 import com.jgos.hotelBooker.hotelDetail.interfaces.HotelDetailViewOps;
+import com.jgos.hotelBooker.reservation.ReservationActivity;
 import com.jgos.hotelBooker.storage.Storage;
 
 
@@ -249,5 +251,31 @@ public class HotelDetailActivity extends AppCompatActivity
     @Override
     public void dismissProgressDialog() {
         progressDialog.dismiss();
+    }
+
+    @Override
+    public void showReservationSuccessDialog() {
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title(R.string.your_resercation)
+                .content(R.string.reservation_success)
+                .positiveText(R.string.ok)
+                .onAny(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        mPresenter.ReservationSuccessDialogDisappear();
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    public void endActivity() {
+        finish();
+    }
+
+    @Override
+    public void showReservationActivity() {
+        Intent myIntent = new Intent(this, ReservationActivity.class);
+        this.startActivity(myIntent);
     }
 }

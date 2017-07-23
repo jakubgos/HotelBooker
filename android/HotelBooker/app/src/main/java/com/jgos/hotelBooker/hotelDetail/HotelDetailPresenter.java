@@ -57,7 +57,7 @@ public class HotelDetailPresenter implements HotelDetailPresenterOps {
             getView().showProgressDialog();
         } else {
             getView().showAlertDialog("Unexpected reservationRoomId: ," + reservationRoomId, true);
-            Storage.getInstance().setKillListActivity(true);
+            Storage.getInstance().setUpdateListView(true);
 
         }
 
@@ -76,21 +76,20 @@ public class HotelDetailPresenter implements HotelDetailPresenterOps {
             @Override
             public void run() {
                 getView().dismissProgressDialog();
-                Storage.getInstance().setKillListActivity(true);
+                Storage.getInstance().setUpdateListView(true);
                 getView().showAlertDialog("Nie możemy zrealizować twoiej rezerwacji, Wybierz inny termin.", true);
-
             }
         });
     }
 
     @Override
-    public void reservationRequestResult(ReservationRequest reservationRequest) {
+    public void reservationRequestResult(ReservationResponse reservationResponse) {
         handler.post(new Runnable() {
             @Override
             public void run() {
                 getView().dismissProgressDialog();
-
-
+                getView().showReservationSuccessDialog();
+                Storage.getInstance().setUpdateListView(true);
             }
         });
     }
@@ -102,9 +101,15 @@ public class HotelDetailPresenter implements HotelDetailPresenterOps {
             public void run() {
                 getView().dismissProgressDialog();
                 getView().showAlertDialog("Napotkaliśmy niespodziewany błąd: " + s, true);
-                Storage.getInstance().setKillListActivity(true);
+                Storage.getInstance().setUpdateListView(true);
 
             }
         });
+    }
+
+    @Override
+    public void ReservationSuccessDialogDisappear() {
+        getView().endActivity();
+        getView().showReservationActivity();
     }
 }

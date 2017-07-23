@@ -21,4 +21,10 @@ public interface HotelDetailViewOps {
     void showProgressDialog();
 
     void dismissProgressDialog();
+
+    void showReservationSuccessDialog();
+
+    void endActivity();
+
+    void showReservationActivity();
 }
