@@ -14,5 +14,6 @@ import java.util.List;
 public interface RoomRepository extends CrudRepository<Room, Long> {
 
     List<Room> findByIdNotIn(Collection<Long> room);
+    Room findById(long id);
 
 }

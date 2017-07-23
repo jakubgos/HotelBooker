@@ -1,22 +1,26 @@
-package com.jgos.hotelBooker.data.serverEntity.endpoint;
+package com.jgos.hotelbooker.entity.endpoint;
 
 /**
- * Created by Bos on 2017-07-22.
+ * Created by Bos on 2017-07-23.
  */
-
 public class ReservationRequest {
     private long arrivalTime;
     private long departureTim;
     private long reservationRoomId;
 
     public ReservationRequest() {
-
     }
 
-    public ReservationRequest(long arrivalTime, long departureTim, long reservationRoomId) {
-        this.arrivalTime = arrivalTime;
-        this.departureTim = departureTim;
-        this.reservationRoomId = reservationRoomId;
+    public ReservationRequest(long arrivalTime, long departureTime, long reservationRoomId) {
+    }
+
+    @Override
+    public String toString() {
+        return "ReservationRequest{" +
+                "arrivalTime=" + arrivalTime +
+                ", departureTim=" + departureTim +
+                ", reservationRoomId=" + reservationRoomId +
+                '}';
     }
 
     public long getArrivalTime() {
@@ -41,14 +45,5 @@ public class ReservationRequest {
 
     public void setReservationRoomId(long reservationRoomId) {
         this.reservationRoomId = reservationRoomId;
-    }
-
-    @Override
-    public String toString() {
-        return "ReservationRequest{" +
-                "arrivalTime=" + arrivalTime +
-                ", departureTim=" + departureTim +
-                ", reservationRoomId=" + reservationRoomId +
-                '}';
     }
 }

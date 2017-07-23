@@ -241,6 +241,7 @@ public class NetworkServiceImpl implements NetworkService {
             @Override
             public void run() {
                 Log.d("MyApp_Service", "reservationRequest invoked");
+                Log.d("MyApp_Service", "dupa " + reservationRequest.getArrivalTime() + " " + reservationRequest.getDepartureTim() + " " + reservationRequest.getReservationRoomId());
 
                 OkHttpClient okHttpClient = new OkHttpClient();
                 String json = null;

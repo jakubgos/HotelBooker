@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Calendar;
 
 import java.util.*;
 
@@ -42,6 +43,11 @@ public class OfferSearchImpl implements OfferSearch {
 
         Date from = new Date(searchRequest.getArrivalTime());
         Date to = new Date(searchRequest.getDepartureTime());
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(to);
+        cal.add(Calendar.DAY_OF_MONTH, -1);
+        to=cal.getTime();
 
         List<Reservation> restrictedReservations = reservationRepository.findByDateBetween(from, to);
         Collection<Long> restrictedRooms = new LinkedHashSet<Long>();

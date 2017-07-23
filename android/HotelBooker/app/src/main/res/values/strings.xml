@@ -51,7 +51,7 @@
     <string name="content_dialog_reservation">Czy napewno chcesz zarezerwować ten pokój?</string>
     <string name="longer_positive">TAK</string>
     <string name="negative">Nie</string>
-    <string name="error">Error</string>
+    <string name="error">Błąd</string>
     <string name="ok">Ok</string>
     <string name="please_wait">Prosze czekać</string>
     <string name="process_request">Realizujemy twoje żądanie</string>

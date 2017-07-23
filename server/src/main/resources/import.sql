@@ -58,7 +58,7 @@ insert into hotel_room_list (hotel_id, room_list_id) values (1,1);
 insert into hotel_room_list (hotel_id, room_list_id) values (1,2);
 insert into hotel_room_list (hotel_id, room_list_id) values (2,3);
 
-insert into reservation (id, room_id,user_id,date) values (1,1,1,'2017-05-28');
+-- insert into reservation (id, room_id,user_id,date) values (1,1,1,'2017-05-28');
 
 
 insert into room_facilities (id, name) values (1,'Telewizor');

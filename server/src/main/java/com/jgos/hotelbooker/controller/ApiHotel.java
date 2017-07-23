@@ -1,13 +1,19 @@
 package com.jgos.hotelbooker.controller;
 
 import com.jgos.hotelbooker.entity.endpoint.HotelOffer;
+import com.jgos.hotelbooker.entity.endpoint.ReservationRequest;
+import com.jgos.hotelbooker.entity.endpoint.ReservationResponse;
 import com.jgos.hotelbooker.entity.endpoint.SearchRequest;
 import com.jgos.hotelbooker.entity.hotel.data.City;
+import com.jgos.hotelbooker.entity.hotel.data.ResultStatus;
 import com.jgos.hotelbooker.repository.CityRepository;
 import com.jgos.hotelbooker.service.OfferSearch;
+import com.jgos.hotelbooker.service.ReservationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +36,10 @@ public class ApiHotel {
 
     @Autowired
     private OfferSearch offerSearch;
+
+    @Autowired
+    private ReservationService reservationService;
+
 
     @RequestMapping("/test")
     @ResponseBody
@@ -55,5 +65,19 @@ public class ApiHotel {
         return hotelOffer;
     }
 
+    @RequestMapping(value = "/reservation", method = RequestMethod.POST)
+    @ResponseBody
+    public ReservationResponse reservation(@AuthenticationPrincipal UserDetails userDetails,
+            @Valid @RequestBody ReservationRequest reservationRequest) throws InterruptedException {
+        ReservationResponse reservationResponse;
+        if (reservationService.validate(reservationRequest)) {
+            reservationResponse = reservationService.reserve(reservationRequest, userDetails.getUsername());
+        } else {
+            reservationResponse = new ReservationResponse(ResultStatus.RESERVATION_NOT_POSSIBLE);
 
+        }
+
+        log.info(reservationResponse.toString());
+        return reservationResponse;
+    }
 }

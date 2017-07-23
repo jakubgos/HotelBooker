@@ -8,10 +8,11 @@ Done:
 - [S] wystawienie Api umożlwiającego pobieranie listy hotelów (Hotele na sztywno zapisane w bazie danych, wysyłana jest informacja o hotelach/pokojach)
 - [S/ A] możliwość sprecyzowania terminu oraz ilości miejsc w pokoju (do wyszukiwania) (domyślnie system szuka pokoju na najbliższą noc dla 2 osób)
 - [A] wyświetlenie znalezionych wyników jako listView
+- [S/A] Wyświetlenie informacji o wybranym pokoju (ilość miejsc, standard, usługi hotelowe, udogodnienia itp)
+- [S/A] (new) Możliwość rezerwacji pokoju
+- [S/A] wyszukanie hotelu w danym mieście
 
 Backlog:
-- [S/A] Wyświetlenie informacji o wybranym pokoju (ilość miejsc, standard, usługi hotelowe, udogodnienia itp)
-- [A] wyświetlenie hotelów na mapie z pozycją w obrębie X Km
 - [S/A] obsługa rezerwacji wybranego pokoju (oczekuje na weryfikację, oczekuje na wpłatę, zarezerwowane)
 - [S/A] Sprawdzenie swoich rezerwacji
 - [S/A] rejestracja dla użytkownika
@@ -20,15 +21,16 @@ Backlog:
 - [I] możliwość konfiguracji pokojów, terminów, informacji o pokoju (ilość miejsc, standard, usługi hotelowe, udogodnienia, opis, lokalizacja)
 - [I] możliwość zmiany stanów zamówień klientów
 - [I] możliwość edytowania informacji o hotelu (opis/lokalizacja)
-- [A] uumozliwienie konfiguracji promienia wyszukiwania hotelów
 - [S/A/I] galeria zdjęć Hotelu
+- [A] wyświetlenie hotelów na mapie z pozycją w obrębie X Km 
+- [A] uumozliwienie konfiguracji promienia wyszukiwania hotelów
 - [S/A/I} system ocen/opinii pokoju
 - [I] wykorzystanie netSocketów do aktualizacji danych o zamówieniach
 - [S/A] notyfikacja MQTT o zmianie stanu rezerwacji
 - [S] wysyłanie mailów z potwierdzeniem rezerwacji
 - [A] filtrowanie list/hoteli (np. tylko tam, gdzie basen, czy tylko pokoje w konkretnym hotelu)
 - [S/A] możliwość dodania hotelu do ulubionych
-- [S/A/I] wyszukanie hotelu w danym mieście
+
 
 Improvements:
 - Add room groups (Allow to add multiple room with same type), priority: Must Have

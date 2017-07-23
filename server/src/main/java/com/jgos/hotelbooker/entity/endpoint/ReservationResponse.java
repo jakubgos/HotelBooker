@@ -1,16 +1,20 @@
-package com.jgos.hotelBooker.data.serverEntity.endpoint;
+package com.jgos.hotelbooker.entity.endpoint;
 
-import com.jgos.hotelBooker.data.serverEntity.hotel.data.ResultStatus;
+import com.jgos.hotelbooker.entity.hotel.data.ResultStatus;
 
 /**
- * Created by Bos on 2017-07-22.
+ * Created by Bos on 2017-07-23.
  */
-
 public class ReservationResponse {
 
     ResultStatus status;
 
     public ReservationResponse() {
+        status=ResultStatus.NOT_INITIALED;
+    }
+
+    public ReservationResponse(ResultStatus status) {
+        this.status=status;
     }
 
     public ResultStatus getStatus() {
