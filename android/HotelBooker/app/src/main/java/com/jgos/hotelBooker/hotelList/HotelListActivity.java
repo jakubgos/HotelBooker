@@ -25,6 +25,7 @@ import com.jgos.hotelBooker.hotelDetail.HotelDetailActivity;
 import com.jgos.hotelBooker.hotelList.interfaces.HotelListPresenterOps;
 import com.jgos.hotelBooker.hotelList.interfaces.HotelListViewOps;
 import com.jgos.hotelBooker.hotelList.list.HotelArrayAdapter;
+import com.jgos.hotelBooker.reservation.ReservationActivity;
 import com.jgos.hotelBooker.storage.Storage;
 
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class HotelListActivity extends AppCompatActivity
     private ListView hotelListView;
     private MaterialDialog progressDialog;
     HotelArrayAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,18 +128,10 @@ public class HotelListActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_your_reservation) {
+            mPresenter.showReservationRequested();
+        } else if (id == R.id.nav_filter) {
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -146,7 +140,7 @@ public class HotelListActivity extends AppCompatActivity
     }
 
     @Override
-    public void initHotelListView(ArrayList hotelData) {
+    public void initHotelListView(ArrayList<HotelData> hotelData) {
         adapter = new HotelArrayAdapter(this, hotelData);
         hotelListView.setAdapter(adapter);
 
@@ -197,5 +191,11 @@ public class HotelListActivity extends AppCompatActivity
     public void updateListView(List<HotelData> items) {
         Log.d("MyApp_list", "updateListView invoked");
         adapter.swapItems(items);
+    }
+
+    @Override
+    public void showReservationActivity() {
+        Intent myIntent = new Intent(this, ReservationActivity.class);
+        this.startActivity(myIntent);
     }
 }

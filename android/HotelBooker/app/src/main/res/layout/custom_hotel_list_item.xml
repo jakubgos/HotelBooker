@@ -98,7 +98,6 @@
                         android:text="4 / 5"
                         android:textColor="@color/md_green_900"
                         android:textSize="12sp"
-
                         />
                 </LinearLayout>
 

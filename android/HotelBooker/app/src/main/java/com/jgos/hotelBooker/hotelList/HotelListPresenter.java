@@ -60,7 +60,7 @@ public class HotelListPresenter implements HotelListPresenterOps {
                 if (updateOngoing) {
                     getView().updateListView(hotelOffer.getHotelData());
                 } else {
-                    getView().initHotelListView((ArrayList) hotelOffer.getHotelData());
+                    getView().initHotelListView(hotelOffer.getHotelData());
                 }
             }
         });
@@ -89,5 +89,10 @@ public class HotelListPresenter implements HotelListPresenterOps {
             updateOngoing = true;
         }
 
+    }
+
+    @Override
+    public void showReservationRequested() {
+        getView().showReservationActivity();
     }
 }

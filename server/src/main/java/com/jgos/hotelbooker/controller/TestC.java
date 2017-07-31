@@ -34,29 +34,4 @@ public class TestC {
     @Autowired
     ReservationRepository reservationRepository;
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    @ResponseBody
-    public String searchOffer(
-            //        @RequestBody City city
-    )
-            throws InterruptedException {
-
-
-        UserDb user = users.findOne((long) 1);
-        Hotel hotel = hotels.findOne((long) 1);
-
-        Reservation reservation = new Reservation(hotel.getRoomList().get(0), user, new Date());
-
-        log.info(user.toString());
-        log.info(hotel.toString());
-        log.info(reservation.toString());
-        reservationRepository.save(reservation);
-
-        Reservation newRes = reservationRepository.findOne((long) 1);
-
-
-        //return user+"\n "+hotel +"\nOLD::" +reservation + "\n NEW:: " + newRes + "\n";
-        return "!: " + hotels.findOne((long) 1).getRoomList() + "\n 2:" + hotels.findOne((long) 2).getRoomList();
-    }
-
 }

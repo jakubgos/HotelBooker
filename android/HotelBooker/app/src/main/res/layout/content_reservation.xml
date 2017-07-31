@@ -9,8 +9,18 @@
     tools:showIn="@layout/app_bar_reservation">
 
     <TextView
+        android:id="@+id/reservation_msg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="reservation" />
+        android:text="@string/nie_masz_adnych_rezerwacji"
+        android:gravity="center"
+        android:textAppearance="@style/TextStyle.Title"
+        android:textColor="@color/colorAccent"
+        android:visibility="gone"/>
+
+    <ListView
+        android:id="@+id/reservation_list_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 
 </android.support.constraint.ConstraintLayout>

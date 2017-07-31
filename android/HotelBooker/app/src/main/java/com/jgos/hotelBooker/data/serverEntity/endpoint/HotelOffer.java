@@ -14,7 +14,7 @@ public class HotelOffer {
 
     ResultStatus status;
 
-    private List<HotelData> hotelData = new ArrayList<>();
+    private ArrayList<HotelData> hotelData = new ArrayList<>();
 
     public HotelOffer() {
     }
@@ -31,11 +31,11 @@ public class HotelOffer {
         this.status = status;
     }
 
-    public List<HotelData> getHotelData() {
+    public ArrayList<HotelData> getHotelData() {
         return hotelData;
     }
 
-    public void setHotelData(List<HotelData> hotelData) {
+    public void setHotelData(ArrayList<HotelData> hotelData) {
         this.hotelData = hotelData;
     }
 

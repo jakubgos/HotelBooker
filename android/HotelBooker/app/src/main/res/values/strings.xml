@@ -57,6 +57,8 @@
     <string name="process_request">Realizujemy twoje żądanie</string>
     <string name="your_resercation">Twoja Rezerwacja</string>
     <string name="reservation_success">Pokój został zarezerwowany</string>
+    <string name="nie_masz_adnych_rezerwacji">Nie masz żadnych rezerwacji</string>
+    <string name="status">STATUS</string>
 
     <string-array name="numerOfPeople">
         <item>1 Osoba</item>

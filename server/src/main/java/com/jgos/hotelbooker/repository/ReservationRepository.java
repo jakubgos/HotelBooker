@@ -17,4 +17,6 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
 
     List<Reservation> findByDateBetweenAndRoomId(Date from, Date to,long id);
 
+    List<Reservation> findByUserEmail(String email);
+
 }

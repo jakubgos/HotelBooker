@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 public interface HotelListViewOps {
-    void initHotelListView(ArrayList hotelData);
+    abstract void initHotelListView(ArrayList<HotelData> hotelData);
 
     void showHotelDetailView();
 
@@ -22,4 +22,6 @@ public interface HotelListViewOps {
     void showAlertDialogAndFinish(String s);
 
     void updateListView(List<HotelData> hotelOffer);
+
+    void showReservationActivity();
 }

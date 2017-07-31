@@ -1,11 +1,14 @@
 package com.jgos.hotelbooker.service;
 
 import com.jgos.hotelbooker.controller.ApiHotel;
+import com.jgos.hotelbooker.entity.endpoint.ReservationData;
 import com.jgos.hotelbooker.entity.endpoint.ReservationRequest;
 import com.jgos.hotelbooker.entity.endpoint.ReservationResponse;
+import com.jgos.hotelbooker.entity.endpoint.UserReservationResponse;
 import com.jgos.hotelbooker.entity.hotel.data.ResultStatus;
 import com.jgos.hotelbooker.entity.room.Room;
 import com.jgos.hotelbooker.entity.user.Reservation;
+import com.jgos.hotelbooker.entity.user.ReservationStatus;
 import com.jgos.hotelbooker.entity.user.UserDb;
 import com.jgos.hotelbooker.repository.HotelRepository;
 import com.jgos.hotelbooker.repository.ReservationRepository;
@@ -16,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -71,11 +75,31 @@ public class ReservationServiceImpl implements ReservationService {
         UserDb user = userRepository.findByEmail(username);
         Room room = roomRepository.findById(reservationRequest.getReservationRoomId());
         //end.add(Calendar.DAY_OF_MONTH, -1); for nie łapie ostatniego dnia i tak :)
-        log.info("asdasd");
+
         for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
-            Reservation reservation = new Reservation(room, user, date);
+            Reservation reservation = new Reservation(room, user, date,ReservationStatus.WAIT_FOR_CONFIRMATION);
             reservationRepository.save(reservation);
         }
         return new ReservationResponse(ResultStatus.OK);
+    }
+
+    @Override
+    public UserReservationResponse getUserReservation(String username) {
+
+        UserReservationResponse userReservationResponse = new UserReservationResponse(ResultStatus.NO_DATA);
+        ArrayList<ReservationData> reservationDataArrayList = new ArrayList<>();
+
+        List<Reservation> reservationList = reservationRepository.findByUserEmail(username);
+
+        for (Reservation reservation :reservationList ) {
+            reservationDataArrayList.add(new ReservationData(reservation.getRoom().getName(),reservation.getReservationStatus().toString()));
+        }
+
+        if(!reservationDataArrayList.isEmpty())
+        {
+            userReservationResponse.setStatus(ResultStatus.OK);
+            userReservationResponse.setReservationDataArrayList(reservationDataArrayList);
+        }
+        return userReservationResponse;
     }
 }

@@ -17,4 +17,6 @@ public interface HotelListPresenterOps {
     void getSearchRequestFailure(String s);
 
     void onResume();
+
+    void showReservationRequested();
 }

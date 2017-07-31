@@ -25,13 +25,30 @@ public class Reservation {
     @ManyToOne
     private Room room;
 
+    private ReservationStatus reservationStatus;
+
     public Reservation() {
     }
 
-    public Reservation(Room room, UserDb user, Date date) {
+    public Reservation(Room room, UserDb user, Date date,ReservationStatus reservationStatus) {
+
         this.room = room;
         this.user = user;
         this.date = date;
+        this.reservationStatus = reservationStatus;
+
+    }
+
+    public ReservationStatus getReservationStatus() {
+        return reservationStatus;
+    }
+
+    public void setReservationStatus(ReservationStatus reservationStatus) {
+        this.reservationStatus = reservationStatus;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Room getRoom() {

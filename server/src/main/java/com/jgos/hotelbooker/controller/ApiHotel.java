@@ -1,9 +1,6 @@
 package com.jgos.hotelbooker.controller;
 
-import com.jgos.hotelbooker.entity.endpoint.HotelOffer;
-import com.jgos.hotelbooker.entity.endpoint.ReservationRequest;
-import com.jgos.hotelbooker.entity.endpoint.ReservationResponse;
-import com.jgos.hotelbooker.entity.endpoint.SearchRequest;
+import com.jgos.hotelbooker.entity.endpoint.*;
 import com.jgos.hotelbooker.entity.hotel.data.City;
 import com.jgos.hotelbooker.entity.hotel.data.ResultStatus;
 import com.jgos.hotelbooker.repository.CityRepository;
@@ -80,4 +77,18 @@ public class ApiHotel {
         log.info(reservationResponse.toString());
         return reservationResponse;
     }
+
+    @RequestMapping(value = "/getUserReservation")
+    @ResponseBody
+    public UserReservationResponse getUserReservation(@AuthenticationPrincipal UserDetails userDetails ) throws InterruptedException {
+
+        UserReservationResponse userReservationResponse = reservationService.getUserReservation(userDetails.getUsername());
+
+
+        log.info(userReservationResponse.toString());
+        return userReservationResponse;
+    }
+
+
+
 }

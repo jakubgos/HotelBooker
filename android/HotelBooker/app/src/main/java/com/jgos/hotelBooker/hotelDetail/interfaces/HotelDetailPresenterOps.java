@@ -23,4 +23,6 @@ public interface HotelDetailPresenterOps {
     void reservationRequestFailure(String s);
 
     void ReservationSuccessDialogDisappear();
+
+    void showReservationRequested();
 }
