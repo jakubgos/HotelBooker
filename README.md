@@ -11,10 +11,10 @@ Done:
 - [S/A] Wyświetlenie informacji o wybranym pokoju (ilość miejsc, standard, usługi hotelowe, udogodnienia itp)
 - [S/A] (new) Możliwość rezerwacji pokoju
 - [S/A] wyszukanie hotelu w danym mieście
+- [S/A] Sprawdzenie swoich rezerwacji
+- [S/A] obsługa rezerwacji wybranego pokoju (oczekuje na weryfikację, oczekuje na wpłatę, zarezerwowane)
 
 Backlog:
-- [S/A] obsługa rezerwacji wybranego pokoju (oczekuje na weryfikację, oczekuje na wpłatę, zarezerwowane)
-- [S/A] Sprawdzenie swoich rezerwacji
 - [S/A] rejestracja dla użytkownika
 - [I] przygotowanie bootStrapa pod interferjs użytkownika
 - [I] logowanie dla obsługi hotelu (oauth2)
@@ -30,6 +30,7 @@ Backlog:
 - [S] wysyłanie mailów z potwierdzeniem rezerwacji
 - [A] filtrowanie list/hoteli (np. tylko tam, gdzie basen, czy tylko pokoje w konkretnym hotelu)
 - [S/A] możliwość dodania hotelu do ulubionych
+- [S/A] możliwość naulowania zamówienia
 
 
 Improvements:
