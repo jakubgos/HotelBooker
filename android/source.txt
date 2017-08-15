@@ -40,3 +40,10 @@ http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html		//thymeleaf
 http://www.android4devs.pl/2011/07/listview-pierwsze-kroki/
 https://www.raywenderlich.com/124438/android-listview-tutorial
 https://stackoverflow.com/questions/14503006/android-listview-not-refreshing-after-notifydatasetchanged
+
+
+
+angular 1
+https://www.w3schools.com/angular/angular_intro.asp
+https://www.w3schools.com/angular/angular_ref_directives.asp
+http://www.baeldung.com/rest-api-spring-oauth2-angularjs

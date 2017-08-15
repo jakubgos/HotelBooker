@@ -66,6 +66,8 @@ public class ApiHotel {
     @ResponseBody
     public ReservationResponse reservation(@AuthenticationPrincipal UserDetails userDetails,
             @Valid @RequestBody ReservationRequest reservationRequest) throws InterruptedException {
+        log.info("reservation received with data:" + reservationRequest + "user data:" + userDetails);
+
         ReservationResponse reservationResponse;
         if (reservationService.validate(reservationRequest)) {
             reservationResponse = reservationService.reserve(reservationRequest, userDetails.getUsername());

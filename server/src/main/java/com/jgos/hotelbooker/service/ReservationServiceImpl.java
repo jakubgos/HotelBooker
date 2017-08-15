@@ -46,6 +46,8 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public boolean validate(ReservationRequest reservationRequest) {
+        log.info("reservation service 'validate' started with data:" + reservationRequest);
+
         Date from = new Date(reservationRequest.getArrivalTime());
         Date to = new Date(reservationRequest.getDepartureTim());
 
@@ -62,6 +64,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public ReservationResponse reserve(ReservationRequest reservationRequest, String username) {
+        log.info("reservation service 'reserve' started with data:" + reservationRequest + "user " + username );
 
         Date from = new Date(reservationRequest.getArrivalTime());
         Date to = new Date(reservationRequest.getDepartureTim());

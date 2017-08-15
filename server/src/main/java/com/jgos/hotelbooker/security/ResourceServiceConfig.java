@@ -11,20 +11,12 @@ public class ResourceServiceConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        //http.authorizeRequests()
-        //        .anyRequest()
-        //        .permitAll();
-
         http
-                //.authorizeRequests()
-                //.antMatchers("/test/").permitAll()
-                //.and()
+                .antMatcher("/api/**")
                 .authorizeRequests()
-                .antMatchers("/api/**").permitAll()//.hasAuthority(Authorities.ROLE_USER.name())
-                .and()
-                .authorizeRequests()
-                .antMatchers("/web/**").hasAuthority(Authorities.ROLE_WEB.name())
-                .and().authorizeRequests()
-                .antMatchers("/test/**").permitAll();
+                .anyRequest()
+                .hasAuthority(Authorities.ROLE_USER.name())
+                .anyRequest()
+                .authenticated();
     }
 }
