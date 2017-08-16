@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:fragment="links-css">
+        <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+        <!-- MetisMenu CSS -->
+        <link th:href="@{/css/bootstrap/metisMenu/metisMenu.min.css}" rel="stylesheet"/>
+
+        <!-- Custom CSS -->
+        <link th:href="@{/css/bootstrap/dist/css/sb-admin-2.css}" rel="stylesheet"/>
+
+        <!-- Morris Charts CSS -->
+        <link th:href="@{/css/bootstrap/morrisjs/morris.css}" rel="stylesheet"/>
+
+        <!-- Custom Fonts -->
+        <link th:href="@{/css/bootstrap/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </div>
+</head>
+<body>
+<div th:fragment="links-scripts">
+    <!-- jQuery -->
+    <script src="webjars/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script th:src="@{/css/bootstrap/metisMenu/metisMenu.min.js}"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script th:src="@{/css/bootstrap/raphael/raphael.min.js}"></script>
+    <script th:src="@{/css/bootstrap/morrisjs/morris.min.js}"></script>
+    <script th:src="@{/css/bootstrap/data/morris-data.js}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script th:src="@{/css/bootstrap/dist/js/sb-admin-2.js}"></script>
+</div>
+
+</body>
+</html>

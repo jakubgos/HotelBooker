@@ -28,11 +28,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/**")
                 .permitAll()
                 // end api security
-                .antMatchers("/").permitAll()
+                //.antMatchers("/").permitAll()
                 .anyRequest().hasAuthority(Authorities.ROLE_WEB.name())
                 //.anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").failureUrl("/login?error=true")
+                .formLogin().loginPage("/login").failureUrl("/login?error=true").defaultSuccessUrl("/home",true)
                 .permitAll()
                 .and()
                 .logout().permitAll()
@@ -46,13 +46,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                // .withUser("user").password("password").roles("USER");
     }
 
-  /*  @Override
+    @Override
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/api/**","/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+                .antMatchers("/static/**", "/css/**", "/js/**", "/images/**","/webjars/**","/bootstrap/**");
 
-    }*/
+    }
 
 
 }
