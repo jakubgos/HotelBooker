@@ -42,6 +42,8 @@ https://www.raywenderlich.com/124438/android-listview-tutorial
 https://stackoverflow.com/questions/14503006/android-listview-not-refreshing-after-notifydatasetchanged
 
 
+all in
+https://medium.com/@gustavo.ponce.ch/spring-boot-spring-mvc-spring-security-mysql-a5d8545d837d
 
 angular 1
 https://www.w3schools.com/angular/angular_intro.asp
