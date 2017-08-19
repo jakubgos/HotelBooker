@@ -10,9 +10,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Created by Bos on 2017-04-16.
@@ -58,5 +60,22 @@ public class WebHotel {
         return userDetails.toString();
     }
 
+
+
+
+    @RequestMapping(value="/logout", method = RequestMethod.GET)
+    public ModelAndView logoutPage (RedirectAttributes redirectAttributes) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        ModelAndView model = new ModelAndView();
+        model.setViewName("error");
+        if (auth != null){
+            SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
+            model.setViewName("redirect:/login");
+            redirectAttributes.addFlashAttribute("logout",1);
+
+        }
+        return model;
+    }
 
 }

@@ -13,11 +13,11 @@ Done:
 - [S/A] wyszukanie hotelu w danym mieście
 - [S/A] Sprawdzenie swoich rezerwacji
 - [S/A] obsługa rezerwacji wybranego pokoju (oczekuje na weryfikację, oczekuje na wpłatę, zarezerwowane)
+- [I] przygotowanie bootStrapa pod interferjs użytkownika
+- [I] logowanie dla obsługi hotelu (oauth2)
 
 Backlog:
 - [S/A] rejestracja dla użytkownika
-- [I] przygotowanie bootStrapa pod interferjs użytkownika
-- [I] logowanie dla obsługi hotelu (oauth2)
 - [I] możliwość konfiguracji pokojów, terminów, informacji o pokoju (ilość miejsc, standard, usługi hotelowe, udogodnienia, opis, lokalizacja)
 - [I] możliwość zmiany stanów zamówień klientów
 - [I] możliwość edytowania informacji o hotelu (opis/lokalizacja)
