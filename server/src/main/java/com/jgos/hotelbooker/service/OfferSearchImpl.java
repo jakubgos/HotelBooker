@@ -4,7 +4,7 @@ import com.jgos.hotelbooker.controller.ApiHotel;
 import com.jgos.hotelbooker.entity.endpoint.HotelOffer;
 import com.jgos.hotelbooker.entity.endpoint.SearchRequest;
 import com.jgos.hotelbooker.entity.hotel.Hotel;
-import com.jgos.hotelbooker.entity.hotel.HotelData;
+import com.jgos.hotelbooker.entity.endpoint.HotelData;
 import com.jgos.hotelbooker.entity.hotel.data.ResultStatus;
 import com.jgos.hotelbooker.entity.room.Room;
 import com.jgos.hotelbooker.entity.user.Reservation;

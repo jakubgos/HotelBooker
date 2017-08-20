@@ -59,6 +59,7 @@
     <string name="reservation_success">Pokój został zarezerwowany</string>
     <string name="nie_masz_adnych_rezerwacji">Nie masz żadnych rezerwacji</string>
     <string name="status">STATUS</string>
+    <string name="no_offer">Brak</string>
 
     <string-array name="numerOfPeople">
         <item>1 Osoba</item>

@@ -23,61 +23,50 @@
 
     <!-- Page Content -->
     <div id="page-wrapper">
-        <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Blank</h1>
+                    <h1 class="page-header">Pulpit</h1>
                 </div>
+            </div>
+            <!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-yellow">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-shopping-cart fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge" th:utext="${noOfwaitingReservation}" >-1</div>
+                                <div>Oczekujące rezerwacje</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a th:href="@{/wRes}">
+                        <div class="panel-footer">
+                            <span class="pull-left">Zarządzaj</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+                <!-- /.row -->
 
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Default Buttons
+                                Hotel Booker
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
-                                <h4>some content 1</h4>
-
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Circle Icon Buttons with Font Awesome Icons
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <h4>some content 2</h4>
-
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel -->
-                    </div>
-                    <!-- /.col-lg-6 -->
-                    <div class="col-lg-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Outline Buttons with Smooth Transition
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <h4>some content 3</h4>
-
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Social Buttons with Font Awesome Icons
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <h4>some content 4</h4>
-
+                                <h4 th:inline="text"> Witaj, [[${userName}]]! </h4>
+                                    <p>W tym miejscu możesz zarządzać swoim hotelem.</p>
                             </div>
                             <!-- /.panel-body -->
                         </div>
@@ -86,10 +75,6 @@
                     <!-- /.col-lg-6 -->
                 </div>
                 <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
     </div>
     <!-- /#page-wrapper -->
 

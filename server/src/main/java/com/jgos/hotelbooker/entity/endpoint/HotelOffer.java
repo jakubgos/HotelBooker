@@ -1,7 +1,6 @@
 package com.jgos.hotelbooker.entity.endpoint;
 
 
-import com.jgos.hotelbooker.entity.hotel.HotelData;
 import com.jgos.hotelbooker.entity.hotel.data.ResultStatus;
 
 import java.util.ArrayList;

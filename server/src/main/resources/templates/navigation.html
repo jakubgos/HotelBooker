@@ -22,19 +22,19 @@
             <!-- /.dropdown -->
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    <i class="fa fa-owner fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                <ul class="dropdown-menu dropdown-owner">
+                    <li><a href="#"><i class="fa fa-owner fa-fw"></i> User Profile</a>
                     </li>
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a th:href="@{/web/logout}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <a th:href="@{/logout}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
-                <!-- /.dropdown-user -->
+                <!-- /.dropdown-owner -->
             </li>
             <!-- /.dropdown -->
         </ul>
@@ -60,10 +60,14 @@
                     </li>
                     <li>
                         <a th:href="@{/hotelData}" th:classappend="${#httpServletRequest.getRequestURI() == '/hotelData' ? 'active':''}">
-                            <i class="fa fa-building-o fa-fw"></i> Dane o hotel</a>
+                            <i class="fa fa-building-o fa-fw"></i> Dane hotelu</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-building-o fa-fw"></i> Hotel<span class="fa arrow"></span></a>
+                        <a th:href="@{/room}" th:classappend="${#httpServletRequest.getRequestURI() == '/room' ? 'active':''}">
+                            <i class="fa fa-columns fa-fw"></i> Pokoje</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-tasks fa-fw"></i> Rezerwacje<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a th:href="@{/wRes}" th:classappend="${#httpServletRequest.getRequestURI() == '/wRes' ? 'active':''}">Oczekujące rezerwacje</a>

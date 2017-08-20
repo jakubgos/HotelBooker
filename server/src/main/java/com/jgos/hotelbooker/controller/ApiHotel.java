@@ -3,7 +3,10 @@ package com.jgos.hotelbooker.controller;
 import com.jgos.hotelbooker.entity.endpoint.*;
 import com.jgos.hotelbooker.entity.hotel.data.City;
 import com.jgos.hotelbooker.entity.hotel.data.ResultStatus;
+import com.jgos.hotelbooker.entity.user.UserDb;
 import com.jgos.hotelbooker.repository.CityRepository;
+import com.jgos.hotelbooker.repository.RoomRepository;
+import com.jgos.hotelbooker.repository.UserRepository;
 import com.jgos.hotelbooker.service.OfferSearch;
 import com.jgos.hotelbooker.service.ReservationService;
 import org.slf4j.Logger;
@@ -37,12 +40,6 @@ public class ApiHotel {
     @Autowired
     private ReservationService reservationService;
 
-
-    @RequestMapping("/test")
-    @ResponseBody
-    public String greeting(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
-        return "OK!";
-    }
 
     @RequestMapping("/getCityList")
     public List<City> getCityList(Model model) throws InterruptedException {

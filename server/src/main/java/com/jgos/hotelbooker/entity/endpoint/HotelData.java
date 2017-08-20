@@ -1,5 +1,6 @@
-package com.jgos.hotelbooker.entity.hotel;
+package com.jgos.hotelbooker.entity.endpoint;
 
+import com.jgos.hotelbooker.entity.hotel.HotelDetail;
 import com.jgos.hotelbooker.entity.room.Room;
 
 import java.util.List;

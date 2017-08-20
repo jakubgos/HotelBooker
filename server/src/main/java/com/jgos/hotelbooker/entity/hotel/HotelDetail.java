@@ -27,7 +27,7 @@ public class HotelDetail {
     @Column(nullable = false)
     private String address;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Coordinates coordinates;
 
     @ManyToOne(optional = false)

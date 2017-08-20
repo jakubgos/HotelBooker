@@ -29,6 +29,7 @@ public class City {
         this.name = name;
     }
 
+
     public long getId() {
         return id;
     }

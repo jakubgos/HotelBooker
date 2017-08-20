@@ -1,5 +1,7 @@
 package com.jgos.hotelbooker.entity.hotel.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +26,14 @@ public class Coordinates {
     }
 
     public Coordinates() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public long getLatitude() {

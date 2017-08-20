@@ -23,73 +23,122 @@
 
     <!-- Page Content -->
     <div id="page-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Blank</h1>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Default Buttons
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <h4>some content 1</h4>
-
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Circle Icon Buttons with Font Awesome Icons
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <h4>some content 2</h4>
-
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel -->
-                    </div>
-                    <!-- /.col-lg-6 -->
-                    <div class="col-lg-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Outline Buttons with Smooth Transition
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <h4>some content 3</h4>
-
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Social Buttons with Font Awesome Icons
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <h4>some content 4</h4>
-
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel -->
-                    </div>
-                    <!-- /.col-lg-6 -->
-                </div>
-                <!-- /.col-lg-12 -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Informacje o Hotelu</h1>
             </div>
-            <!-- /.row -->
         </div>
-        <!-- /.container-fluid -->
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Edycja
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                        <div th:if="${message}" class="alert alert-success alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert"
+                                                    aria-hidden="true">&times;</button>
+                                            <span th:text="${message}"></span>
+                                        </div>
+                                        <div th:if="${errorMessage}" class="alert alert-danger alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert"
+                                                    aria-hidden="true">&times;</button>
+                                            <span th:text="${errorMessage}"></span>
+                                        </div>
+                                    <form href="#" role="form" th:action="@{/saveHotelData}" th:object="${hotelDetail}" method="post">
+                                        <input type="hidden" th:value="${id}" name="id" th:field="*{id}" />
+
+                                        <div class="form-group">
+                                            <label>Nazwa Hotelu</label>
+                                            <input class="form-control"  th:field="*{name}" />
+                                            <p class="help-block">Za pomocą tego pola, możesz zmienić nazwę hotelu</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Text area</label>
+                                            <textarea class="form-control" rows="8" th:field="*{description}"></textarea>
+                                            <p class="help-block">Pamiętaj! możesz używać znaczników HTML.</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Adres</label>
+                                            <input class="form-control"  th:field="*{address}" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Współżędne geograficzne</label>
+                                            <input type="hidden" th:value="*{coordinates.id}" th:field="*{coordinates.id}" />
+
+                                            <div class="col-lg-12"></div>
+                                            <div class="col-lg-6">
+                                            <input class="form-control "  th:field="*{coordinates.latitude}" />
+                                            <p class="help-block">Szerokość Geograficzna</p>
+                                            </div>
+                                            <div class="col-lg-6">
+
+                                            <input class="form-control "  th:field="*{coordinates.longitude}" />
+                                            <p class="help-block">Długość geograficzna.</p>
+                                            </div>
+                                        </div>
+                                            <div class="form-group">
+                                                <label>Miasto</label>
+                                                <select class="form-control" th:field="*{city}">
+                                                    <div th:each="current : ${cityList}" class="select">
+                                                        <option th:value="${current.id}"  th:text="${current.name}"  th:field="*{city}"></option>
+                                                    </div>
+                                                </select>
+                                            </div>
+
+                                        <div class="form-group">
+                                            <label>Oferta żywności</label>
+                                            <div th:each="food : ${allFoodOffer}" class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" th:text="${food.name}" th:value="${food.id}" th:field="*{foodOffer}"/>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Udogodnienia w hotelu</label>
+
+                                            <div th:each="facilities : ${allHotelFacilities}" class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" th:text="${facilities.name}" th:value="${facilities.id}" th:field="*{hotelFacilities}"/>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Liczba gwiazdek świadczy</label>
+                                            <div  th:each="rating : ${allRating}" class="radio-inline " >
+                                                <label>
+                                                    <input type="radio" th:text="${rating.value}" th:value="${rating.id}" th:field="*{rating}"/>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-default">Zapisz</button>
+                                            <button type="reset" class="btn btn-default">Zresetuj dane</button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-6 -->
+        </div>
+        <!-- /.col-lg-12 -->
     </div>
     <!-- /#page-wrapper -->
 

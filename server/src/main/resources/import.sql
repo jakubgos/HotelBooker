@@ -15,7 +15,7 @@ insert into city (id, name) values (2, 'Gdynia');
 insert into city (id, name) values (3, 'Warszawa');
 insert into city (id, name) values (4, 'Katowice');
 
-insert into coordinates (id, latitude, longitude) values (1,0,0);
+insert into coordinates (id, latitude, longitude) values (1,10,20);
 insert into coordinates (id, latitude, longitude) values (2,10,10);
 
 insert into rating (id, value) values (1, 1);
@@ -31,6 +31,9 @@ insert into hotel_detail (id, name, city_id, description,address, coordinates_id
 
 insert into hotel_facilities (id, name) values (1,'Parking');
 insert into hotel_facilities (id, name) values (2,'Basen');
+insert into hotel_facilities (id, name) values (3,'Siłownia');
+insert into hotel_facilities (id, name) values (4,'Sauna');
+
 
 insert into hotel_detail_hotel_facilities (hotel_detail_id ,hotel_facilities_id) values (1,1);
 insert into hotel_detail_hotel_facilities (hotel_detail_id ,hotel_facilities_id) values (1,2);
@@ -42,17 +45,16 @@ insert into food_offer (id, name) values (3,'Kolacja');
 
 insert into hotel_detail_food_offer (hotel_detail_id ,food_offer_id) values (1,1);
 insert into hotel_detail_food_offer (hotel_detail_id ,food_offer_id) values (1,2);
-insert into hotel_detail_food_offer (hotel_detail_id ,food_offer_id) values (1,3);
 insert into hotel_detail_food_offer (hotel_detail_id ,food_offer_id) values (2,1);
 
 
-insert into hotel (id, hotel_detail_id) values (1, 1);
-insert into hotel (id, hotel_detail_id) values (2, 2);
+insert into hotel (id, hotel_detail_id, owner_id) values (1, 1, 3);
+insert into hotel (id, hotel_detail_id, owner_id) values (2, 2, 4);
 
 
-insert into room (id,name,description,price,size ) values (1,'room_1_name','room_1_description',100,2);
-insert into room (id,name,description,price,size ) values (2,'room_2_name','room_2_description',100,2);
-insert into room (id,name,description,price,size ) values (3,'room_3_name','room_3_description',400,2);
+insert into room (id,name,description,price,size, hotel_id ) values (1,'room_1_name','room_1_description',100,2, 1);
+insert into room (id,name,description,price,size, hotel_id ) values (2,'room_2_name','room_2_description',100,2, 1);
+insert into room (id,name,description,price,size, hotel_id ) values (3,'room_3_name','room_3_description',400,2, 2 );
 
 insert into hotel_room_list (hotel_id, room_list_id) values (1,1);
 insert into hotel_room_list (hotel_id, room_list_id) values (1,2);

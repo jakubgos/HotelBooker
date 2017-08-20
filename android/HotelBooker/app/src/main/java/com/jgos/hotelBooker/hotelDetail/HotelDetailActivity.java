@@ -156,16 +156,20 @@ public class HotelDetailActivity extends AppCompatActivity
         for (FoodOffer fo : hotelDetail.getFoodOffer()) {
             tmpString = new StringBuilder(tmpString).append("&#8226;").append(fo.getName()).append("<br/><br/>").toString();
         }
-        tmpString = tmpString.substring(0, tmpString.length() - 8);
-        foodOffer.setText(Html.fromHtml(tmpString));
+        if(!tmpString.isEmpty()) {
+            tmpString = tmpString.substring(0, tmpString.length() - 8);
+            foodOffer.setText(Html.fromHtml(tmpString));
+        }
 
         tmpString = "";
         for (HotelFacilities fo : hotelDetail.getHotelFacilities()) {
             tmpString = new StringBuilder(tmpString).append("&#8226;").append(fo.getName()).append("<br/><br/>").toString();
         }
-        tmpString = tmpString.substring(0, tmpString.length() - 8);
 
-        facilities.setText(Html.fromHtml(tmpString));
+        if(!tmpString.isEmpty()) {
+            tmpString = tmpString.substring(0, tmpString.length() - 8);
+            facilities.setText(Html.fromHtml(tmpString));
+        }
     }
 
     @Override

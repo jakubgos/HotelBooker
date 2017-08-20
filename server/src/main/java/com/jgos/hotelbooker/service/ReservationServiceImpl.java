@@ -80,7 +80,7 @@ public class ReservationServiceImpl implements ReservationService {
         //end.add(Calendar.DAY_OF_MONTH, -1); for nie łapie ostatniego dnia i tak :)
 
         for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
-            Reservation reservation = new Reservation(room, user, date,ReservationStatus.WAIT_FOR_CONFIRMATION);
+            Reservation reservation = new Reservation(room, user, date,ReservationStatus.WAIT_FOR_CONFIRMATION, room.getHotel().getOwner());
             reservationRepository.save(reservation);
         }
         return new ReservationResponse(ResultStatus.OK);
@@ -104,5 +104,12 @@ public class ReservationServiceImpl implements ReservationService {
             userReservationResponse.setReservationDataArrayList(reservationDataArrayList);
         }
         return userReservationResponse;
+    }
+
+    @Override
+    public List<Reservation> getReservationFromStatus(String hotelUserName, ReservationStatus reservationStatus) {
+        UserDb hotelUser = userRepository.findByEmail(hotelUserName);
+
+        return reservationRepository.findByOwnerAndReservationStatus(hotelUser,reservationStatus);
     }
 }

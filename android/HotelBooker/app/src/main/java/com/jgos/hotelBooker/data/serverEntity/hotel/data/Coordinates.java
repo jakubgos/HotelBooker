@@ -18,6 +18,14 @@ public class Coordinates {
     public Coordinates() {
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public long getLatitude() {
         return latitude;
     }

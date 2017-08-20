@@ -1,6 +1,10 @@
 package com.jgos.hotelbooker.entity.room;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jgos.hotelbooker.entity.hotel.Hotel;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -17,19 +21,16 @@ public class Room {
     private int size;
     private float price;
 
+    @NotNull
+    @JsonIgnore
+    @ManyToOne
+    private Hotel hotel;
+
     @ManyToMany(fetch = FetchType.LAZY)
     private List<RoomFacilities> roomFacilities;
 
 
     public Room() {
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
     }
 
     public long getId() {
@@ -62,6 +63,22 @@ public class Room {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 
     public List<RoomFacilities> getRoomFacilities() {

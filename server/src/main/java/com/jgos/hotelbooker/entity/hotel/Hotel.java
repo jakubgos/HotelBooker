@@ -1,6 +1,8 @@
 package com.jgos.hotelbooker.entity.hotel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jgos.hotelbooker.entity.room.Room;
+import com.jgos.hotelbooker.entity.user.UserDb;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,6 +24,10 @@ public class Hotel {
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<Room> roomList;
+
+    @JsonIgnore
+    @OneToOne
+    private UserDb owner;
 
     public Hotel() {
     }
@@ -56,6 +62,15 @@ public class Hotel {
                 "id=" + id +
                 ", hotelDetail=" + hotelDetail +
                 ", roomList=" + roomList +
+                ", owner=" + owner +
                 '}';
+    }
+
+    public UserDb getOwner() {
+        return owner;
+    }
+
+    public void setOwner(UserDb owner) {
+        this.owner = owner;
     }
 }

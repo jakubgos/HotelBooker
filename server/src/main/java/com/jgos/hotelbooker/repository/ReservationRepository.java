@@ -1,6 +1,8 @@
 package com.jgos.hotelbooker.repository;
 
 import com.jgos.hotelbooker.entity.user.Reservation;
+import com.jgos.hotelbooker.entity.user.ReservationStatus;
+import com.jgos.hotelbooker.entity.user.UserDb;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,5 +20,5 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
     List<Reservation> findByDateBetweenAndRoomId(Date from, Date to,long id);
 
     List<Reservation> findByUserEmail(String email);
-
+    List<Reservation> findByOwnerAndReservationStatus(UserDb owner, ReservationStatus reservationStatus);
 }

@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().hasAuthority(Authorities.ROLE_WEB.name())
                 //.anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").failureUrl("/login?error=true").defaultSuccessUrl("/index",true)
+                .formLogin().loginPage("/login").failureUrl("/login?error=true").defaultSuccessUrl("/index",false)
                 .permitAll()
                 .and()
                 .logout().permitAll().logoutSuccessUrl("/login?logout=true")
