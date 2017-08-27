@@ -12,6 +12,8 @@
 
     <div th:replace="links :: links-css"></div>
 
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css"/>
+
 </head>
 
 <body>
@@ -25,66 +27,79 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Blank</h1>
+                <h1 class="page-header">Oczekujące Rezerwacje</h1>
             </div>
         </div>
         <!-- /.row -->
 
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Default Buttons
+                        Rezerwacje
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <h4>some content 1</h4>
+                        <form href="#" role="form" th:action="@{/wResAction}" th:object="${reservationsWrapper}"
+                              method="post">
+                            <div th:if="${message}" class="alert alert-success alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert"
+                                        aria-hidden="true">&times;</button>
+                                <span th:text="${message}"></span>
+                            </div>
+                            <table id="example" class="display" cellspacing="0" width="100%" th:field="*{reservations}">
 
+                                <thead>
+                                <tr>
+                                    <th>Użytkownik</th>
+                                    <th>Data</th>
+                                    <th>Nazwa Pokoju</th>
+                                    <th>Status Rezerwacji</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Użytkownik</th>
+                                    <th>Data</th>
+                                    <th>Nazwa Pokoju</th>
+                                    <th>Status Rezerwacji</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <tr th:each="row,rowStat : *{reservations}">
+                                    <input type="hidden" th:field="*{reservations[__${rowStat.index}__].id}"/>
+                                    <input type="checkbox" style="display: none"
+                                           th:field="*{reservations[__${rowStat.index}__].selected}"/>
+
+                                    <td th:text="${row.user.email}">NO DATA</td>
+                                    <td th:text="${row.date}">NO DATA</td>
+                                    <td th:text="${row.room.name}">NO DATA</td>
+                                    <td th:text="${row.reservationStatus.text}">NO DATA</td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <select class="form-control"
+                                            th:field="${reservationsWrapper.reservationStatus.text}">
+                                        <option th:each="var:${reservationOptionAll}"
+                                                th:value="${var}"
+                                                th:text="${var}"
+                                        >
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-default">Aktualizuj Dane</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <!-- /.panel-body -->
                 </div>
-                <!-- /.panel -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Circle Icon Buttons with Font Awesome Icons
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <h4>some content 2</h4>
-
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
             </div>
-            <!-- /.col-lg-6 -->
-            <div class="col-lg-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Outline Buttons with Smooth Transition
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <h4>some content 3</h4>
-
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Social Buttons with Font Awesome Icons
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <h4>some content 4</h4>
-
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-            </div>
-            <!-- /.col-lg-6 -->
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -94,6 +109,44 @@
 <!-- /#wrapper -->
 
 <div th:replace="links :: links-scripts"></div>
+
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+
+
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+    //<![CDATA[
+
+    $(document).ready(function () {
+        $('#example').DataTable( {
+            "order": [[ 1, "desc" ]]
+        } );
+        var table = $('#example').DataTable();
+
+        $('#example tbody').on('click', 'tr', function () {
+            $(this).toggleClass('selected');
+            if (document.getElementsByName("reservations[" + (this.rowIndex - 1) + "].selected")[0].checked == true) {
+                document.getElementsByName("reservations[" + (this.rowIndex - 1) + "].selected")[0].checked = false
+            }
+            else {
+                document.getElementsByName("reservations[" + (this.rowIndex - 1) + "].selected")[0].checked = true;
+            }
+        });
+
+        $('#button').click(function (e, dt, node, config) {
+            var selectArray = "";
+            for (var i = 0; i < table.rows('.selected').data().length; i++) {
+                selectArray += table.rows('.selected').data()[i][0];
+                if (i + 1 < table.rows('.selected').data().length) {
+                    selectArray += ',';
+                }
+            }
+            alert("asd" + selectArray);
+        });
+    });
+    //]]>
+
+</script>
 
 </body>
 

@@ -5,7 +5,6 @@ import com.jgos.hotelbooker.entity.room.Room;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.security.acl.Owner;
 import java.util.Date;
 
 /**
@@ -22,16 +21,27 @@ public class Reservation {
     Date date;
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    private long id;
+    public long id;
     @NotNull
     @ManyToOne
-    private Room room;
+    public Room room;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    private UserDb owner;
+    public UserDb owner;
 
-    private ReservationStatus reservationStatus;
+    @Enumerated(EnumType.ORDINAL)
+    public ReservationStatus reservationStatus;
+
+
+    public Reservation(Reservation res) {
+        user=res.getUser();
+        date=res.getDate();
+        id=res.getId();
+        room=res.getRoom();
+        owner=res.getOwner();
+        reservationStatus=res.getReservationStatus();
+    }
 
     @Override
     public String toString() {
@@ -57,7 +67,6 @@ public class Reservation {
     }
 
     public Reservation(Room room, UserDb user, Date date, ReservationStatus reservationStatus, UserDb owner) {
-
         this.room = room;
         this.user = user;
         this.date = date;

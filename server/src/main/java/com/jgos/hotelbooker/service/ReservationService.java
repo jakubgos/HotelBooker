@@ -6,7 +6,10 @@ import com.jgos.hotelbooker.entity.endpoint.UserReservationResponse;
 import com.jgos.hotelbooker.entity.user.Reservation;
 import com.jgos.hotelbooker.entity.user.ReservationStatus;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * Created by Bos on 2017-07-23.
@@ -18,5 +21,7 @@ public interface ReservationService {
 
     UserReservationResponse getUserReservation(String username);
 
-    List<Reservation> getReservationFromStatus(String username, ReservationStatus waitForConfirmation);
+    ArrayList<Reservation> getReservationFromStatus(String username, ReservationStatus waitForConfirmation);
+
+    ArrayList<Reservation> getReservation(String username);
 }

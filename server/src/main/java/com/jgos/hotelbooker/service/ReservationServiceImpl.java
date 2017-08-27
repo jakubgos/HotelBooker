@@ -19,10 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Bos on 2017-07-23.
@@ -107,9 +104,14 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public List<Reservation> getReservationFromStatus(String hotelUserName, ReservationStatus reservationStatus) {
+    public ArrayList<Reservation> getReservationFromStatus(String hotelUserName, ReservationStatus reservationStatus) {
         UserDb hotelUser = userRepository.findByEmail(hotelUserName);
 
         return reservationRepository.findByOwnerAndReservationStatus(hotelUser,reservationStatus);
+    }
+
+    @Override
+    public ArrayList<Reservation> getReservation(String username) {
+        return reservationRepository.findByUserEmail(username);
     }
 }
