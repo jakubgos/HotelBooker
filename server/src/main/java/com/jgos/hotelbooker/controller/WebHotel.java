@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
+
 import static com.jgos.hotelbooker.entity.user.ReservationStatus.getEnumByString;
 
 /**
@@ -141,12 +143,18 @@ public class WebHotel {
 
     @RequestMapping(value = {"/wRes"}, method = RequestMethod.GET)
     public ModelAndView wres(@AuthenticationPrincipal UserDetails userDetails, @RequestParam(required = false, defaultValue = "0") int result) {
+        
         ModelAndView model = new ModelAndView();
         model.setViewName("wRes");
         model.addObject("reservationsWrapper", new WrapperReservationData(reservationService.getReservationFromStatus(userDetails.getUsername(), ReservationStatus.WAIT_FOR_CONFIRMATION)));
         model.addObject("userName", userDetails.getUsername());
-        model.addObject("reservationOptionAll", ReservationStatus.values());
-        model.addObject("cityList", cityRepository.findAll());
+
+        ArrayList<ReservationStatus> reservationStatuses = new ArrayList<>();
+        for (int i= 0 ;i < ReservationStatus.UNKNOWN.ordinal() ; i++)
+        {
+            reservationStatuses.add(ReservationStatus.values()[i]);
+        }
+        model.addObject("reservationOptionAll", reservationStatuses);        model.addObject("cityList", cityRepository.findAll());
         if (result == 1) {
             model.addObject("message", "Zmiany zostały zapisane");
         } else if (result == 2) {
@@ -162,7 +170,13 @@ public class WebHotel {
         model.setViewName("rRes");
         model.addObject("reservationsWrapper", new WrapperReservationData(reservationService.getReservation(userDetails.getUsername())));
         model.addObject("userName", userDetails.getUsername());
-        model.addObject("reservationOptionAll", ReservationStatus.values());
+
+        ArrayList<ReservationStatus> reservationStatuses = new ArrayList<>();
+        for (int i= 0 ;i < ReservationStatus.UNKNOWN.ordinal() ; i++)
+        {
+            reservationStatuses.add(ReservationStatus.values()[i]);
+        }
+        model.addObject("reservationOptionAll", reservationStatuses);
         model.addObject("cityList", cityRepository.findAll());
         if (result == 1) {
             model.addObject("message", "Zmiany zostały zapisane");
@@ -199,6 +213,7 @@ public class WebHotel {
                 ) {
             if (res.isSelected()) {
                 Reservation reservation = reservationRepository.findOne(res.getId());
+
                 reservation.setReservationStatus(getEnumByString(wrapperReservationData.getReservationStatus().getText()));
                 reservationRepository.save(reservation);
                 result = 1;

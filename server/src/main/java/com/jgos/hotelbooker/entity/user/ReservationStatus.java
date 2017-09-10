@@ -31,7 +31,7 @@ public enum ReservationStatus {
     }
     public static ReservationStatus getEnumByString(String code){
         for(ReservationStatus e : ReservationStatus.values()){
-            if(code.equals(e.text)) return e;
+            if(code.equalsIgnoreCase(e.text)) return e;
         }
         return null;
     }

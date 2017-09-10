@@ -51,6 +51,8 @@
 
                                 <thead>
                                 <tr>
+                                    <th>id</th>
+
                                     <th>Użytkownik</th>
                                     <th>Data</th>
                                     <th>Nazwa Pokoju</th>
@@ -59,6 +61,9 @@
                                 </thead>
                                 <tfoot>
                                 <tr>
+                                    <th>id</th>
+
+
                                     <th>Użytkownik</th>
                                     <th>Data</th>
                                     <th>Nazwa Pokoju</th>
@@ -67,10 +72,11 @@
                                 </tfoot>
                                 <tbody>
                                 <tr th:each="row,rowStat : *{reservations}">
-                                    <input type="hidden" th:field="*{reservations[__${rowStat.index}__].id}"/>
-                                    <input type="checkbox" style="display: none"
-                                           th:field="*{reservations[__${rowStat.index}__].selected}"/>
-
+                                    <td th:inline="text">
+                                        [[${row.id}]]
+                                        <input type="hidden" th:field="*{reservations[__${rowStat.index}__].id}"/>
+                                        <input type="checkbox" style="display: none" th:field="*{reservations[__${rowStat.index}__].selected}"/>
+                                    </td>
                                     <td th:text="${row.user.email}">NO DATA</td>
                                     <td th:text="${row.date}">NO DATA</td>
                                     <td th:text="${row.room.name}">NO DATA</td>
@@ -119,19 +125,16 @@
 
     $(document).ready(function () {
         $('#example').DataTable( {
-            "order": [[ 1, "desc" ]]
+            "order": [[ 2, "desc" ]]
+
         } );
 
         var table = $('#example').DataTable();
 
         $('#example tbody').on('click', 'tr', function () {
             $(this).toggleClass('selected');
-            if (document.getElementsByName("reservations[" + (this.rowIndex - 1) + "].selected")[0].checked == true) {
-                document.getElementsByName("reservations[" + (this.rowIndex - 1) + "].selected")[0].checked = false
-            }
-            else {
-                document.getElementsByName("reservations[" + (this.rowIndex - 1) + "].selected")[0].checked = true;
-            }
+            this.cells.item(0).children[1].checked = !this.cells.item(0).getElementsByTagName("input")[1].checked;
+
         });
 
         $('#button').click(function (e, dt, node, config) {
