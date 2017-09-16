@@ -24,6 +24,7 @@ import com.jgos.hotelBooker.data.serverEntity.hotel.HotelDetail;
 import com.jgos.hotelBooker.data.serverEntity.hotel.data.FoodOffer;
 import com.jgos.hotelBooker.data.serverEntity.hotel.data.HotelFacilities;
 import com.jgos.hotelBooker.data.serverEntity.room.Room;
+import com.jgos.hotelBooker.data.serverEntity.room.RoomFacilities;
 import com.jgos.hotelBooker.hotelDetail.interfaces.HotelDetailPresenterOps;
 import com.jgos.hotelBooker.hotelDetail.interfaces.HotelDetailViewOps;
 import com.jgos.hotelBooker.reservation.ReservationActivity;
@@ -156,7 +157,7 @@ public class HotelDetailActivity extends AppCompatActivity
         for (FoodOffer fo : hotelDetail.getFoodOffer()) {
             tmpString = new StringBuilder(tmpString).append("&#8226;").append(fo.getName()).append("<br/><br/>").toString();
         }
-        if(!tmpString.isEmpty()) {
+        if (!tmpString.isEmpty()) {
             tmpString = tmpString.substring(0, tmpString.length() - 8);
             foodOffer.setText(Html.fromHtml(tmpString));
         }
@@ -166,9 +167,9 @@ public class HotelDetailActivity extends AppCompatActivity
             tmpString = new StringBuilder(tmpString).append("&#8226;").append(fo.getName()).append("<br/><br/>").toString();
         }
 
-        if(!tmpString.isEmpty()) {
+        if (!tmpString.isEmpty()) {
             tmpString = tmpString.substring(0, tmpString.length() - 8);
-            facilities.setText(Html.fromHtml(tmpString));
+            facilities.setText(tmpString);
         }
     }
 
@@ -180,6 +181,25 @@ public class HotelDetailActivity extends AppCompatActivity
         String[] coName = getResources().getStringArray(R.array.numerOfPeople);
         roomCount.setText(coName[room.getSize()]);
         roomDescription.setText(Html.fromHtml(room.getDescription()));
+
+
+        boolean isFirst = false;
+        String tmpString = facilities.getText().toString();
+        if (tmpString.equals("Brak") && !room.getRoomFacilities().isEmpty()) {
+            isFirst = true;
+            tmpString = "";
+        }
+
+        for (RoomFacilities fo : room.getRoomFacilities()) {
+            if (isFirst) {
+                tmpString = new StringBuilder("").append("&#8226;").append(fo.getName()).toString();
+            } else {
+                tmpString = new StringBuilder("").append("&#8226;").append(fo.getName()).append("<br/><br/>").append(tmpString).toString();
+            }
+        }
+
+        facilities.setText(Html.fromHtml(tmpString));
+
     }
 
     @Override

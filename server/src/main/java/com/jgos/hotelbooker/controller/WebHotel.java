@@ -2,6 +2,7 @@ package com.jgos.hotelbooker.controller;
 
 import com.jgos.hotelbooker.entity.hotel.Hotel;
 import com.jgos.hotelbooker.entity.hotel.HotelDetail;
+import com.jgos.hotelbooker.entity.room.Room;
 import com.jgos.hotelbooker.entity.user.Reservation;
 import com.jgos.hotelbooker.entity.user.ReservationStatus;
 import com.jgos.hotelbooker.entity.user.UserDb;
@@ -10,6 +11,7 @@ import com.jgos.hotelbooker.entity.webData.WrapperReservationData;
 import com.jgos.hotelbooker.repository.*;
 import com.jgos.hotelbooker.service.OfferSearch;
 import com.jgos.hotelbooker.service.ReservationService;
+import com.jgos.hotelbooker.service.RoomService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,28 +50,40 @@ public class WebHotel {
     private ReservationService reservationService;
 
     @Autowired
+    private
     HotelRepository hotelRepository;
 
     @Autowired
+    private
     RoomRepository roomRepository;
 
     @Autowired
+    private
     UserRepository userRepository;
 
     @Autowired
+    private
     FoodOfferRepository foodOfferRepository;
 
     @Autowired
+    private
     HotelFacilitiesRepository hotelFacilitiesRepository;
 
     @Autowired
+    private
     RatingRepository ratingRepository;
 
     @Autowired
-    HotelDetailRepository hotelDetailRepository;
+    private HotelDetailRepository hotelDetailRepository;
 
     @Autowired
-    ReservationRepository reservationRepository;
+    private ReservationRepository reservationRepository;
+
+    @Autowired
+    private RoomFacilitiesRepository roomFacilitiesRepository;
+
+    @Autowired
+    private RoomService roomService;
 
     @RequestMapping("/test")
     @ResponseBody
@@ -220,5 +234,53 @@ public class WebHotel {
             }
         }
         return new ModelAndView("redirect:/wRes?result=" + result);
+    }
+
+    @RequestMapping(value = {"/room"}, method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView room(@AuthenticationPrincipal UserDetails userDetails, @RequestParam(required = false, defaultValue = "0") int result) {
+        UserDb user = userRepository.findByEmail(userDetails.getUsername());
+        Hotel hotel = hotelRepository.findByOwner(user);
+
+        ModelAndView model = new ModelAndView();
+        model.setViewName("room");
+        model.addObject("roomList",hotel.getRoomList());
+        model.addObject("userName", userDetails.getUsername());
+
+        if(result == 2){
+            model.addObject("errorMessage", "Nie udało się zapisać danych pokoju.");
+        }
+
+        if(result == 1){
+            model.addObject("message", "Pokój został zapisany");
+        }
+
+        return model;
+    }
+
+    @RequestMapping(value = {"/editRoom"}, method = RequestMethod.POST)
+    public ModelAndView editRoom(@AuthenticationPrincipal UserDetails userDetails, @RequestParam() int roomId) {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("editRoom");
+        model.addObject("room", roomRepository.findById(roomId));
+        model.addObject("allRoomFacilities", roomFacilitiesRepository.findAll());
+
+        return model;
+    }
+
+    @RequestMapping(value = {"/saveRoomData"}, method = RequestMethod.POST)
+    public ModelAndView saveRoomData(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute("editRoom") Room room, BindingResult errors, Model model) {
+
+        log.info("saveRoomData recieved with " + room.toString());
+        UserDb user = userRepository.findByEmail(userDetails.getUsername());
+
+        if(!roomService.verifyData(room))
+        {
+            return new ModelAndView("redirect:/room?result=2");
+        }
+        Hotel hotel = hotelRepository.findByOwner(user);
+        room.setHotel(hotel);
+        roomRepository.save(room);
+        return new ModelAndView("redirect:/room?result=1");
     }
 }

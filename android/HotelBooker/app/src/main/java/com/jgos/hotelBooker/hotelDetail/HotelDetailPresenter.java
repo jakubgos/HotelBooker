@@ -38,6 +38,7 @@ public class HotelDetailPresenter implements HotelDetailPresenterOps {
 
     @Override
     public void onStartup() {
+        //order is imporant !
         getView().prepareHotelData(Storage.getInstance().getSelectedHotelData().getHotelDetail());
         getView().prepareRoomData(Storage.getInstance().getSelectedHotelData().getRoomList().get(0));
 

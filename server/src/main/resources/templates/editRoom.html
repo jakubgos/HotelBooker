@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Hotel Booker</title>
+
+    <div th:replace="links :: links-css"></div>
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <div th:replace="navigation :: navigation"></div>
+
+
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Edytuj Pokój</h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Edycja
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div th:if="${message}" class="alert alert-success alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert"
+                                                aria-hidden="true">&times;</button>
+                                        <span th:text="${message}"></span>
+                                    </div>
+                                    <div th:if="${errorMessage}" class="alert alert-danger alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert"
+                                                aria-hidden="true">&times;</button>
+                                        <span th:text="${errorMessage}"></span>
+                                    </div>
+                                    <form href="#" role="form" th:action="@{/saveRoomData}" th:object="${room}"
+                                          method="post">
+                                        <input type="hidden" th:value="${id}" name="id" th:field="*{id}"/>
+
+                                        <div class="form-group">
+                                            <label>Nazwa Pokoju</label>
+                                            <input class="form-control" value="NO DATA" th:field="*{name}"/>
+                                            <p class="help-block">Za pomocą tego pola, możesz zmienić nazwę pokoju</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Opis Pokoju</label>
+                                            <textarea class="form-control" rows="8"
+                                                      th:field="*{description}"></textarea>
+                                            <p class="help-block">Pamiętaj! możesz używać znaczników HTML.</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Rozmiar pokoju</label>
+                                            <select class="form-control" th:field="*{size}">
+                                                <option th:value="1" th:text="1"
+                                                        th:field="*{size}"></option>
+                                                <option th:value="2" th:text="2"
+                                                        th:field="*{size}"></option>
+                                                <option th:value="3" th:text="3"
+                                                        th:field="*{size}"></option>
+                                                <option th:value="4" th:text="4"
+                                                        th:field="*{size}"></option>
+                                                <option th:value="5" th:text="5"
+                                                        th:field="*{size}"></option>
+                                            </select>
+                                            <p class="help-block">Ilość łóżek w pokoju</p>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control "  th:field="*{price}" />
+                                            <p class="help-block">Cena za noc w Zł</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Udogodnienia w hotelu</label>
+
+                                            <div th:each="facilities : ${allRoomFacilities}" class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" th:text="${facilities.name}"
+                                                           th:value="${facilities.id}" th:field="*{roomFacilities}"/>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-default">Zapisz</button>
+                                            <button type="reset" class="btn btn-default">Zresetuj dane</button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-6 -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<div th:replace="links :: links-scripts"></div>
+
+</body>
+
+</html>

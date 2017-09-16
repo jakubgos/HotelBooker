@@ -12,6 +12,8 @@
 
     <div th:replace="links :: links-css"></div>
 
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css"/>
+
 </head>
 
 <body>
@@ -25,66 +27,70 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Blank</h1>
+                <h1 class="page-header">Pokoje</h1>
             </div>
         </div>
         <!-- /.row -->
 
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Default Buttons
+                        Rezerwacje
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <h4>some content 1</h4>
+                        <div th:if="${message}" class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert"
+                                    aria-hidden="true">&times;</button>
+                            <span th:text="${message}"></span>
+                        </div>
+                        <div th:if="${errorMessage}" class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert"
+                                    aria-hidden="true">&times;</button>
+                            <span th:text="${errorMessage}"></span>
+                        </div>
+                        <table id="example" class="display" cellspacing="0" width="100%" th:field="*{roomList}">
 
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Nazwa</th>
+                                <th>Opis</th>
+                                <th>Rozmiar</th>
+                                <th>Cena</th>
+                                <th>Akcja</th>
+
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>id</th>
+                                <th>Nazwa</th>
+                                <th>Opis</th>
+                                <th>Rozmiar</th>
+                                <th>Cena</th>
+                                <th>Akcja</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            <tr th:each="row,rowStat : *{roomList}">
+                                <form href="#" role="form" th:action="@{/editRoom}" method="post">
+                                    <td th:text="${row.id}">NO DATA</td>
+                                    <td th:text="${row.name}">NO DATA</td>
+                                    <td th:text="${row.description}">NO DATA</td>
+                                    <td th:text="${row.size}">NO DATA</td>
+                                    <td th:text="${row.price}">NO DATA</td>
+                                    <td><input type="hidden" th:value="${row.id}" name="roomId"/><button type="submit" class="btn btn-primary" name="action" value="Edit">Edytuj</button></td>
+                                </form>
+
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <!-- /.panel-body -->
                 </div>
-                <!-- /.panel -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Circle Icon Buttons with Font Awesome Icons
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <h4>some content 2</h4>
-
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
             </div>
-            <!-- /.col-lg-6 -->
-            <div class="col-lg-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Outline Buttons with Smooth Transition
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <h4>some content 3</h4>
-
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Social Buttons with Font Awesome Icons
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <h4>some content 4</h4>
-
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-            </div>
-            <!-- /.col-lg-6 -->
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -94,6 +100,42 @@
 <!-- /#wrapper -->
 
 <div th:replace="links :: links-scripts"></div>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+
+
+<script>
+    //<![CDATA[
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "columnDefs": [
+                {"width": "5%", "targets": 0},
+                {"width": "10%", "targets": 1},
+                {"width": "50%", "targets": 2},
+                {"width": "10%", "targets": 3},
+                {"width": "10%", "targets": 4}
+            ]
+        });
+        var table = $('#example').DataTable();
+
+        $('#example tbody').on('click', 'tr', function () {
+            $(this).toggleClass('selected');
+            this.cells.item(0).children[1].checked = !this.cells.item(0).getElementsByTagName("input")[1].checked;
+
+        });
+
+        $('#button').click(function (e, dt, node, config) {
+            var selectArray = "";
+            for (var i = 0; i < table.rows('.selected').data().length; i++) {
+                selectArray += table.rows('.selected').data()[i][0];
+                if (i + 1 < table.rows('.selected').data().length) {
+                    selectArray += ',';
+                }
+            }
+            alert("asd" + selectArray);
+        });
+    });
+    //]]>
+</script>
 
 </body>
 
