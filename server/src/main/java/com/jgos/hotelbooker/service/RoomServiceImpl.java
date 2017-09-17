@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
  * Created by Bos on 2017-09-16.
  */
 @Service
-public class RoomServiceImpl implements RoomService
-{
+public class RoomServiceImpl implements RoomService {
     public RoomServiceImpl() {
     }
 
@@ -20,14 +19,12 @@ public class RoomServiceImpl implements RoomService
     @Override
     public boolean verifyData(Room room) {
 
-        if (room.getPrice()<=0)
-        {
+        if (room.getPrice() <= 0) {
             log.info("verifyData room.getPrice()<=0 ");
             return false;
         }
 
-        if (room.getName().equals("") || room.getDescription().equals(""))
-        {
+        if (room.getName().equals("") || room.getDescription().equals("")) {
             log.info("verifyData room.getName() or getDescription is null ");
             return false;
         }

@@ -35,12 +35,12 @@ public class Reservation {
 
 
     public Reservation(Reservation res) {
-        user=res.getUser();
-        date=res.getDate();
-        id=res.getId();
-        room=res.getRoom();
-        owner=res.getOwner();
-        reservationStatus=res.getReservationStatus();
+        user = res.getUser();
+        date = res.getDate();
+        id = res.getId();
+        room = res.getRoom();
+        owner = res.getOwner();
+        reservationStatus = res.getReservationStatus();
     }
 
     @Override
@@ -70,7 +70,7 @@ public class Reservation {
         this.room = room;
         this.user = user;
         this.date = date;
-        this.owner=owner;
+        this.owner = owner;
         this.reservationStatus = reservationStatus;
 
     }

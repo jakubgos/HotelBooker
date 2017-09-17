@@ -13,6 +13,7 @@ public class UserReservationResponse {
     ResultStatus status;
 
     ArrayList<ReservationData> reservationDataArrayList;
+
     public UserReservationResponse() {
 
     }

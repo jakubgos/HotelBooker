@@ -103,7 +103,7 @@ public class ApiHotel {
 
         List<String> authorities = new ArrayList<>();
         authorities.add("ROLE_USER");
-        UserDb userDb = new UserDb(registerRequest.getUser(),registerRequest.getPassword(),authorities);
+        UserDb userDb = new UserDb(registerRequest.getUser(), registerRequest.getPassword(), authorities);
 
         userRepository.save(userDb);
 

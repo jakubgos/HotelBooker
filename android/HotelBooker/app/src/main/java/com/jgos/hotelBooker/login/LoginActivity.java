@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -191,8 +190,8 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
         userText = (EditText) dialog.getCustomView().findViewById(R.id.dialog_user_name);
         psswdText = (EditText) dialog.getCustomView().findViewById(R.id.dialog_user_pswd);
 
-        Log.d("myapp",userText +"");
-        Log.d("myapp",psswdText +"");
+        Log.d("myapp", userText + "");
+        Log.d("myapp", psswdText + "");
 
     }
 

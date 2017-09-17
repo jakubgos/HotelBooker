@@ -25,7 +25,7 @@ class ReservationModel implements ReservationModelOps {
 
     @Override
     public void downloadUserReservation(LoginData loginData) {
-        networkService.downloadUserReservation(loginData, new UserReservationResult(){
+        networkService.downloadUserReservation(loginData, new UserReservationResult() {
             @Override
             public void userReservationNotAvailable() {
                 reservationPresenter.userReservationNotAvailable();

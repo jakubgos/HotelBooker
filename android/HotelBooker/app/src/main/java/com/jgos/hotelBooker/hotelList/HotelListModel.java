@@ -4,7 +4,6 @@ import com.jgos.hotelBooker.data.NetworkServiceImpl;
 import com.jgos.hotelBooker.data.entity.LoginData;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.HotelOffer;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.SearchRequest;
-import com.jgos.hotelBooker.filter.interfaces.FilterPresenterOps;
 import com.jgos.hotelBooker.filter.interfaces.SearchRequestResult;
 import com.jgos.hotelBooker.hotelList.interfaces.HotelListModelOps;
 import com.jgos.hotelBooker.hotelList.interfaces.HotelListPresenterOps;

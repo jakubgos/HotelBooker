@@ -4,7 +4,6 @@ import com.jgos.hotelBooker.data.entity.LoginData;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.RegisterRequest;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.ReservationRequest;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.SearchRequest;
-import com.jgos.hotelBooker.data.serverEntity.endpoint.UserReservationResponse;
 import com.jgos.hotelBooker.filter.interfaces.LoginServiceCityListResult;
 import com.jgos.hotelBooker.filter.interfaces.SearchRequestResult;
 import com.jgos.hotelBooker.hotelList.interfaces.ReservationRequestResult;

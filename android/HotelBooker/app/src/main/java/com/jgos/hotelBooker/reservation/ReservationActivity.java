@@ -34,7 +34,7 @@ public class ReservationActivity extends AppCompatActivity
 
     private ReservationPresenterOps mPresenter;
     private MaterialDialog progressDialog;
-    private ListView reservationListView ;
+    private ListView reservationListView;
     private TextView reservationTextView;
     ReservationArrayAdapter adapter;
 
@@ -163,7 +163,7 @@ public class ReservationActivity extends AppCompatActivity
 
     @Override
     public void makeToast(String dzialam) {
-        Toast.makeText(this,dzialam,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, dzialam, Toast.LENGTH_LONG).show();
     }
 
     @Override

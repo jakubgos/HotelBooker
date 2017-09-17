@@ -5,7 +5,6 @@ import com.jgos.hotelBooker.data.serverEntity.hotel.HotelData;
 import com.jgos.hotelBooker.data.serverEntity.hotel.data.ResultStatus;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Bos on 2017-05-28.

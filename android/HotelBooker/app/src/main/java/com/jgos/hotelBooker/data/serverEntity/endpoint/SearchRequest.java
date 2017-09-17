@@ -1,7 +1,6 @@
 package com.jgos.hotelBooker.data.serverEntity.endpoint;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jgos.hotelBooker.data.serverEntity.hotel.data.City;
 
 /**

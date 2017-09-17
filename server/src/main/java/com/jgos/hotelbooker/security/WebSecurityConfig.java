@@ -7,9 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 /**
  * Created by Bos on 2017-08-15.
@@ -32,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().hasAuthority(Authorities.ROLE_WEB.name())
                 //.anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").failureUrl("/login?error=true").defaultSuccessUrl("/index",false)
+                .formLogin().loginPage("/login").failureUrl("/login?error=true").defaultSuccessUrl("/index", false)
                 .permitAll()
                 .and()
                 .logout().permitAll().logoutSuccessUrl("/login?logout=true")
@@ -42,15 +40,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
-               // .inMemoryAuthentication()
-               // .withUser("user").password("password").roles("USER");
+        // .inMemoryAuthentication()
+        // .withUser("user").password("password").roles("USER");
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/static/**", "/css/**", "/js/**", "/images/**","/webjars/**","/bootstrap/**");
+                .antMatchers("/static/**", "/css/**", "/js/**", "/images/**", "/webjars/**", "/bootstrap/**");
 
     }
 

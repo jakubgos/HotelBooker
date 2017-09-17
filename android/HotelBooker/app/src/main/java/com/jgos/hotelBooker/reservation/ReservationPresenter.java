@@ -1,7 +1,6 @@
 package com.jgos.hotelBooker.reservation;
 
 import android.os.Handler;
-import android.widget.Toast;
 
 import com.jgos.hotelBooker.data.NetworkServiceImpl;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.ReservationData;

@@ -29,9 +29,10 @@ public enum ReservationStatus {
 
     ReservationStatus() {
     }
-    public static ReservationStatus getEnumByString(String code){
-        for(ReservationStatus e : ReservationStatus.values()){
-            if(code.equalsIgnoreCase(e.text)) return e;
+
+    public static ReservationStatus getEnumByString(String code) {
+        for (ReservationStatus e : ReservationStatus.values()) {
+            if (code.equalsIgnoreCase(e.text)) return e;
         }
         return null;
     }

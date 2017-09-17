@@ -1,10 +1,10 @@
 package com.jgos.hotelbooker.service;
 
 import com.jgos.hotelbooker.controller.ApiHotel;
+import com.jgos.hotelbooker.entity.endpoint.HotelData;
 import com.jgos.hotelbooker.entity.endpoint.HotelOffer;
 import com.jgos.hotelbooker.entity.endpoint.SearchRequest;
 import com.jgos.hotelbooker.entity.hotel.Hotel;
-import com.jgos.hotelbooker.entity.endpoint.HotelData;
 import com.jgos.hotelbooker.entity.hotel.data.ResultStatus;
 import com.jgos.hotelbooker.entity.room.Room;
 import com.jgos.hotelbooker.entity.user.Reservation;
@@ -16,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Calendar;
 
 import java.util.*;
 
@@ -47,7 +46,7 @@ public class OfferSearchImpl implements OfferSearch {
         Calendar cal = Calendar.getInstance();
         cal.setTime(to);
         cal.add(Calendar.DAY_OF_MONTH, -1);
-        to=cal.getTime();
+        to = cal.getTime();
 
         List<Reservation> restrictedReservations = reservationRepository.findByDateBetween(from, to);
         Collection<Long> restrictedRooms = new LinkedHashSet<Long>();

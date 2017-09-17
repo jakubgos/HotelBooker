@@ -19,7 +19,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Bos on 2017-07-23.
@@ -51,9 +54,9 @@ public class ReservationServiceImpl implements ReservationService {
         Calendar cal = Calendar.getInstance();
         cal.setTime(to);
         cal.add(Calendar.DAY_OF_MONTH, -1);
-        to=cal.getTime();
+        to = cal.getTime();
 
-        List<Reservation> restrictedReservations = reservationRepository.findByDateBetweenAndRoomId(from, to,reservationRequest.getReservationRoomId());
+        List<Reservation> restrictedReservations = reservationRepository.findByDateBetweenAndRoomId(from, to, reservationRequest.getReservationRoomId());
         log.info(restrictedReservations.toString());
 
         return restrictedReservations.isEmpty();
@@ -61,7 +64,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public ReservationResponse reserve(ReservationRequest reservationRequest, String username) {
-        log.info("reservation service 'reserve' started with data:" + reservationRequest + "user " + username );
+        log.info("reservation service 'reserve' started with data:" + reservationRequest + "user " + username);
 
         Date from = new Date(reservationRequest.getArrivalTime());
         Date to = new Date(reservationRequest.getDepartureTim());
@@ -77,7 +80,7 @@ public class ReservationServiceImpl implements ReservationService {
         //end.add(Calendar.DAY_OF_MONTH, -1); for nie łapie ostatniego dnia i tak :)
 
         for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
-            Reservation reservation = new Reservation(room, user, date,ReservationStatus.WAIT_FOR_CONFIRMATION, room.getHotel().getOwner());
+            Reservation reservation = new Reservation(room, user, date, ReservationStatus.WAIT_FOR_CONFIRMATION, room.getHotel().getOwner());
             reservationRepository.save(reservation);
         }
         return new ReservationResponse(ResultStatus.OK);
@@ -91,12 +94,11 @@ public class ReservationServiceImpl implements ReservationService {
 
         List<Reservation> reservationList = reservationRepository.findByUserEmail(username);
 
-        for (Reservation reservation :reservationList ) {
-            reservationDataArrayList.add(new ReservationData(reservation.getRoom().getName(),reservation.getReservationStatus().toString()));
+        for (Reservation reservation : reservationList) {
+            reservationDataArrayList.add(new ReservationData(reservation.getRoom().getName(), reservation.getReservationStatus().toString()));
         }
 
-        if(!reservationDataArrayList.isEmpty())
-        {
+        if (!reservationDataArrayList.isEmpty()) {
             userReservationResponse.setStatus(ResultStatus.OK);
             userReservationResponse.setReservationDataArrayList(reservationDataArrayList);
         }
@@ -107,7 +109,7 @@ public class ReservationServiceImpl implements ReservationService {
     public ArrayList<Reservation> getReservationFromStatus(String hotelUserName, ReservationStatus reservationStatus) {
         UserDb hotelUser = userRepository.findByEmail(hotelUserName);
 
-        return reservationRepository.findByOwnerAndReservationStatus(hotelUser,reservationStatus);
+        return reservationRepository.findByOwnerAndReservationStatus(hotelUser, reservationStatus);
     }
 
     @Override

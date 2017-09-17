@@ -12,7 +12,6 @@ import com.jgos.hotelBooker.hotelList.interfaces.HotelListViewOps;
 import com.jgos.hotelBooker.storage.Storage;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 
 /**
  * Created by Bos on 2017-06-18.

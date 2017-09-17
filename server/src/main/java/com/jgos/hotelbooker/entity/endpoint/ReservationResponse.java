@@ -10,11 +10,11 @@ public class ReservationResponse {
     ResultStatus status;
 
     public ReservationResponse() {
-        status=ResultStatus.NOT_INITIALED;
+        status = ResultStatus.NOT_INITIALED;
     }
 
     public ReservationResponse(ResultStatus status) {
-        this.status=status;
+        this.status = status;
     }
 
     public ResultStatus getStatus() {

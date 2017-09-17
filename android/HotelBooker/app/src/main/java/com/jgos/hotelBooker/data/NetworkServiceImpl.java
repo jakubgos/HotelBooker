@@ -283,9 +283,8 @@ public class NetworkServiceImpl implements NetworkService {
 
                     String responseJson = response.body().string();
                     Log.d("MyApp_Service", "NetworkServiceImpl searchRequest response string:" + responseJson);
-                    if(response.code()==404)
-                    {
-                        reservationRequestResult.reservationRequestFailure("404: " + responseJson );
+                    if (response.code() == 404) {
+                        reservationRequestResult.reservationRequestFailure("404: " + responseJson);
                         return;
 
                     }
@@ -353,9 +352,8 @@ public class NetworkServiceImpl implements NetworkService {
 
                     String responseJson = response.body().string();
                     Log.d("MyApp_Service", "NetworkServiceImpl downloadUserReservation response string:" + responseJson);
-                    if(response.code()==404)
-                    {
-                        userReservationResult.reservationRequestFailure("404: " + responseJson );
+                    if (response.code() == 404) {
+                        userReservationResult.reservationRequestFailure("404: " + responseJson);
                         return;
 
                     }
@@ -433,12 +431,9 @@ public class NetworkServiceImpl implements NetworkService {
                     //Log.d("MyApp_Service", "NetworkServiceImpl getParkingList list " + list.toString());
                     Log.d("MyApp_Service", "NetworkServiceImpl register result " + registerResult.ordinal());
 
-                    if (registerResult == RegisterResult.OK)
-                    {
+                    if (registerResult == RegisterResult.OK) {
                         loginServiceRegisterResult.registerResultOk();
-                    }
-                    else if(registerResult == RegisterResult.USEREXIST)
-                    {
+                    } else if (registerResult == RegisterResult.USEREXIST) {
                         loginServiceRegisterResult.registerResultFailed("Login zarezerwowany");
                     }
 

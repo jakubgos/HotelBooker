@@ -1,7 +1,5 @@
 package com.jgos.hotelBooker.data.serverEntity.endpoint;
 
-import android.text.Editable;
-
 /**
  * Created by Bos on 2017-09-17.
  */

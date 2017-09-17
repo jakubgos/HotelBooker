@@ -157,18 +157,18 @@ public class WebHotel {
 
     @RequestMapping(value = {"/wRes"}, method = RequestMethod.GET)
     public ModelAndView wres(@AuthenticationPrincipal UserDetails userDetails, @RequestParam(required = false, defaultValue = "0") int result) {
-        
+
         ModelAndView model = new ModelAndView();
         model.setViewName("wRes");
         model.addObject("reservationsWrapper", new WrapperReservationData(reservationService.getReservationFromStatus(userDetails.getUsername(), ReservationStatus.WAIT_FOR_CONFIRMATION)));
         model.addObject("userName", userDetails.getUsername());
 
         ArrayList<ReservationStatus> reservationStatuses = new ArrayList<>();
-        for (int i= 0 ;i < ReservationStatus.UNKNOWN.ordinal() ; i++)
-        {
+        for (int i = 0; i < ReservationStatus.UNKNOWN.ordinal(); i++) {
             reservationStatuses.add(ReservationStatus.values()[i]);
         }
-        model.addObject("reservationOptionAll", reservationStatuses);        model.addObject("cityList", cityRepository.findAll());
+        model.addObject("reservationOptionAll", reservationStatuses);
+        model.addObject("cityList", cityRepository.findAll());
         if (result == 1) {
             model.addObject("message", "Zmiany zostały zapisane");
         } else if (result == 2) {
@@ -186,8 +186,7 @@ public class WebHotel {
         model.addObject("userName", userDetails.getUsername());
 
         ArrayList<ReservationStatus> reservationStatuses = new ArrayList<>();
-        for (int i= 0 ;i < ReservationStatus.UNKNOWN.ordinal() ; i++)
-        {
+        for (int i = 0; i < ReservationStatus.UNKNOWN.ordinal(); i++) {
             reservationStatuses.add(ReservationStatus.values()[i]);
         }
         model.addObject("reservationOptionAll", reservationStatuses);
@@ -244,14 +243,14 @@ public class WebHotel {
 
         ModelAndView model = new ModelAndView();
         model.setViewName("room");
-        model.addObject("roomList",hotel.getRoomList());
+        model.addObject("roomList", hotel.getRoomList());
         model.addObject("userName", userDetails.getUsername());
 
-        if(result == 2){
+        if (result == 2) {
             model.addObject("errorMessage", "Nie udało się zapisać danych pokoju.");
         }
 
-        if(result == 1){
+        if (result == 1) {
             model.addObject("message", "Pokój został zapisany");
         }
 
@@ -274,8 +273,7 @@ public class WebHotel {
         log.info("saveRoomData recieved with " + room.toString());
         UserDb user = userRepository.findByEmail(userDetails.getUsername());
 
-        if(!roomService.verifyData(room))
-        {
+        if (!roomService.verifyData(room)) {
             return new ModelAndView("redirect:/room?result=2");
         }
         Hotel hotel = hotelRepository.findByOwner(user);
