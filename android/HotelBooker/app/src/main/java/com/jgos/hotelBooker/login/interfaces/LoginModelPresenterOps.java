@@ -15,4 +15,8 @@ public interface LoginModelPresenterOps {
     void validateLoginParamFailed(Result loginInvalid);
 
     void validateLoginParamSuccess(LoginReqParam loginReqParam);
+
+    void registerResultOk();
+
+    void registerResultFailed(String s);
 }

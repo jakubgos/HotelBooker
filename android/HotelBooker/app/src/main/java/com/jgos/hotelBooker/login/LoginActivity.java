@@ -2,7 +2,9 @@ package com.jgos.hotelBooker.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,7 +13,10 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.jgos.hotelBooker.R;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.RegisterRequest;
 import com.jgos.hotelBooker.filter.FilterActivity;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
 import com.jgos.hotelBooker.login.entity.Result;
@@ -35,6 +40,9 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
     private AutoCompleteTextView mLoginView;
     private EditText mPasswordView;
     private View mProgressView;
+    private MaterialDialog progressDialog;
+    EditText userText;
+    EditText psswdText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +64,25 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
             }
         });
 
+        Button mRegisterButton = (Button) findViewById(R.id.register_in_button);
+        mRegisterButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attemptRegister();
+            }
+        });
+
         mProgressView = findViewById(R.id.login_progress);
         addEmailsToAutoComplete();
 
         mPresenter.onStartup();
 
+    }
+
+    private void attemptRegister() {
+        Log.d("MyApp_login", "view attemptRegister invoked");
+
+        mPresenter.attemptRegister();
     }
 
     @Override
@@ -150,6 +172,61 @@ public class LoginActivity extends AppCompatActivity implements LoginViewOps {
     public void showFilterActivity() {
         Intent myIntent = new Intent(this, FilterActivity.class);
         this.startActivity(myIntent);
+    }
+
+    @Override
+    public void showRegisterDialog() {
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title("Zarejestruj")
+                .customView(R.layout.dialog_register_custom, true)
+                .positiveText("Stwórz konto")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        mPresenter.registerConfirm(new RegisterRequest(userText.getText().toString(), psswdText.getText().toString()));
+
+                    }
+                })
+                .show();
+        userText = (EditText) dialog.getCustomView().findViewById(R.id.dialog_user_name);
+        psswdText = (EditText) dialog.getCustomView().findViewById(R.id.dialog_user_pswd);
+
+        Log.d("myapp",userText +"");
+        Log.d("myapp",psswdText +"");
+
+    }
+
+    @Override
+    public void showProgressDialog() {
+        progressDialog = new MaterialDialog.Builder(this)
+                .title(R.string.please_wait)
+                .content(R.string.process_request)
+                .progress(true, 0)
+                .show();
+    }
+
+    @Override
+    public void dismissProgressDialog() {
+        progressDialog.dismiss();
+    }
+
+    @Override
+    public void showAlertDialog(String s) {
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title(R.string.error)
+                .content(s)
+                .positiveText(R.string.ok)
+                .show();
+    }
+
+    @Override
+    public void showRegistrationSuccessDialog() {
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title(R.string.New_acc)
+                .content(R.string.registartion_succ)
+                .positiveText(R.string.ok)
+
+                .show();
     }
 
 }

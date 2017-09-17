@@ -15,12 +15,13 @@ Done:
 - [S/A] obsługa rezerwacji wybranego pokoju (oczekuje na weryfikację, oczekuje na wpłatę, zarezerwowane)
 - [I] przygotowanie bootStrapa pod interferjs użytkownika
 - [I] logowanie dla obsługi hotelu (oauth2)
-
-Backlog:
-- [S/A] rejestracja dla użytkownika
-- [I] możliwość konfiguracji pokojów, terminów, informacji o pokoju (ilość miejsc, standard, usługi hotelowe, udogodnienia, opis, lokalizacja)
 - [I] możliwość zmiany stanów zamówień klientów
 - [I] możliwość edytowania informacji o hotelu (opis/lokalizacja)
+- [S/A] rejestracja dla użytkownika
+- [I] możliwość konfiguracji pokojów, terminów, informacji o pokoju (ilość miejsc, standard, usługi hotelowe, udogodnienia, opis, lokalizacja)
+
+
+Backlog:
 - [S/A/I] galeria zdjęć Hotelu
 - [A] wyświetlenie hotelów na mapie z pozycją w obrębie X Km 
 - [A] uumozliwienie konfiguracji promienia wyszukiwania hotelów

@@ -15,9 +15,11 @@ http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html		//thymeleaf
  curl -X POST 'http://client:secret@localhost:8080/oauth/token?grant_type=password&&username=john.doe@gmail.com&password=password'
  curl -i -H "Authorization: Bearer e8111331-8f9d-464b-b615-d5a5473c68be" http://localhost:8080/test
  curl -i -H "Content-Type: application/json" -H "Authorization: Bearer $token" -X POST -d '{"arrivalTime":1495980364873,"city":{"id":1,"name":"Łódź"},"departureTime":1496066764873,"numberOfPeople":2}' http://localhost:8080/api/searchOffer
+ 
 
   curl -i -H "Content-Type: application/json" -H "Authorization: Bearer $token" -X POST -d '{"arrivalTime":1500764707490,"departureTim":1500851107490,"reservationRoomId":1}' http://localhost:8080/api/reservation
-
+  
+curl -i -H "Content-Type: application/json" -X POST -d '{"user":"test","password":"test"}' http://localhost:8080/api/register
  
  https://github.com/wasabeef/awesome-android-ui
  
@@ -49,3 +51,9 @@ angular 1
 https://www.w3schools.com/angular/angular_intro.asp
 https://www.w3schools.com/angular/angular_ref_directives.asp
 http://www.baeldung.com/rest-api-spring-oauth2-angularjs
+
+thymeleaf:
+http://www.baeldung.com/thymeleaf-in-spring-mvc
+
+datatables:
+https://datatables.net/

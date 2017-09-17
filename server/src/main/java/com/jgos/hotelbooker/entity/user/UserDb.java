@@ -1,10 +1,7 @@
 package com.jgos.hotelbooker.entity.user;
 
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +9,7 @@ import java.util.List;
 public class UserDb {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
     @Column
     private String email;
@@ -21,6 +19,11 @@ public class UserDb {
     @ElementCollection
     private List<String> authorities = new ArrayList<>();
 
+    public UserDb(String email, String password, List<String> authorities) {
+        this.email = email;
+        this.password = password;
+        this.authorities = authorities;
+    }
 
     public UserDb() {
     }

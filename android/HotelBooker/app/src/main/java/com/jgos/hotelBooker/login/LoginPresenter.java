@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.jgos.hotelBooker.data.NetworkServiceImpl;
 import com.jgos.hotelBooker.data.entity.LoginData;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.RegisterRequest;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
 import com.jgos.hotelBooker.login.entity.Result;
 import com.jgos.hotelBooker.login.interfaces.LoginModelOps;
@@ -62,6 +63,17 @@ public class LoginPresenter implements LoginPresenterOps, LoginModelPresenterOps
     }
 
     @Override
+    public void attemptRegister() {
+        getView().showRegisterDialog();
+    }
+
+    @Override
+    public void registerConfirm(RegisterRequest registerRequest) {
+        getView().showProgressDialog();
+        loginModelOps.register(registerRequest);
+    }
+
+    @Override
     public void loginSuccess(final LoginData s) {
         Log.d("MyApp_Login", "Login OK!!!!");
         Storage.getInstance().setLoginData(s);
@@ -101,5 +113,30 @@ public class LoginPresenter implements LoginPresenterOps, LoginModelPresenterOps
     public void validateLoginParamSuccess(LoginReqParam loginReqParam) {
         getView().showProgress(true);
         loginModelOps.login(loginReqParam);
+    }
+
+    @Override
+    public void registerResultOk() {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                getView().dismissProgressDialog();
+                getView().showRegistrationSuccessDialog();
+
+            }
+        });
+    }
+
+    @Override
+    public void registerResultFailed(final String s) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                getView().dismissProgressDialog();
+                getView().showAlertDialog(s);
+
+
+            }
+        });
     }
 }

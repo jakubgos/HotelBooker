@@ -1,5 +1,6 @@
 package com.jgos.hotelBooker.login.interfaces;
 
+import com.jgos.hotelBooker.data.serverEntity.endpoint.RegisterRequest;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
 
 /**
@@ -9,4 +10,6 @@ public interface LoginModelOps {
     void login(LoginReqParam loginReqParam);
 
     void validateLoginParameters(LoginReqParam loginReqParam);
+
+    void register(RegisterRequest registerRequest);
 }

@@ -60,6 +60,11 @@
     <string name="nie_masz_adnych_rezerwacji">Nie masz żadnych rezerwacji</string>
     <string name="status">STATUS</string>
     <string name="no_offer">Brak</string>
+    <string name="string_register">Rejestracja</string>
+    <string name="user_name">Nazwa użykownika</string>
+    <string name="user_pswd">Hasło</string>
+    <string name="New_acc">Nowe konto</string>
+    <string name="registartion_succ">Rejestracja zakonczona powodzeniem</string>
 
     <string-array name="numerOfPeople">
         <item>1 Osoba</item>

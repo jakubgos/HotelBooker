@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.jgos.hotelBooker.data.entity.LoginData;
 import com.jgos.hotelBooker.data.interfaces.NetworkService;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.HotelOffer;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.RegisterRequest;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.RegisterResult;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.ReservationRequest;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.ReservationResponse;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.SearchRequest;
@@ -18,6 +20,7 @@ import com.jgos.hotelBooker.filter.interfaces.SearchRequestResult;
 import com.jgos.hotelBooker.hotelList.interfaces.ReservationRequestResult;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
 import com.jgos.hotelBooker.login.interfaces.LoginServiceLoginResult;
+import com.jgos.hotelBooker.login.interfaces.LoginServiceRegisterResult;
 import com.jgos.hotelBooker.reservation.interfaces.UserReservationResult;
 
 import java.io.IOException;
@@ -39,15 +42,16 @@ public class NetworkServiceImpl implements NetworkService {
 
     public static final String UNKNOWN_ERROR = "Błąd:";
     private static final String SERVER_ADDRESS =
-            "192.168.0.6";
-            // "80.211.194.227";
+            //"192.168.0.6";
+            "80.211.194.227";
     private static final int SERVER_PORT =
             8080;
     private static final String SEARCH_PATH =
             "api/searchOffer";
     private static final String MAKE_RESERVATION_PATH =
             "api/reservation";
-
+    private static final String REGISTER_PATH =
+            "api/register";
     private static final String GET_USER_RESERVATION_PATH =
             "api/getUserReservation";
     private static final String CITY_LIST_PATH =
@@ -381,5 +385,69 @@ public class NetworkServiceImpl implements NetworkService {
         });
         thread.start();
 
+    }
+
+    @Override
+    public void register(final RegisterRequest registerRequest, final LoginServiceRegisterResult loginServiceRegisterResult) {
+        final Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                Log.d("MyApp_Service", "register invoked");
+
+                OkHttpClient okHttpClient = new OkHttpClient();
+                String json = null;
+                try {
+                    json = objectMapper.writeValueAsString(registerRequest);
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                    loginServiceRegisterResult.registerResultFailed("Failed to create Json Object");
+                    return;
+                }
+
+                HttpUrl url = new HttpUrl.Builder()
+                        .scheme("http")
+                        .host(SERVER_ADDRESS)
+                        .port(8080)
+                        .addPathSegments(REGISTER_PATH)
+                        .build();
+
+                Request request = new Request.Builder()
+                        .url(url)
+                        .post(RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json))
+                        .build();
+
+                Log.d("MyApp_Service", "NetworkServiceImpl registerRequest request " + request.toString() + "JSON: " + json);
+
+                Response response = null;
+                try {
+                    response = okHttpClient
+                            .newCall(request)
+                            .execute();
+
+                    String responseJson = response.body().string();
+                    //Log.d("MyApp_Service", "NetworkServiceImpl searchRequest result " + responseJson);
+
+                    RegisterResult registerResult = objectMapper.readValue(responseJson, TypeFactory.defaultInstance().constructType(RegisterResult.class));
+
+                    //Log.d("MyApp_Service", "NetworkServiceImpl getParkingList list " + list.toString());
+                    Log.d("MyApp_Service", "NetworkServiceImpl register result " + registerResult.ordinal());
+
+                    if (registerResult == RegisterResult.OK)
+                    {
+                        loginServiceRegisterResult.registerResultOk();
+                    }
+                    else if(registerResult == RegisterResult.USEREXIST)
+                    {
+                        loginServiceRegisterResult.registerResultFailed("Login zarezerwowany");
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    loginServiceRegisterResult.registerResultFailed("Exception happen...");
+                }
+            }
+        });
+        thread.start();
     }
 }

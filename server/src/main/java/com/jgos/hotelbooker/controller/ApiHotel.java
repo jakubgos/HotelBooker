@@ -5,7 +5,6 @@ import com.jgos.hotelbooker.entity.hotel.data.City;
 import com.jgos.hotelbooker.entity.hotel.data.ResultStatus;
 import com.jgos.hotelbooker.entity.user.UserDb;
 import com.jgos.hotelbooker.repository.CityRepository;
-import com.jgos.hotelbooker.repository.RoomRepository;
 import com.jgos.hotelbooker.repository.UserRepository;
 import com.jgos.hotelbooker.service.OfferSearch;
 import com.jgos.hotelbooker.service.ReservationService;
@@ -18,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +41,10 @@ public class ApiHotel {
     private ReservationService reservationService;
 
 
+    @Autowired
+    private UserRepository userRepository;
+
+
     @RequestMapping("/getCityList")
     public List<City> getCityList(Model model) throws InterruptedException {
         return (List<City>) cityRepository.findAll();
@@ -62,7 +66,7 @@ public class ApiHotel {
     @RequestMapping(value = "/reservation", method = RequestMethod.POST)
     @ResponseBody
     public ReservationResponse reservation(@AuthenticationPrincipal UserDetails userDetails,
-            @Valid @RequestBody ReservationRequest reservationRequest) throws InterruptedException {
+                                           @Valid @RequestBody ReservationRequest reservationRequest) throws InterruptedException {
         log.info("reservation received with data:" + reservationRequest + "user data:" + userDetails);
 
         ReservationResponse reservationResponse;
@@ -79,7 +83,7 @@ public class ApiHotel {
 
     @RequestMapping(value = "/getUserReservation")
     @ResponseBody
-    public UserReservationResponse getUserReservation(@AuthenticationPrincipal UserDetails userDetails ) throws InterruptedException {
+    public UserReservationResponse getUserReservation(@AuthenticationPrincipal UserDetails userDetails) throws InterruptedException {
 
         UserReservationResponse userReservationResponse = reservationService.getUserReservation(userDetails.getUsername());
 
@@ -88,6 +92,23 @@ public class ApiHotel {
         return userReservationResponse;
     }
 
+
+    @RequestMapping(value = "/register")
+    @ResponseBody
+    public RegisterResult register(@Valid @RequestBody RegisterRequest registerRequest) throws InterruptedException {
+        if (userRepository.findByEmail(registerRequest.getUser()) != null) {
+            return RegisterResult.USEREXIST;
+        }
+
+
+        List<String> authorities = new ArrayList<>();
+        authorities.add("ROLE_USER");
+        UserDb userDb = new UserDb(registerRequest.getUser(),registerRequest.getPassword(),authorities);
+
+        userRepository.save(userDb);
+
+        return RegisterResult.OK;
+    }
 
 
 }

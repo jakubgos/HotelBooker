@@ -14,5 +14,15 @@ public interface LoginViewOps {
     void resetLoginErrors();
 
     void showFilterActivity();
+
+    void showRegisterDialog();
+
+    void showProgressDialog();
+
+    void dismissProgressDialog();
+
+    void showAlertDialog(String s);
+
+    void showRegistrationSuccessDialog();
 }
 

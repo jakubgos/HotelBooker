@@ -1,5 +1,6 @@
 package com.jgos.hotelBooker.login.interfaces;
 
+import com.jgos.hotelBooker.data.serverEntity.endpoint.RegisterRequest;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
 
 /**
@@ -11,4 +12,8 @@ public interface LoginPresenterOps {
     void onResume();
 
     void onStartup();
+
+    void attemptRegister();
+
+    void registerConfirm(RegisterRequest registerRequest);
 }
