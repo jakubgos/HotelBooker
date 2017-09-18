@@ -114,6 +114,6 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public ArrayList<Reservation> getReservation(String username) {
-        return reservationRepository.findByUserEmail(username);
+        return reservationRepository.findByOwnerEmail(username);
     }
 }

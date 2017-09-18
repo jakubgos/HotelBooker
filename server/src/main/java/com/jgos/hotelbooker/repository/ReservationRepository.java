@@ -22,5 +22,8 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
 
     ArrayList<Reservation> findByUserEmail(String email);
 
+    ArrayList<Reservation> findByOwnerEmail(String owner);
+
+
     ArrayList<Reservation> findByOwnerAndReservationStatus(UserDb owner, ReservationStatus reservationStatus);
 }
