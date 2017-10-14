@@ -42,6 +42,8 @@ public class ReservationServiceImpl implements ReservationService {
     RoomRepository roomRepository;
     @Autowired
     HotelRepository hotelRepository;
+    @Autowired
+    ReservationParserService reservationParserService;
 
 
     @Override
@@ -90,17 +92,13 @@ public class ReservationServiceImpl implements ReservationService {
     public UserReservationResponse getUserReservation(String username) {
 
         UserReservationResponse userReservationResponse = new UserReservationResponse(ResultStatus.NO_DATA);
-        ArrayList<ReservationData> reservationDataArrayList = new ArrayList<>();
 
         List<Reservation> reservationList = reservationRepository.findByUserEmail(username);
 
-        for (Reservation reservation : reservationList) {
-            reservationDataArrayList.add(new ReservationData(reservation.getRoom().getName(), reservation.getReservationStatus().toString()));
-        }
-
-        if (!reservationDataArrayList.isEmpty()) {
+        if (!reservationList.isEmpty()) {
             userReservationResponse.setStatus(ResultStatus.OK);
-            userReservationResponse.setReservationDataArrayList(reservationDataArrayList);
+
+            userReservationResponse = reservationParserService.parseReservation(reservationList,userReservationResponse);
         }
         return userReservationResponse;
     }

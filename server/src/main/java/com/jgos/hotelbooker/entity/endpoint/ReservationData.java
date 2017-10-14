@@ -1,28 +1,25 @@
 package com.jgos.hotelbooker.entity.endpoint;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by Bos on 2017-07-25.
  */
 public class ReservationData {
 
     private String roomName;
-    private String reservationStatus;
-
-    public ReservationData(String roomName, String roomStatus) {
-        this.roomName = roomName;
-        this.reservationStatus = roomStatus;
-    }
+    private Date fromDate;
+    private Date toDate;
 
     public ReservationData() {
     }
 
-    @Override
-    public String toString() {
-        return "ReservationData{" +
-                "roomName='" + roomName + '\'' +
-                ", reservationStatus=" + reservationStatus +
-                '}';
+    public ReservationData(Date fromDate, String name) {
+        this.fromDate = fromDate;
+        this.roomName = name;
     }
 
     public String getRoomName() {
@@ -33,11 +30,29 @@ public class ReservationData {
         this.roomName = roomName;
     }
 
-    public String getReservationStatus() {
-        return reservationStatus;
+    public Date getFromDate() {
+        return fromDate;
     }
 
-    public void setReservationStatus(String reservationStatus) {
-        this.reservationStatus = reservationStatus;
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public Date getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(Date toDate) {
+        this.toDate = toDate;
+    }
+
+    @Override
+    public String toString() {
+        DateFormat df = new SimpleDateFormat("mm/dd/yyyy hh:mm:ss");
+        return "ReservationData{" +
+                "roomName='" + roomName + '\'' +
+                ", fromDate=" + df.format(fromDate) +
+                ", toDate=" + df.format(toDate) +
+                '}';
     }
 }

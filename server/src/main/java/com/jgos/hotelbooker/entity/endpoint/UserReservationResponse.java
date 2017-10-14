@@ -22,14 +22,6 @@ public class UserReservationResponse {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "UserReservationResponse{" +
-                "status=" + status +
-                ", reservationDataArrayList=" + reservationDataArrayList +
-                '}';
-    }
-
     public ArrayList<ReservationData> getReservationDataArrayList() {
         return reservationDataArrayList;
     }
@@ -44,5 +36,21 @@ public class UserReservationResponse {
 
     public void setStatus(ResultStatus status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "UserReservationResponse{" +
+                "status=" + status +
+                ", reservationDataArrayList=" + reservationDataArrayList +
+                '}';
+    }
+
+    public void addReservationData(ReservationData reservationData) {
+        if (reservationDataArrayList == null)
+        {
+            reservationDataArrayList = new ArrayList<ReservationData>();
+        }
+        reservationDataArrayList.add(reservationData);
     }
 }
