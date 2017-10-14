@@ -11,15 +11,34 @@ import java.util.Date;
 public class ReservationData {
 
     private String roomName;
+    private String hotelName;
+    private String reservationStatus;
+
     private Date fromDate;
     private Date toDate;
 
-    public ReservationData() {
-    }
-
-    public ReservationData(Date fromDate, String name) {
+    public ReservationData(Date fromDate, String name,  String hotelName, String reservationStatus) {
         this.fromDate = fromDate;
         this.roomName = name;
+        this.hotelName = hotelName;
+        this.reservationStatus = reservationStatus;
+    }
+
+
+    public String getReservationStatus() {
+        return reservationStatus;
+    }
+
+    public void setReservationStatus(String reservationStatus) {
+        this.reservationStatus = reservationStatus;
+    }
+
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
     }
 
     public String getRoomName() {
@@ -48,11 +67,13 @@ public class ReservationData {
 
     @Override
     public String toString() {
-        DateFormat df = new SimpleDateFormat("mm/dd/yyyy hh:mm:ss");
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
         return "ReservationData{" +
                 "roomName='" + roomName + '\'' +
-                ", fromDate=" + df.format(fromDate) +
-                ", toDate=" + df.format(toDate) +
+                ", fromDate=" + df.format(fromDate) + '\'' +
+                ", toDate=" + df.format(toDate) + '\'' +
+                ", hotelNAme=" + hotelName+ '\'' +
+                ", reservationStatus=" + reservationStatus+ '\'' +
                 '}';
     }
 }

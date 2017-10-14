@@ -1,6 +1,8 @@
 package com.jgos.hotelbooker;
 
 import com.jgos.hotelbooker.entity.endpoint.UserReservationResponse;
+import com.jgos.hotelbooker.entity.hotel.Hotel;
+import com.jgos.hotelbooker.entity.hotel.HotelDetail;
 import com.jgos.hotelbooker.entity.hotel.data.ResultStatus;
 import com.jgos.hotelbooker.entity.room.Room;
 import com.jgos.hotelbooker.entity.user.Reservation;
@@ -10,8 +12,11 @@ import com.jgos.hotelbooker.service.ReservationParserService;
 import com.jgos.hotelbooker.service.ReservationParserServiceImpl;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.stubbing.Answer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +31,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static org.mockito.Mockito.when;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ReservationParserServiceImplTests {
@@ -35,19 +42,43 @@ public class ReservationParserServiceImplTests {
 
 	@Autowired
 	ReservationParserService reservationParserService;
+
+	@Mock
+	private Hotel hotel;
+	@Mock
+	private HotelDetail hotelDetail;
+	@Mock
+	private
+	Room room1;
+	@Mock
+	private
+	Room room2;
+	@Mock
+	private
+	Room room3;
+
+	@Before
+	public void setUp() {
+		when(room1.getHotel()).thenReturn(hotel);
+		when(room1.getName()).thenReturn("room1");
+		when(room2.getHotel()).thenReturn(hotel);
+		when(room2.getName()).thenReturn("room2");
+		when(room3.getHotel()).thenReturn(hotel);
+		when(room3.getName()).thenReturn("room3");
+
+		when(hotel.getHotelDetail()).thenReturn(hotelDetail);
+		when(hotelDetail.getName()).thenReturn("mockName");
+	}
+
 	@Test
 	public void contextLoads() throws ParseException {
 		List<Reservation> reservationList = new ArrayList<Reservation>();
+
+
+
+		when(hotel.getHotelDetail()).thenReturn(hotelDetail);
+		when(hotelDetail.getName()).thenReturn("mockName");
 		//    public Reservation(Room room, UserDb user, Date date, ReservationStatus reservationStatus, UserDb owner) {
-		Room room1 = new Room();
-		room1.setId(1);
-		room1.setName("room1");
-		Room room2 = new Room();
-		room2.setId(2);
-		room2.setName("room2");
-		Room room3 = new Room();
-		room3.setName("room3");
-		room3.setId(3);
 
 		DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
 		Date date1 = df.parse("06/01/2007");
@@ -64,6 +95,7 @@ public class ReservationParserServiceImplTests {
 		reservationList.add(new Reservation(room2,null ,date1, ReservationStatus.UNKNOWN,null));
 		reservationList.add(new Reservation(room2,null ,date2, ReservationStatus.UNKNOWN,null));
 		reservationList.add(new Reservation(room2,null ,date5, ReservationStatus.UNKNOWN,null));
+
 
 		UserReservationResponse result = reservationParserService.parseReservation(reservationList, new UserReservationResponse());
 

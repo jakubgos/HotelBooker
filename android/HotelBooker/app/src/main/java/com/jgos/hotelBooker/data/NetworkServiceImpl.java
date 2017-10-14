@@ -42,8 +42,8 @@ public class NetworkServiceImpl implements NetworkService {
 
     public static final String UNKNOWN_ERROR = "Błąd:";
     private static final String SERVER_ADDRESS =
-            //"192.168.0.6";
-            "80.211.194.227";
+            "192.168.0.6";
+            //"80.211.194.227";
     private static final int SERVER_PORT =
             8080;
     private static final String SEARCH_PATH =

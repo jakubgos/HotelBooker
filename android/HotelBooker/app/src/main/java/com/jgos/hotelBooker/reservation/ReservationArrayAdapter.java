@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.jgos.hotelBooker.R;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.ReservationData;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,7 @@ import java.util.List;
 
 class ReservationArrayAdapter extends ArrayAdapter<ReservationData> {
 
+    DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
     public ReservationArrayAdapter(Context context, ArrayList<ReservationData> reservationDataArrayList) {
         super(context, 0, reservationDataArrayList);
     }
@@ -41,6 +44,9 @@ class ReservationArrayAdapter extends ArrayAdapter<ReservationData> {
             viewHolder = new ViewHolder();
             viewHolder.roomName = (TextView) rowView.findViewById(R.id.reservation_room_name);
             viewHolder.status = (TextView) rowView.findViewById(R.id.reservation_status);
+            viewHolder.hotelName = (TextView) rowView.findViewById(R.id.reservation_hotel_name);
+            viewHolder.fromDate = (TextView) rowView.findViewById(R.id.reservation_fromDate);
+            viewHolder.toDate = (TextView) rowView.findViewById(R.id.reservation_toDate);
 
 
             rowView.setTag(viewHolder);
@@ -50,11 +56,19 @@ class ReservationArrayAdapter extends ArrayAdapter<ReservationData> {
         ReservationData reservationData = getItem(position);
         viewHolder.roomName.setText(reservationData.getRoomName());
         viewHolder.status.setText(reservationData.getReservationStatus());
+        viewHolder.hotelName.setText(reservationData.getHotelName());
+        viewHolder.fromDate.setText(df.format(reservationData.getFromDate()));
+        viewHolder.toDate.setText(df.format(reservationData.getToDate()));
+
         return rowView;
     }
 
     static class ViewHolder {
         public TextView roomName;
         public TextView status;
+        public TextView hotelName;
+        public TextView fromDate;
+        public TextView toDate;
+
     }
 }

@@ -4,8 +4,11 @@ import com.jgos.hotelbooker.entity.endpoint.ReservationData;
 import com.jgos.hotelbooker.entity.endpoint.UserReservationResponse;
 import com.jgos.hotelbooker.entity.room.Room;
 import com.jgos.hotelbooker.entity.user.Reservation;
+import com.jgos.hotelbooker.entity.user.ReservationStatus;
+import com.jgos.hotelbooker.repository.HotelRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -17,7 +20,6 @@ import java.util.*;
 public class ReservationParserServiceImpl implements ReservationParserService{
 
     private static final Logger log = LoggerFactory.getLogger(ReservationParserServiceImpl.class);
-
 
     @Override
     public UserReservationResponse parseReservation(List<Reservation> reservationList, UserReservationResponse userReservationResponse) {
@@ -34,33 +36,36 @@ public class ReservationParserServiceImpl implements ReservationParserService{
 
         for (Room room: rooms)
         {
-            ArrayList<Date> datesPerRoom = new ArrayList<Date>();
+            TreeMap<Date,DataObject> map = new TreeMap<Date,DataObject>();
+           // ArrayList<Date> datesPerRoom = new ArrayList<Date>();
 
             for (Reservation reservation: reservationList)
             {
                 if (!room.equals(reservation.getRoom())){continue;}
-                datesPerRoom.add(reservation.getDate());
+                map.put(reservation.getDate(), new DataObject(reservation.getReservationStatus()));
+                //datesPerRoom.add(reservation.getDate());
             }
             //log.info("parseReservation: dates NO SORT found roomId: " + room.getId() + ": " +datesPerRoom);
 
-            datesPerRoom.sort(Date::compareTo);
-            log.info("parseReservation: dates SORT found roomId: " + room.getId() + ": " +datesPerRoom);
+            //datesPerRoom.sort(Date::compareTo);
 
-            ReservationData reservationData = new ReservationData(datesPerRoom.get(0), room.getName());
+            log.info("parseReservation: dates SORT found roomId: " + room.getId() + ": " +map.toString());
 
-            for( int i = 0 ; i < datesPerRoom.size()-1; i++)
+            ReservationData reservationData = new ReservationData(map.firstKey(), room.getName(),room.getHotel().getHotelDetail().getName(),map.get(map.firstKey()).getReservationStatus().getText() );
+
+            for (Map.Entry<Date, DataObject> entry : map.entrySet())
             {
-                if(!isNextDay(datesPerRoom.get(i), datesPerRoom.get(i+1)))
+                if(!isNextDay(entry.getKey(), map.higherKey(entry.getKey())))
                 {
                     log.info("Another reservation detected,");
-                    reservationData.setToDate(addDay(datesPerRoom.get(i)));
+                    reservationData.setToDate(addDay(entry.getKey()));
                     userReservationResponse.addReservationData(reservationData);
 
                     //initialize new reservation data
-                    reservationData = new ReservationData(datesPerRoom.get(i+1), room.getName());
+                    reservationData = new ReservationData(map.higherKey(entry.getKey()), room.getName(), room.getHotel().getHotelDetail().getName(),entry.getValue().getReservationStatus().getText());
                 }
             }
-            reservationData.setToDate(addDay(datesPerRoom.get(datesPerRoom.size()-1)));
+            reservationData.setToDate(addDay(map.lastKey()));
             userReservationResponse.addReservationData(reservationData);
         }
 
@@ -80,7 +85,14 @@ public class ReservationParserServiceImpl implements ReservationParserService{
         calCurrent.add(Calendar.DATE, 1); // next day
 
         Calendar calNext = Calendar.getInstance();
-        calNext.setTime(next);  // set the date
+        try {
+            calNext.setTime(next);  // set the date
+
+        }catch (NullPointerException e)
+        {
+            //no next, return true anyway
+            return true;
+        }
         //log.info("compare Dates " + calCurrent.getTime().getDay() + " :: to :: " + calNext.getTime().getDay());
         return calCurrent.get(Calendar.YEAR) == calNext.get(Calendar.YEAR) &&
                 calCurrent.get(Calendar.DAY_OF_YEAR) == calNext.get(Calendar.DAY_OF_YEAR);
@@ -88,4 +100,26 @@ public class ReservationParserServiceImpl implements ReservationParserService{
     }
 
 
+    private class DataObject {
+        ReservationStatus reservationStatus;
+
+        public DataObject(ReservationStatus reservationStatus) {
+            this.reservationStatus = reservationStatus;
+        }
+
+        public ReservationStatus getReservationStatus() {
+            return reservationStatus;
+        }
+
+        public void setReservationStatus(ReservationStatus reservationStatus) {
+            this.reservationStatus = reservationStatus;
+        }
+
+        @Override
+        public String toString() {
+            return "DataObject{" +
+                    "reservationStatus=" + reservationStatus +
+                    '}';
+        }
+    }
 }
