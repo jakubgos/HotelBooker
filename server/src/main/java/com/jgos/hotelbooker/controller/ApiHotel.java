@@ -50,7 +50,6 @@ public class ApiHotel {
         return (List<City>) cityRepository.findAll();
 
     }
-    //  public SearchRequest(City city, long arrivalTime, long departureTime, int numberOfPeople) {
 
     @RequestMapping(value = "/searchOffer", method = RequestMethod.POST)
     @ResponseBody

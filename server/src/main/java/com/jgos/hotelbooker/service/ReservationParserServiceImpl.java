@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -40,6 +42,21 @@ public class ReservationParserServiceImpl implements ReservationParserService{
 
         userReservationResponse.setReservationDataArrayList((ArrayList<ReservationData>) parse(reservationList));
         return userReservationResponse;
+    }
+
+    @Override
+    public List<Reservation> addToDate(ArrayList<Reservation> reservationFromStatus) {
+        ArrayList<Reservation> result = new ArrayList<>();
+        for (Reservation res: reservationFromStatus
+             ) {
+            Calendar toDatePlusDay = Calendar.getInstance();
+            toDatePlusDay.setTime(res.getToDate());
+            toDatePlusDay.add(Calendar.DATE, 1);
+
+            res.setToDate(toDatePlusDay.getTime());
+            result.add(res);
+        }
+        return result;
     }
 
 

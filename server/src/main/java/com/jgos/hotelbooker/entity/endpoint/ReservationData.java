@@ -20,6 +20,7 @@ public class ReservationData {
     private Date fromDate;
     private Date toDate;
 
+    //todo check if can remove
     @JsonIgnore
     private UserDb user;
 

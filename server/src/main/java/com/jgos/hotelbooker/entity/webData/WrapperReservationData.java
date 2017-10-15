@@ -19,10 +19,10 @@ public class WrapperReservationData {
     public WrapperReservationData() {
     }
 
-    public WrapperReservationData(List<ReservationData> reservations) {
+    public WrapperReservationData(List<Reservation> reservations) {
         ArrayList<WrapperReservation> tmep = new ArrayList<>();
 
-        for (ReservationData res : reservations) {
+        for (Reservation res : reservations) {
             tmep.add(new WrapperReservation(res));
         }
 

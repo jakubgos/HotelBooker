@@ -52,9 +52,9 @@
                                 <thead>
                                 <tr>
                                     <th>id</th>
-
                                     <th>Użytkownik</th>
-                                    <th>Data</th>
+                                    <th>Od</th>
+                                    <th>Do</th>
                                     <th>Nazwa Pokoju</th>
                                     <th>Status Rezerwacji</th>
                                 </tr>
@@ -62,10 +62,9 @@
                                 <tfoot>
                                 <tr>
                                     <th>id</th>
-
-
                                     <th>Użytkownik</th>
-                                    <th>Data</th>
+                                    <th>Od</th>
+                                    <th>Do</th>
                                     <th>Nazwa Pokoju</th>
                                     <th>Status Rezerwacji</th>
                                 </tr>
@@ -77,8 +76,10 @@
                                         <input type="hidden" th:field="*{reservations[__${rowStat.index}__].id}"/>
                                         <input type="checkbox" style="display: none" th:field="*{reservations[__${rowStat.index}__].selected}"/>
                                     </td>
+
                                     <td th:text="${row.user.email}">NO DATA</td>
-                                    <td th:text="${row.date}">NO DATA</td>
+                                    <td th:text="${#dates.format(row.fromDate, 'dd-MM-yyyy')}">NO DATA</td>
+                                    <td th:text="${#dates.format(row.toDate, 'dd-MM-yyyy')}">NO DATA</td>
                                     <td th:text="${row.room.name}">NO DATA</td>
                                     <td th:text="${row.reservationStatus.text}">NO DATA</td>
 

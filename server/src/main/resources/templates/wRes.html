@@ -78,9 +78,9 @@
                                     </td>
 
                                     <td th:text="${row.user.email}">NO DATA</td>
-                                    <td th:text="${row.fromDate}">NO DATA</td>
-                                    <td th:text="${row.toDate}">NO DATA</td>
-                                    <td th:text="${row.roomName}">NO DATA</td>
+                                    <td th:text="${#dates.format(row.fromDate, 'dd-MM-yyyy')}">NO DATA</td>
+                                    <td th:text="${#dates.format(row.toDate, 'dd-MM-yyyy')}">NO DATA</td>
+                                    <td th:text="${row.room.name}">NO DATA</td>
                                     <td th:text="${row.reservationStatus.text}">NO DATA</td>
 
                                 </tr>

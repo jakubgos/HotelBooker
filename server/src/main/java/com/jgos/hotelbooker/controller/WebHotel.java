@@ -30,6 +30,7 @@ import java.util.ArrayList;
 
 import static com.jgos.hotelbooker.entity.user.ReservationStatus.getEnumByString;
 
+
 /**
  * Created by Bos on 2017-04-16.
  */
@@ -114,7 +115,7 @@ public class WebHotel {
     public ModelAndView home(@AuthenticationPrincipal UserDetails userDetails) {
         ModelAndView model = new ModelAndView();
         model.setViewName("index");
-        model.addObject("noOfwaitingReservation", reservationParserService.parseReservation(reservationService.getReservationFromStatus(userDetails.getUsername(), ReservationStatus.WAIT_FOR_CONFIRMATION),null).getReservationDataArrayList().size());
+        model.addObject("noOfwaitingReservation", reservationParserService.parseReservation(reservationService.getReservationFromStatus(userDetails.getUsername(), ReservationStatus.WAIT_FOR_CONFIRMATION)).size());
         model.addObject("userName", userDetails.getUsername());
         return model;
     }
@@ -164,7 +165,7 @@ public class WebHotel {
 
         ModelAndView model = new ModelAndView();
         model.setViewName("wRes");
-        //model.addObject("reservationsWrapper", new WrapperReservationData(reservationService.getReservationFromStatus(userDetails.getUsername(), ReservationStatus.WAIT_FOR_CONFIRMATION)));
+        model.addObject("reservationsWrapper", new WrapperReservationData(reservationParserService.addToDate(reservationService.getReservationFromStatus(userDetails.getUsername(), ReservationStatus.WAIT_FOR_CONFIRMATION))));
         model.addObject("userName", userDetails.getUsername());
 
         ArrayList<ReservationStatus> reservationStatuses = new ArrayList<>();
@@ -187,9 +188,8 @@ public class WebHotel {
         ModelAndView model = new ModelAndView();
         model.setViewName("rRes");
 
-        model.addObject("reservationsWrapper", new WrapperReservationData(
-                reservationParserService.parseReservation(
-                        reservationService.getReservation(userDetails.getUsername()))));
+        model.addObject("reservationsWrapper", new WrapperReservationData(reservationParserService.addToDate(
+                reservationService.getReservation(userDetails.getUsername()))));
 
         model.addObject("userName", userDetails.getUsername());
         ArrayList<ReservationStatus> reservationStatuses = new ArrayList<>();
@@ -210,7 +210,7 @@ public class WebHotel {
     @RequestMapping(value = {"/rResAction"}, method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView rResAction(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute("reservationsWrapper") WrapperReservationData wrapperReservationData, BindingResult errors, Model model) {
-     /*   log.info("rResAction initaited with data : " + wrapperReservationData.toString());
+       log.info("rResAction initaited with data : " + wrapperReservationData.toString());
         int result = 2;
         for (WrapperReservation res : wrapperReservationData.getReservations()
                 ) {
@@ -221,16 +221,14 @@ public class WebHotel {
                 result = 1;
             }
         }
-        return new ModelAndView("redirect:/rRes?result=" + result);*/
-     return null;
+        return new ModelAndView("redirect:/rRes?result=" + result);
     }
 
     @RequestMapping(value = {"/wResAction"}, method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView wResAction(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute("reservationsWrapper") WrapperReservationData wrapperReservationData, BindingResult errors, Model model) {
         log.info("wResAction initaited with data : " + wrapperReservationData.toString());
-        return null;
-/*
+
         int result = 2;
         for (WrapperReservation res : wrapperReservationData.getReservations()
                 ) {
@@ -242,7 +240,7 @@ public class WebHotel {
                 result = 1;
             }
         }
-        return new ModelAndView("redirect:/wRes?result=" + result);*/
+        return new ModelAndView("redirect:/wRes?result=" + result);
     }
 
     @RequestMapping(value = {"/room"}, method = RequestMethod.GET)

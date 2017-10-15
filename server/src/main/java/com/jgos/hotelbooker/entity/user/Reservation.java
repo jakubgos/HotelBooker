@@ -48,6 +48,16 @@ public class Reservation {
         this.reservationStatus = reservationStatus;
     }
 
+    public Reservation(Reservation res) {
+        this.id=res.getId();
+        this.user = res.getUser();
+        this.fromDate = res.getFromDate();
+        this.toDate = res.getToDate();
+        this.room = res.getRoom();
+        this.owner = res.getOwner();
+        this.reservationStatus = res.getReservationStatus();
+    }
+
     public UserDb getUser() {
         return user;
     }
@@ -103,6 +113,8 @@ public class Reservation {
     public void setReservationStatus(ReservationStatus reservationStatus) {
         this.reservationStatus = reservationStatus;
     }
+
+
 
     @Override
     public String toString() {
