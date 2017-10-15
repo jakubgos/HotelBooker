@@ -5,10 +5,9 @@ import com.jgos.hotelbooker.entity.endpoint.UserReservationResponse;
 import com.jgos.hotelbooker.entity.room.Room;
 import com.jgos.hotelbooker.entity.user.Reservation;
 import com.jgos.hotelbooker.entity.user.ReservationStatus;
-import com.jgos.hotelbooker.repository.HotelRepository;
+import com.jgos.hotelbooker.entity.user.UserDb;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -21,56 +20,57 @@ public class ReservationParserServiceImpl implements ReservationParserService{
 
     private static final Logger log = LoggerFactory.getLogger(ReservationParserServiceImpl.class);
 
+
+    @Override
+    public List<ReservationData> parseReservation(List<Reservation> reservationList) {
+        if (reservationList == null) {
+            reservationList = new ArrayList<>();
+        }
+        return parse(reservationList);
+    }
+
+
+
     @Override
     public UserReservationResponse parseReservation(List<Reservation> reservationList, UserReservationResponse userReservationResponse) {
-        List<Room> rooms = new ArrayList<Room>();
-
-        for (Reservation reservation: reservationList)
-        {
-            if(!rooms.contains(reservation.getRoom()))
-            {
-                rooms.add(reservation.getRoom());
-            }
-        }
-        log.info("parseReservation: rooms found:"+ rooms.toString());
-
-        for (Room room: rooms)
-        {
-            TreeMap<Date,DataObject> map = new TreeMap<Date,DataObject>();
-           // ArrayList<Date> datesPerRoom = new ArrayList<Date>();
-
-            for (Reservation reservation: reservationList)
-            {
-                if (!room.equals(reservation.getRoom())){continue;}
-                map.put(reservation.getDate(), new DataObject(reservation.getReservationStatus()));
-                //datesPerRoom.add(reservation.getDate());
-            }
-            //log.info("parseReservation: dates NO SORT found roomId: " + room.getId() + ": " +datesPerRoom);
-
-            //datesPerRoom.sort(Date::compareTo);
-
-            log.info("parseReservation: dates SORT found roomId: " + room.getId() + ": " +map.toString());
-
-            ReservationData reservationData = new ReservationData(map.firstKey(), room.getName(),room.getHotel().getHotelDetail().getName(),map.get(map.firstKey()).getReservationStatus().getText() );
-
-            for (Map.Entry<Date, DataObject> entry : map.entrySet())
-            {
-                if(!isNextDay(entry.getKey(), map.higherKey(entry.getKey())))
-                {
-                    log.info("Another reservation detected,");
-                    reservationData.setToDate(addDay(entry.getKey()));
-                    userReservationResponse.addReservationData(reservationData);
-
-                    //initialize new reservation data
-                    reservationData = new ReservationData(map.higherKey(entry.getKey()), room.getName(), room.getHotel().getHotelDetail().getName(),entry.getValue().getReservationStatus().getText());
-                }
-            }
-            reservationData.setToDate(addDay(map.lastKey()));
-            userReservationResponse.addReservationData(reservationData);
+        if (userReservationResponse == null) userReservationResponse = new UserReservationResponse();
+        if (reservationList == null) {
+            reservationList = new ArrayList<>();
         }
 
+        userReservationResponse.setReservationDataArrayList((ArrayList<ReservationData>) parse(reservationList));
         return userReservationResponse;
     }
+
+
+    private List<ReservationData> parse(List<Reservation> reservationList)
+    {
+        List<ReservationData> result = new ArrayList<>();
+        for (Reservation reservation : reservationList
+             ) {
+
+            Calendar toDatePlusDay = Calendar.getInstance();
+            toDatePlusDay.setTime(reservation.getToDate());
+            toDatePlusDay.add(Calendar.DATE, 1);
+
+            ReservationData reservationData = new ReservationData(reservation.getRoom().getName(),
+                    reservation.getRoom().getHotel().getHotelDetail().getName(),
+                    reservation.getReservationStatus().getText(),
+                    reservation.getFromDate(),
+                    toDatePlusDay.getTime(),
+                    reservation.getUser());
+            result.add(reservationData);
+        }
+
+
+        return result;
+    }
+
+    private boolean isSameUser(UserDb currentUser, UserDb nextUser) {
+        if(currentUser.equals(nextUser)) return true;
+        return false;
+    }
+
 
     private Date addDay(Date date) {
         Calendar calCurrent=Calendar.getInstance();
@@ -85,14 +85,8 @@ public class ReservationParserServiceImpl implements ReservationParserService{
         calCurrent.add(Calendar.DATE, 1); // next day
 
         Calendar calNext = Calendar.getInstance();
-        try {
             calNext.setTime(next);  // set the date
 
-        }catch (NullPointerException e)
-        {
-            //no next, return true anyway
-            return true;
-        }
         //log.info("compare Dates " + calCurrent.getTime().getDay() + " :: to :: " + calNext.getTime().getDay());
         return calCurrent.get(Calendar.YEAR) == calNext.get(Calendar.YEAR) &&
                 calCurrent.get(Calendar.DAY_OF_YEAR) == calNext.get(Calendar.DAY_OF_YEAR);
@@ -100,26 +94,5 @@ public class ReservationParserServiceImpl implements ReservationParserService{
     }
 
 
-    private class DataObject {
-        ReservationStatus reservationStatus;
 
-        public DataObject(ReservationStatus reservationStatus) {
-            this.reservationStatus = reservationStatus;
-        }
-
-        public ReservationStatus getReservationStatus() {
-            return reservationStatus;
-        }
-
-        public void setReservationStatus(ReservationStatus reservationStatus) {
-            this.reservationStatus = reservationStatus;
-        }
-
-        @Override
-        public String toString() {
-            return "DataObject{" +
-                    "reservationStatus=" + reservationStatus +
-                    '}';
-        }
-    }
 }

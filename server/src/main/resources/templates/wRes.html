@@ -53,7 +53,8 @@
                                 <tr>
                                     <th>id</th>
                                     <th>Użytkownik</th>
-                                    <th>Data</th>
+                                    <th>Od</th>
+                                    <th>Do</th>
                                     <th>Nazwa Pokoju</th>
                                     <th>Status Rezerwacji</th>
                                 </tr>
@@ -62,7 +63,8 @@
                                 <tr>
                                     <th>id</th>
                                     <th>Użytkownik</th>
-                                    <th>Data</th>
+                                    <th>Od</th>
+                                    <th>Do</th>
                                     <th>Nazwa Pokoju</th>
                                     <th>Status Rezerwacji</th>
                                 </tr>
@@ -76,8 +78,9 @@
                                     </td>
 
                                     <td th:text="${row.user.email}">NO DATA</td>
-                                    <td th:text="${row.date}">NO DATA</td>
-                                    <td th:text="${row.room.name}">NO DATA</td>
+                                    <td th:text="${row.fromDate}">NO DATA</td>
+                                    <td th:text="${row.toDate}">NO DATA</td>
+                                    <td th:text="${row.roomName}">NO DATA</td>
                                     <td th:text="${row.reservationStatus.text}">NO DATA</td>
 
                                 </tr>

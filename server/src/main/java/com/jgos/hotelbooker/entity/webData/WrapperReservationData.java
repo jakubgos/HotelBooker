@@ -1,9 +1,11 @@
 package com.jgos.hotelbooker.entity.webData;
 
+import com.jgos.hotelbooker.entity.endpoint.ReservationData;
 import com.jgos.hotelbooker.entity.user.Reservation;
 import com.jgos.hotelbooker.entity.user.ReservationStatus;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Bos on 2017-08-22.
@@ -17,10 +19,10 @@ public class WrapperReservationData {
     public WrapperReservationData() {
     }
 
-    public WrapperReservationData(ArrayList<Reservation> reservations) {
+    public WrapperReservationData(List<ReservationData> reservations) {
         ArrayList<WrapperReservation> tmep = new ArrayList<>();
 
-        for (Reservation res : reservations) {
+        for (ReservationData res : reservations) {
             tmep.add(new WrapperReservation(res));
         }
 

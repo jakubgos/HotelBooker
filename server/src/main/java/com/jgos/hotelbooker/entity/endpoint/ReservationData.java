@@ -1,6 +1,9 @@
 package com.jgos.hotelbooker.entity.endpoint;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jgos.hotelbooker.entity.user.UserDb;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,13 +20,30 @@ public class ReservationData {
     private Date fromDate;
     private Date toDate;
 
-    public ReservationData(Date fromDate, String name,  String hotelName, String reservationStatus) {
-        this.fromDate = fromDate;
-        this.roomName = name;
-        this.hotelName = hotelName;
-        this.reservationStatus = reservationStatus;
+    @JsonIgnore
+    private UserDb user;
+
+
+    public ReservationData() {
     }
 
+    public ReservationData(ReservationData reservationData) {
+        this.fromDate = reservationData.getFromDate();
+        this.toDate = reservationData.getToDate();
+        this.roomName = reservationData.getRoomName();
+        this.hotelName = reservationData.getHotelName();
+        this.reservationStatus = reservationData.getReservationStatus();
+        this.user = user;
+    }
+
+    public ReservationData(String roomName, String hotelName, String reservationStatus, Date fromDate, Date toDate, UserDb user ) {
+        this.roomName = roomName;
+        this.hotelName = hotelName;
+        this.reservationStatus = reservationStatus;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.user=user;
+    }
 
     public String getReservationStatus() {
         return reservationStatus;
@@ -65,6 +85,14 @@ public class ReservationData {
         this.toDate = toDate;
     }
 
+    public UserDb getUser() {
+        return user;
+    }
+
+    public void setUser(UserDb user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
@@ -74,6 +102,8 @@ public class ReservationData {
                 ", toDate=" + df.format(toDate) + '\'' +
                 ", hotelNAme=" + hotelName+ '\'' +
                 ", reservationStatus=" + reservationStatus+ '\'' +
+                ", user=" + user.toString()+ '\'' +
+
                 '}';
     }
 }

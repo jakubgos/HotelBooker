@@ -18,7 +18,7 @@ public interface ReservationService {
 
     UserReservationResponse getUserReservation(String username);
 
-    ArrayList<Reservation> getReservationFromStatus(String username, ReservationStatus waitForConfirmation);
+    ArrayList<Reservation> getReservationFromStatus(String owner, ReservationStatus waitForConfirmation);
 
     ArrayList<Reservation> getReservation(String username);
 }

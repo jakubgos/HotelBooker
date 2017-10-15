@@ -1,7 +1,6 @@
 package com.jgos.hotelbooker.service;
 
 import com.jgos.hotelbooker.controller.ApiHotel;
-import com.jgos.hotelbooker.entity.endpoint.ReservationData;
 import com.jgos.hotelbooker.entity.endpoint.ReservationRequest;
 import com.jgos.hotelbooker.entity.endpoint.ReservationResponse;
 import com.jgos.hotelbooker.entity.endpoint.UserReservationResponse;
@@ -58,10 +57,13 @@ public class ReservationServiceImpl implements ReservationService {
         cal.add(Calendar.DAY_OF_MONTH, -1);
         to = cal.getTime();
 
-        List<Reservation> restrictedReservations = reservationRepository.findByDateBetweenAndRoomId(from, to, reservationRequest.getReservationRoomId());
-        log.info(restrictedReservations.toString());
+        for (Reservation reservation: reservationRepository.findBetweenDates(from,to))
+        {
+            if(reservation.getRoom().getId()==reservationRequest.getReservationRoomId())return  false;
+        }
 
-        return restrictedReservations.isEmpty();
+        return true;
+
     }
 
     @Override
@@ -72,19 +74,27 @@ public class ReservationServiceImpl implements ReservationService {
         Date to = new Date(reservationRequest.getDepartureTim());
 
 
-        Calendar start = Calendar.getInstance();
-        start.setTime(from);
         Calendar end = Calendar.getInstance();
         end.setTime(to);
+        end.add(Calendar.DAY_OF_YEAR,-1);
 
         UserDb user = userRepository.findByEmail(username);
         Room room = roomRepository.findById(reservationRequest.getReservationRoomId());
         //end.add(Calendar.DAY_OF_MONTH, -1); for nie łapie ostatniego dnia i tak :)
 
-        for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
-            Reservation reservation = new Reservation(room, user, date, ReservationStatus.WAIT_FOR_CONFIRMATION, room.getHotel().getOwner());
-            reservationRepository.save(reservation);
-        }
+
+            Reservation reservation = new Reservation(
+                    user,
+                    from,
+                    end.getTime(),
+                    room,
+                    room
+                            .getHotel()
+                            .getOwner(),
+                    ReservationStatus.WAIT_FOR_CONFIRMATION);
+
+        reservationRepository.save(reservation);
+
         return new ReservationResponse(ResultStatus.OK);
     }
 

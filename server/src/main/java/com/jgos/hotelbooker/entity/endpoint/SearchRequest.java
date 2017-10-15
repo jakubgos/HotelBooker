@@ -4,6 +4,7 @@ import com.jgos.hotelbooker.entity.hotel.data.City;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import java.util.Date;
 
 
 /**
@@ -56,8 +57,8 @@ public class SearchRequest {
     public String toString() {
         return "SearchRequest{" +
                 "city=" + city +
-                ", arrivalTime=" + arrivalTime +
-                ", departureTime=" + departureTime +
+                ", arrivalTime=" + new Date(arrivalTime) +
+                ", departureTime=" +new Date(departureTime) +
                 ", numberOfPeople=" + numberOfPeople +
                 '}';
     }

@@ -18,7 +18,9 @@ public class Reservation {
     UserDb user;
     @NotNull
     @Temporal(TemporalType.DATE)
-    Date date;
+    Date fromDate;
+    @Temporal(TemporalType.DATE)
+    Date toDate;
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     public long id;
@@ -33,54 +35,45 @@ public class Reservation {
     @Enumerated(EnumType.ORDINAL)
     public ReservationStatus reservationStatus;
 
-
-    public Reservation(Reservation res) {
-        user = res.getUser();
-        date = res.getDate();
-        id = res.getId();
-        room = res.getRoom();
-        owner = res.getOwner();
-        reservationStatus = res.getReservationStatus();
-    }
-
-    @Override
-    public String toString() {
-        return "Reservation{" +
-                "user=" + user +
-                ", date=" + date +
-                ", id=" + id +
-                ", room=" + room +
-                ", owner=" + owner +
-                ", reservationStatus=" + reservationStatus +
-                '}';
-    }
-
-    public UserDb getOwner() {
-        return owner;
-    }
-
-    public void setOwner(UserDb owner) {
-        this.owner = owner;
-    }
-
     public Reservation() {
+
     }
 
-    public Reservation(Room room, UserDb user, Date date, ReservationStatus reservationStatus, UserDb owner) {
-        this.room = room;
+    public Reservation(UserDb user, Date fromDate, Date toDate, Room room, UserDb owner, ReservationStatus reservationStatus) {
         this.user = user;
-        this.date = date;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.room = room;
         this.owner = owner;
         this.reservationStatus = reservationStatus;
-
     }
 
-    public ReservationStatus getReservationStatus() {
-        return reservationStatus;
+    public UserDb getUser() {
+        return user;
     }
 
-    public void setReservationStatus(ReservationStatus reservationStatus) {
-        this.reservationStatus = reservationStatus;
+    public void setUser(UserDb user) {
+        this.user = user;
+    }
+
+    public Date getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public Date getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(Date toDate) {
+        this.toDate = toDate;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public void setId(long id) {
@@ -95,24 +88,32 @@ public class Reservation {
         this.room = room;
     }
 
-    public long getId() {
-        return id;
+    public UserDb getOwner() {
+        return owner;
     }
 
-    public UserDb getUser() {
-        return user;
+    public void setOwner(UserDb owner) {
+        this.owner = owner;
     }
 
-    public void setUser(UserDb user) {
-        this.user = user;
+    public ReservationStatus getReservationStatus() {
+        return reservationStatus;
     }
 
-    public Date getDate() {
-        return date;
+    public void setReservationStatus(ReservationStatus reservationStatus) {
+        this.reservationStatus = reservationStatus;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "user=" + user +
+                ", fromDate=" + fromDate +
+                ", toDate=" + toDate +
+                ", id=" + id +
+                ", room=" + room +
+                ", owner=" + owner +
+                ", reservationStatus=" + reservationStatus +
+                '}';
     }
-
 }

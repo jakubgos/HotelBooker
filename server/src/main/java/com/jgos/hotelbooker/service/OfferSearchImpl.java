@@ -48,7 +48,10 @@ public class OfferSearchImpl implements OfferSearch {
         cal.add(Calendar.DAY_OF_MONTH, -1);
         to = cal.getTime();
 
-        List<Reservation> restrictedReservations = reservationRepository.findByDateBetween(from, to);
+
+        List<Reservation> restrictedReservations = reservationRepository.findBetweenDates(from, to);
+
+        log.info(restrictedReservations.toString());
         Collection<Long> restrictedRooms = new LinkedHashSet<Long>();
         for (Reservation reservation : restrictedReservations) {
             restrictedRooms.add(reservation.getRoom().getId());
@@ -70,4 +73,6 @@ public class OfferSearchImpl implements OfferSearch {
         }
         return hotelOffer;
     }
+
+
 }

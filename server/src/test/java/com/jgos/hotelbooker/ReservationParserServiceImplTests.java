@@ -10,6 +10,7 @@ import com.jgos.hotelbooker.entity.user.ReservationStatus;
 import com.jgos.hotelbooker.entity.user.UserDb;
 import com.jgos.hotelbooker.service.ReservationParserService;
 import com.jgos.hotelbooker.service.ReservationParserServiceImpl;
+import com.jgos.hotelbooker.service.ReservationService;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.junit.Assert;
 import org.junit.Before;
@@ -27,6 +28,7 @@ import javax.validation.constraints.AssertTrue;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -57,6 +59,22 @@ public class ReservationParserServiceImplTests {
 	private
 	Room room3;
 
+	@Mock
+	private
+	UserDb userDb;
+
+	@Mock
+	private
+	UserDb userDb2;
+
+	@Mock
+	private
+	UserDb userOwnerDb;
+
+
+
+	DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
+
 	@Before
 	public void setUp() {
 		when(room1.getHotel()).thenReturn(hotel);
@@ -71,7 +89,7 @@ public class ReservationParserServiceImplTests {
 	}
 
 	@Test
-	public void contextLoads() throws ParseException {
+	public void test1() throws ParseException {
 		List<Reservation> reservationList = new ArrayList<Reservation>();
 
 
@@ -80,21 +98,19 @@ public class ReservationParserServiceImplTests {
 		when(hotelDetail.getName()).thenReturn("mockName");
 		//    public Reservation(Room room, UserDb user, Date date, ReservationStatus reservationStatus, UserDb owner) {
 
-		DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
 		Date date1 = df.parse("06/01/2007");
 		Date date2 = df.parse("06/02/2007");
 		Date date3 = df.parse("06/03/2007");
 		Date date4 = df.parse("06/04/2007");
 		Date date5 = df.parse("06/05/2007");
 		Date date6 = df.parse("06/06/2007");
+		Date date7 = df.parse("06/07/2007");
 
-		reservationList.add(new Reservation(room1,null ,date2, ReservationStatus.UNKNOWN,null));
-		reservationList.add(new Reservation(room1,null ,date3, ReservationStatus.UNKNOWN,null));
-		reservationList.add(new Reservation(room1,null ,date1, ReservationStatus.UNKNOWN,null));
+		reservationList.add(new Reservation(userDb,date1 ,date3, room1,userOwnerDb,  ReservationStatus.UNKNOWN));
 
-		reservationList.add(new Reservation(room2,null ,date1, ReservationStatus.UNKNOWN,null));
-		reservationList.add(new Reservation(room2,null ,date2, ReservationStatus.UNKNOWN,null));
-		reservationList.add(new Reservation(room2,null ,date5, ReservationStatus.UNKNOWN,null));
+		reservationList.add(new Reservation(userDb,date1 ,date5, room2,userOwnerDb,  ReservationStatus.UNKNOWN));
+
+		reservationList.add(new Reservation(userDb2,date1 ,date5, room2,userOwnerDb,  ReservationStatus.UNKNOWN));
 
 
 		UserReservationResponse result = reservationParserService.parseReservation(reservationList, new UserReservationResponse());
@@ -110,13 +126,20 @@ public class ReservationParserServiceImplTests {
 
 
 		Assert.assertTrue(result.getReservationDataArrayList().get(1).getFromDate().equals(date1));
-		Assert.assertTrue(result.getReservationDataArrayList().get(1).getToDate().equals(date3));
+		Assert.assertTrue(result.getReservationDataArrayList().get(1).getToDate().equals(date6));
 
-		Assert.assertTrue(result.getReservationDataArrayList().get(2).getFromDate().equals(date5));
+		Assert.assertTrue(result.getReservationDataArrayList().get(2).getFromDate().equals(date1));
 		Assert.assertTrue(result.getReservationDataArrayList().get(2).getToDate().equals(date6));
+
+
 
 	}
 
+	@Test
+	public void test2() throws ParseException {
+		UserReservationResponse result = reservationParserService.parseReservation(null, new UserReservationResponse());
 
+		Assert.assertTrue(result.getReservationDataArrayList().size()==0);
+	}
 
 }

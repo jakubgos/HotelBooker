@@ -11,7 +11,10 @@ public class ReservationRequest {
     public ReservationRequest() {
     }
 
-    public ReservationRequest(long arrivalTime, long departureTime, long reservationRoomId) {
+    public ReservationRequest(long arrivalTime, long departureTim, long reservationRoomId) {
+        this.arrivalTime = arrivalTime;
+        this.departureTim = departureTim;
+        this.reservationRoomId = reservationRoomId;
     }
 
     @Override

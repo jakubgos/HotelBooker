@@ -10,6 +10,7 @@ import com.jgos.hotelbooker.entity.webData.WrapperReservation;
 import com.jgos.hotelbooker.entity.webData.WrapperReservationData;
 import com.jgos.hotelbooker.repository.*;
 import com.jgos.hotelbooker.service.OfferSearch;
+import com.jgos.hotelbooker.service.ReservationParserService;
 import com.jgos.hotelbooker.service.ReservationService;
 import com.jgos.hotelbooker.service.RoomService;
 import org.slf4j.Logger;
@@ -85,6 +86,9 @@ public class WebHotel {
     @Autowired
     private RoomService roomService;
 
+    @Autowired
+    ReservationParserService reservationParserService;
+
     @RequestMapping("/test")
     @ResponseBody
     public String greeting(@AuthenticationPrincipal UserDetails userDetails) {
@@ -110,7 +114,7 @@ public class WebHotel {
     public ModelAndView home(@AuthenticationPrincipal UserDetails userDetails) {
         ModelAndView model = new ModelAndView();
         model.setViewName("index");
-        model.addObject("noOfwaitingReservation", reservationService.getReservationFromStatus(userDetails.getUsername(), ReservationStatus.WAIT_FOR_CONFIRMATION).size());
+        model.addObject("noOfwaitingReservation", reservationParserService.parseReservation(reservationService.getReservationFromStatus(userDetails.getUsername(), ReservationStatus.WAIT_FOR_CONFIRMATION),null).getReservationDataArrayList().size());
         model.addObject("userName", userDetails.getUsername());
         return model;
     }
@@ -160,7 +164,7 @@ public class WebHotel {
 
         ModelAndView model = new ModelAndView();
         model.setViewName("wRes");
-        model.addObject("reservationsWrapper", new WrapperReservationData(reservationService.getReservationFromStatus(userDetails.getUsername(), ReservationStatus.WAIT_FOR_CONFIRMATION)));
+        //model.addObject("reservationsWrapper", new WrapperReservationData(reservationService.getReservationFromStatus(userDetails.getUsername(), ReservationStatus.WAIT_FOR_CONFIRMATION)));
         model.addObject("userName", userDetails.getUsername());
 
         ArrayList<ReservationStatus> reservationStatuses = new ArrayList<>();
@@ -182,9 +186,12 @@ public class WebHotel {
     public ModelAndView rres(@AuthenticationPrincipal UserDetails userDetails, @RequestParam(required = false, defaultValue = "0") int result) {
         ModelAndView model = new ModelAndView();
         model.setViewName("rRes");
-        model.addObject("reservationsWrapper", new WrapperReservationData(reservationService.getReservation(userDetails.getUsername())));
-        model.addObject("userName", userDetails.getUsername());
 
+        model.addObject("reservationsWrapper", new WrapperReservationData(
+                reservationParserService.parseReservation(
+                        reservationService.getReservation(userDetails.getUsername()))));
+
+        model.addObject("userName", userDetails.getUsername());
         ArrayList<ReservationStatus> reservationStatuses = new ArrayList<>();
         for (int i = 0; i < ReservationStatus.UNKNOWN.ordinal(); i++) {
             reservationStatuses.add(ReservationStatus.values()[i]);
@@ -203,7 +210,7 @@ public class WebHotel {
     @RequestMapping(value = {"/rResAction"}, method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView rResAction(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute("reservationsWrapper") WrapperReservationData wrapperReservationData, BindingResult errors, Model model) {
-        log.info("rResAction initaited with data : " + wrapperReservationData.toString());
+     /*   log.info("rResAction initaited with data : " + wrapperReservationData.toString());
         int result = 2;
         for (WrapperReservation res : wrapperReservationData.getReservations()
                 ) {
@@ -214,13 +221,16 @@ public class WebHotel {
                 result = 1;
             }
         }
-        return new ModelAndView("redirect:/rRes?result=" + result);
+        return new ModelAndView("redirect:/rRes?result=" + result);*/
+     return null;
     }
 
     @RequestMapping(value = {"/wResAction"}, method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView wResAction(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute("reservationsWrapper") WrapperReservationData wrapperReservationData, BindingResult errors, Model model) {
         log.info("wResAction initaited with data : " + wrapperReservationData.toString());
+        return null;
+/*
         int result = 2;
         for (WrapperReservation res : wrapperReservationData.getReservations()
                 ) {
@@ -232,7 +242,7 @@ public class WebHotel {
                 result = 1;
             }
         }
-        return new ModelAndView("redirect:/wRes?result=" + result);
+        return new ModelAndView("redirect:/wRes?result=" + result);*/
     }
 
     @RequestMapping(value = {"/room"}, method = RequestMethod.GET)

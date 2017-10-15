@@ -11,18 +11,25 @@ import java.util.ArrayList;
 
 public class UserReservationResponse {
 
-    ResultStatus status;
+    ResultStatus status = ResultStatus.NO_DATA;
 
     ArrayList<ReservationData> reservationDataArrayList;
 
     public UserReservationResponse() {
+        if (reservationDataArrayList == null)
+        {
+            reservationDataArrayList = new ArrayList<ReservationData>();
+        }
     }
 
     public UserReservationResponse(ResultStatus status) {
+        super();
         this.status = status;
     }
 
     public ArrayList<ReservationData> getReservationDataArrayList() {
+
+
         return reservationDataArrayList;
     }
 
@@ -46,11 +53,5 @@ public class UserReservationResponse {
                 '}';
     }
 
-    public void addReservationData(ReservationData reservationData) {
-        if (reservationDataArrayList == null)
-        {
-            reservationDataArrayList = new ArrayList<ReservationData>();
-        }
-        reservationDataArrayList.add(reservationData);
-    }
+
 }
