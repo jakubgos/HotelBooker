@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Hotel Booker</title>
+
+    <div th:replace="links :: links-css"></div>
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <div th:replace="navigation :: navigation"></div>
+
+
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Edytuj Notyfikacje</h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Notyfikacje Email
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div th:if="${message}" class="alert alert-success alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert"
+                                                aria-hidden="true">&times;</button>
+                                        <span th:text="${message}"></span>
+                                    </div>
+                                    <div th:if="${errorMessage}" class="alert alert-danger alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert"
+                                                aria-hidden="true">&times;</button>
+                                        <span th:text="${errorMessage}"></span>
+                                    </div>
+
+
+                                    <form href="#" role="form" th:action="@{/saveNotification}" th:object="${notificationData}"
+                                          method="post">
+                                        <input type="hidden" th:value="${id}" name="id" th:field="*{id}"/>
+                                        <input type="hidden" th:value="${owner}" name="id" th:field="*{owner}"/>
+
+                                        <div class="form-group">
+                                            <label>Stan</label>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="active" th:field="*{active}"/>Włącz/wyłącz notyfikacje.
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Tytuł e-maila</label>
+                                            <textarea class="form-control" rows="1"
+                                                      th:field="*{subject}"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Zdarzenie: Oczekuje na weryfikacje</label>
+                                            <textarea class="form-control" rows="8"
+                                                      th:field="*{WAIT_FOR_CONFIRMATION_change}"></textarea>
+                                            <p class="help-block">Zostaw puste aby wyłączyć notyfikacje dla tego zdarzenia.</p>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Zdarzenie: Oczekuje na wpłatę</label>
+                                            <textarea class="form-control" rows="8"
+                                                      th:field="*{WAIT_FOR_PAYMENT_change}"></textarea>
+                                            <p class="help-block">Zostaw puste aby wyłączyć notyfikacje dla tego zdarzenia.</p>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Zdarzenie: Zarezerwowane</label>
+                                            <textarea class="form-control" rows="8"
+                                                      th:field="*{RESERVATION_DONE_change}"></textarea>
+                                            <p class="help-block">Zostaw puste aby wyłączyć notyfikacje dla tego zdarzenia.</p>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Zdarzenie: Zrealizowano</label>
+                                            <textarea class="form-control" rows="8"
+                                                      th:field="*{RESERVATION_FINISHED_change}"></textarea>
+                                            <p class="help-block">Zostaw puste aby wyłączyć notyfikacje dla tego zdarzenia.</p>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Zdarzenie: Odrzucono przez hotel</label>
+                                            <textarea class="form-control" rows="8"
+                                                      th:field="*{RESERVATION_REJECTED_change}"></textarea>
+                                            <p class="help-block">Zostaw puste aby wyłączyć notyfikacje dla tego zdarzenia.</p>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-default">Zapisz</button>
+                                            <button type="reset" class="btn btn-default">Zresetuj dane</button>
+                                        </div>
+
+                                    </form>
+
+
+
+
+
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-6 -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<div th:replace="links :: links-scripts"></div>
+
+</body>
+
+</html>

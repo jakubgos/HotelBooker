@@ -67,6 +67,10 @@
                             <i class="fa fa-columns fa-fw"></i> Pokoje</a>
                     </li>
                     <li>
+                        <a th:href="@{/notification}" th:classappend="${#httpServletRequest.getRequestURI() == '/notification' ? 'active':''}">
+                            <i class="fa fa-columns fa-fw"></i> Notyfikacje</a>
+                    </li>
+                    <li>
                         <a href="#"><i class="fa fa-tasks fa-fw"></i> Rezerwacje<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>

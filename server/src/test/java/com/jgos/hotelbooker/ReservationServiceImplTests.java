@@ -118,7 +118,7 @@ public class ReservationServiceImplTests {
                         log.info(user.toString());
                         Assert.assertTrue(user.getUser().equals(userDb));
                         Assert.assertTrue(user.getFromDate().getDay() == date1.getDay());
-                        Assert.assertTrue(user.getToDate().getDay() == date2.getDay());
+                        Assert.assertTrue(user.getToDate().getDay() == date1.getDay());
 
                         return user;
                     }

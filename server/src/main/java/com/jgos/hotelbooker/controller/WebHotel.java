@@ -2,6 +2,7 @@ package com.jgos.hotelbooker.controller;
 
 import com.jgos.hotelbooker.entity.hotel.Hotel;
 import com.jgos.hotelbooker.entity.hotel.HotelDetail;
+import com.jgos.hotelbooker.entity.hotel.Notification;
 import com.jgos.hotelbooker.entity.room.Room;
 import com.jgos.hotelbooker.entity.user.Reservation;
 import com.jgos.hotelbooker.entity.user.ReservationStatus;
@@ -9,13 +10,15 @@ import com.jgos.hotelbooker.entity.user.UserDb;
 import com.jgos.hotelbooker.entity.webData.WrapperReservation;
 import com.jgos.hotelbooker.entity.webData.WrapperReservationData;
 import com.jgos.hotelbooker.repository.*;
-import com.jgos.hotelbooker.service.OfferSearch;
-import com.jgos.hotelbooker.service.ReservationParserService;
-import com.jgos.hotelbooker.service.ReservationService;
-import com.jgos.hotelbooker.service.RoomService;
+import com.jgos.hotelbooker.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,7 +29,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import static com.jgos.hotelbooker.entity.user.ReservationStatus.getEnumByString;
 
@@ -89,6 +95,12 @@ public class WebHotel {
 
     @Autowired
     ReservationParserService reservationParserService;
+
+    @Autowired
+    NotificationRepository notificationRepository;
+
+    @Autowired
+    NotificationService notificationService;
 
     @RequestMapping("/test")
     @ResponseBody
@@ -210,7 +222,7 @@ public class WebHotel {
     @RequestMapping(value = {"/rResAction"}, method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView rResAction(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute("reservationsWrapper") WrapperReservationData wrapperReservationData, BindingResult errors, Model model) {
-       log.info("rResAction initaited with data : " + wrapperReservationData.toString());
+       log.info("rResAction initiated with data : " + wrapperReservationData.toString());
         int result = 2;
         for (WrapperReservation res : wrapperReservationData.getReservations()
                 ) {
@@ -219,15 +231,17 @@ public class WebHotel {
                 reservation.setReservationStatus(getEnumByString(wrapperReservationData.getReservationStatus().getText()));
                 reservationRepository.save(reservation);
                 result = 1;
+                notificationService.addReservation(reservation);
             }
         }
+        notificationService.submitNotification();
         return new ModelAndView("redirect:/rRes?result=" + result);
     }
 
     @RequestMapping(value = {"/wResAction"}, method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView wResAction(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute("reservationsWrapper") WrapperReservationData wrapperReservationData, BindingResult errors, Model model) {
-        log.info("wResAction initaited with data : " + wrapperReservationData.toString());
+        log.info("wResAction initiated with data : " + wrapperReservationData.toString());
 
         int result = 2;
         for (WrapperReservation res : wrapperReservationData.getReservations()
@@ -237,9 +251,11 @@ public class WebHotel {
 
                 reservation.setReservationStatus(getEnumByString(wrapperReservationData.getReservationStatus().getText()));
                 reservationRepository.save(reservation);
+                notificationService.addReservation(reservation);
                 result = 1;
             }
         }
+        notificationService.submitNotification();
         return new ModelAndView("redirect:/wRes?result=" + result);
     }
 
@@ -278,7 +294,7 @@ public class WebHotel {
     @RequestMapping(value = {"/saveRoomData"}, method = RequestMethod.POST)
     public ModelAndView saveRoomData(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute("editRoom") Room room, BindingResult errors, Model model) {
 
-        log.info("saveRoomData recieved with " + room.toString());
+        log.info("saveRoomData received with " + room.toString());
         UserDb user = userRepository.findByEmail(userDetails.getUsername());
 
         if (!roomService.verifyData(room)) {
@@ -288,5 +304,36 @@ public class WebHotel {
         room.setHotel(hotel);
         roomRepository.save(room);
         return new ModelAndView("redirect:/room?result=1");
+    }
+
+    @RequestMapping(value = {"/notification"}, method = RequestMethod.GET)
+    public ModelAndView notification(@AuthenticationPrincipal UserDetails userDetails, @RequestParam(required = false, defaultValue = "0") int result) {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("notification");
+
+        UserDb user = userRepository.findByEmail(userDetails.getUsername());
+        Notification notification = notificationRepository.findByOwner(user);
+        if (notification == null)
+        {
+            log.error("notification: no notification object found in DB !");
+            notification = new Notification();
+            notification.setOwner(user);
+        }
+
+        if (result == 1) {
+            model.addObject("message", "Zmiany zostały zapisane");
+        }
+        model.addObject("notificationData",notification);
+        return model;
+    }
+
+    @RequestMapping(value = {"/saveNotification"}, method = RequestMethod.POST)
+    public ModelAndView saveNotification(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute("editRoom") Notification notification, BindingResult errors, Model model) {
+
+        log.info("saveNotification received with " + notification.toString());
+        UserDb user = userRepository.findByEmail(userDetails.getUsername());
+
+        notificationRepository.save(notification);
+        return new ModelAndView("redirect:/notification?result=1");
     }
 }
