@@ -46,7 +46,7 @@ import static com.jgos.hotelbooker.entity.user.ReservationStatus.getEnumByString
 public class WebHotel {
 
 
-    private static final Logger log = LoggerFactory.getLogger(ApiHotel.class);
+    private static final Logger log = LoggerFactory.getLogger(WebHotel.class);
 
     @Autowired
     private CityRepository cityRepository;
