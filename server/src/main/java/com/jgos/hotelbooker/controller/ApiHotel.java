@@ -6,6 +6,7 @@ import com.jgos.hotelbooker.entity.hotel.data.ResultStatus;
 import com.jgos.hotelbooker.entity.user.UserDb;
 import com.jgos.hotelbooker.repository.CityRepository;
 import com.jgos.hotelbooker.repository.UserRepository;
+import com.jgos.hotelbooker.service.FeedbackService;
 import com.jgos.hotelbooker.service.OfferSearch;
 import com.jgos.hotelbooker.service.ReservationService;
 import org.slf4j.Logger;
@@ -40,10 +41,11 @@ public class ApiHotel {
     @Autowired
     private ReservationService reservationService;
 
-
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private FeedbackService feedbackService;
 
     @RequestMapping("/getCityList")
     public List<City> getCityList(Model model) throws InterruptedException {
@@ -107,6 +109,18 @@ public class ApiHotel {
         userRepository.save(userDb);
 
         return RegisterResult.OK;
+    }
+
+
+    @RequestMapping(value = "/rate", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultStatus rate(@AuthenticationPrincipal UserDetails userDetails,
+                                           @Valid @RequestBody RateRequest rateRequest) throws InterruptedException {
+        log.info("rate received with data:" + rateRequest + "user data:" + userDetails);
+
+        ResultStatus result = feedbackService.rate(rateRequest);
+
+        return result;
     }
 
 

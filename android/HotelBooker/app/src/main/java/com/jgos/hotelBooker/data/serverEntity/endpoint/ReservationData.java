@@ -16,6 +16,8 @@ public class ReservationData {
 
     private Date fromDate;
     private Date toDate;
+    private long id;
+
 
     public ReservationData() {
     }
@@ -66,6 +68,14 @@ public class ReservationData {
 
     public void setToDate(Date toDate) {
         this.toDate = toDate;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override

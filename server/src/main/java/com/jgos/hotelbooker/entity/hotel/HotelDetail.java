@@ -4,6 +4,7 @@ package com.jgos.hotelbooker.entity.hotel;
 import com.jgos.hotelbooker.entity.hotel.data.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,8 +43,21 @@ public class HotelDetail {
     @ManyToOne
     private Rating rating;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Feedback> feedbackList;
+
+
     public HotelDetail() {
     }
+
+    public void addFeedback(Feedback feedback)
+    {
+        if (feedbackList == null) {
+            feedbackList = new ArrayList<Feedback>();
+        }
+        feedbackList.add(feedback);
+    }
+
 
     public long getId() {
         return id;
@@ -117,6 +131,14 @@ public class HotelDetail {
         this.rating = rating;
     }
 
+    public List<Feedback> getFeedbackList() {
+        return feedbackList;
+    }
+
+    public void setFeedbackList(List<Feedback> feedbackList) {
+        this.feedbackList = feedbackList;
+    }
+
     @Override
     public String toString() {
         return "HotelDetail{" +
@@ -129,6 +151,7 @@ public class HotelDetail {
                 ", foodOffer=" + foodOffer +
                 ", hotelFacilities=" + hotelFacilities +
                 ", rating=" + rating +
+                ", feedbackList=" + feedbackList +
                 '}';
     }
 }

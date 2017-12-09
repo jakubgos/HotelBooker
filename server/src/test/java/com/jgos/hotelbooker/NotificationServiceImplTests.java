@@ -1,6 +1,7 @@
 package com.jgos.hotelbooker;
 
 import com.jgos.hotelbooker.entity.endpoint.ReservationRequest;
+import com.jgos.hotelbooker.entity.hotel.Feedback;
 import com.jgos.hotelbooker.entity.hotel.Hotel;
 import com.jgos.hotelbooker.entity.hotel.HotelDetail;
 import com.jgos.hotelbooker.entity.hotel.Notification;
@@ -86,10 +87,10 @@ public class NotificationServiceImplTests {
 		when(notificationRepository.findByOwner(any())).thenReturn(notification);
 
 
-		notificationService.addReservation(new Reservation(new UserDb(),new Date(),new Date(),new Room(),userDb, ReservationStatus.RESERVATION_DONE));
-		notificationService.addReservation(new Reservation(new UserDb(),new Date(),new Date(),new Room(),userDb, ReservationStatus.RESERVATION_FINISHED));
-		notificationService.addReservation(new Reservation(new UserDb(),new Date(),new Date(),new Room(),userDb, ReservationStatus.WAIT_FOR_CONFIRMATION));
-		notificationService.addReservation(new Reservation(new UserDb(),new Date(),new Date(),new Room(),userDb, ReservationStatus.RESERVATION_REJECTED));
+		notificationService.addReservation(new Reservation(new UserDb(),new Date(),new Date(),new Room(),userDb, ReservationStatus.RESERVATION_DONE,new Feedback()));
+		notificationService.addReservation(new Reservation(new UserDb(),new Date(),new Date(),new Room(),userDb, ReservationStatus.RESERVATION_FINISHED,new Feedback()));
+		notificationService.addReservation(new Reservation(new UserDb(),new Date(),new Date(),new Room(),userDb, ReservationStatus.WAIT_FOR_CONFIRMATION,new Feedback()));
+		notificationService.addReservation(new Reservation(new UserDb(),new Date(),new Date(),new Room(),userDb, ReservationStatus.RESERVATION_REJECTED,new Feedback()));
 
 		doNothing().when(emailSender).send(any(SimpleMailMessage.class));
 		notificationService.submitNotification();

@@ -4,6 +4,7 @@ import com.jgos.hotelbooker.controller.ApiHotel;
 import com.jgos.hotelbooker.entity.endpoint.ReservationRequest;
 import com.jgos.hotelbooker.entity.endpoint.ReservationResponse;
 import com.jgos.hotelbooker.entity.endpoint.UserReservationResponse;
+import com.jgos.hotelbooker.entity.hotel.Feedback;
 import com.jgos.hotelbooker.entity.hotel.data.ResultStatus;
 import com.jgos.hotelbooker.entity.room.Room;
 import com.jgos.hotelbooker.entity.user.Reservation;
@@ -91,7 +92,8 @@ public class ReservationServiceImpl implements ReservationService {
                     room
                             .getHotel()
                             .getOwner(),
-                    ReservationStatus.WAIT_FOR_CONFIRMATION);
+                    ReservationStatus.WAIT_FOR_CONFIRMATION,
+                    new Feedback(false));
 
         reservationRepository.save(reservation);
 

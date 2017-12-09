@@ -1,6 +1,7 @@
 package com.jgos.hotelbooker.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jgos.hotelbooker.entity.hotel.Feedback;
 import com.jgos.hotelbooker.entity.room.Room;
 
 import javax.persistence.*;
@@ -14,16 +15,21 @@ import java.util.Date;
 @Entity
 public class Reservation {
     @NotNull
+
     @ManyToOne
     UserDb user;
     @NotNull
+
     @Temporal(TemporalType.DATE)
     Date fromDate;
+
     @Temporal(TemporalType.DATE)
     Date toDate;
+
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     public long id;
+
     @NotNull
     @ManyToOne
     public Room room;
@@ -35,17 +41,21 @@ public class Reservation {
     @Enumerated(EnumType.ORDINAL)
     public ReservationStatus reservationStatus;
 
+    @ManyToOne
+    Feedback feedback;
+
     public Reservation() {
 
     }
 
-    public Reservation(UserDb user, Date fromDate, Date toDate, Room room, UserDb owner, ReservationStatus reservationStatus) {
+    public Reservation(UserDb user, Date fromDate, Date toDate, Room room, UserDb owner, ReservationStatus reservationStatus, Feedback feedback) {
         this.user = user;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.room = room;
         this.owner = owner;
         this.reservationStatus = reservationStatus;
+        this.feedback = feedback;
     }
 
     public Reservation(Reservation res) {
@@ -56,6 +66,7 @@ public class Reservation {
         this.room = res.getRoom();
         this.owner = res.getOwner();
         this.reservationStatus = res.getReservationStatus();
+        this.feedback = res.feedback;
     }
 
     public UserDb getUser() {
@@ -114,7 +125,13 @@ public class Reservation {
         this.reservationStatus = reservationStatus;
     }
 
+    public Feedback getFeedback() {
+        return feedback;
+    }
 
+    public void setFeedback(Feedback feedback) {
+        this.feedback = feedback;
+    }
 
     @Override
     public String toString() {
@@ -126,6 +143,7 @@ public class Reservation {
                 ", room=" + room +
                 ", owner=" + owner +
                 ", reservationStatus=" + reservationStatus +
+                ", feedback=" + feedback +
                 '}';
     }
 }

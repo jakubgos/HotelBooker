@@ -75,6 +75,7 @@ public class ReservationParserServiceImpl implements ReservationParserService{
                     reservation.getReservationStatus().getText(),
                     reservation.getFromDate(),
                     toDatePlusDay.getTime(),
+                    reservation.getId(),
                     reservation.getUser());
             result.add(reservationData);
         }

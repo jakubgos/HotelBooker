@@ -1,6 +1,7 @@
 package com.jgos.hotelbooker;
 
 import com.jgos.hotelbooker.entity.endpoint.UserReservationResponse;
+import com.jgos.hotelbooker.entity.hotel.Feedback;
 import com.jgos.hotelbooker.entity.hotel.Hotel;
 import com.jgos.hotelbooker.entity.hotel.HotelDetail;
 import com.jgos.hotelbooker.entity.hotel.data.ResultStatus;
@@ -106,11 +107,11 @@ public class ReservationParserServiceImplTests {
 		Date date6 = df.parse("06/06/2007");
 		Date date7 = df.parse("06/07/2007");
 
-		reservationList.add(new Reservation(userDb,date1 ,date3, room1,userOwnerDb,  ReservationStatus.UNKNOWN));
+		reservationList.add(new Reservation(userDb,date1 ,date3, room1,userOwnerDb,  ReservationStatus.UNKNOWN,new Feedback()));
 
-		reservationList.add(new Reservation(userDb,date1 ,date5, room2,userOwnerDb,  ReservationStatus.UNKNOWN));
+		reservationList.add(new Reservation(userDb,date1 ,date5, room2,userOwnerDb,  ReservationStatus.UNKNOWN,new Feedback()));
 
-		reservationList.add(new Reservation(userDb2,date1 ,date5, room2,userOwnerDb,  ReservationStatus.UNKNOWN));
+		reservationList.add(new Reservation(userDb2,date1 ,date5, room2,userOwnerDb,  ReservationStatus.UNKNOWN,new Feedback()));
 
 
 		UserReservationResponse result = reservationParserService.parseReservation(reservationList, new UserReservationResponse());

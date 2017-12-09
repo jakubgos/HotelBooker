@@ -19,6 +19,7 @@ public class ReservationData {
 
     private Date fromDate;
     private Date toDate;
+    private long id;
 
     //todo check if can remove
     @JsonIgnore
@@ -28,23 +29,16 @@ public class ReservationData {
     public ReservationData() {
     }
 
-    public ReservationData(ReservationData reservationData) {
-        this.fromDate = reservationData.getFromDate();
-        this.toDate = reservationData.getToDate();
-        this.roomName = reservationData.getRoomName();
-        this.hotelName = reservationData.getHotelName();
-        this.reservationStatus = reservationData.getReservationStatus();
-        this.user = user;
-    }
-
-    public ReservationData(String roomName, String hotelName, String reservationStatus, Date fromDate, Date toDate, UserDb user ) {
+    public ReservationData(String roomName, String hotelName, String reservationStatus, Date fromDate, Date toDate, long id, UserDb user) {
         this.roomName = roomName;
         this.hotelName = hotelName;
         this.reservationStatus = reservationStatus;
         this.fromDate = fromDate;
         this.toDate = toDate;
-        this.user=user;
+        this.id = id;
+        this.user = user;
     }
+
 
     public String getReservationStatus() {
         return reservationStatus;
@@ -94,17 +88,24 @@ public class ReservationData {
         this.user = user;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
         return "ReservationData{" +
                 "roomName='" + roomName + '\'' +
-                ", fromDate=" + df.format(fromDate) + '\'' +
-                ", toDate=" + df.format(toDate) + '\'' +
-                ", hotelNAme=" + hotelName+ '\'' +
-                ", reservationStatus=" + reservationStatus+ '\'' +
-                ", user=" + user.toString()+ '\'' +
-
+                ", hotelName='" + hotelName + '\'' +
+                ", reservationStatus='" + reservationStatus + '\'' +
+                ", fromDate=" + fromDate +
+                ", toDate=" + toDate +
+                ", id=" + id +
+                ", user=" + user +
                 '}';
     }
 }

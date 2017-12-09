@@ -34,7 +34,17 @@ public class HotelDetail {
 
     private Rating rating;
 
+    private List<Feedback> feedbackList;
+
     public HotelDetail() {
+    }
+
+    public List<Feedback> getFeedbackList() {
+        return feedbackList;
+    }
+
+    public void setFeedbackList(List<Feedback> feedbackList) {
+        this.feedbackList = feedbackList;
     }
 
     public long getId() {
