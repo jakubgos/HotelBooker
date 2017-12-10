@@ -21,6 +21,8 @@ public class ReservationData {
     private Date toDate;
     private long id;
 
+    boolean isRated = false;
+
     //todo check if can remove
     @JsonIgnore
     private UserDb user;
@@ -29,16 +31,16 @@ public class ReservationData {
     public ReservationData() {
     }
 
-    public ReservationData(String roomName, String hotelName, String reservationStatus, Date fromDate, Date toDate, long id, UserDb user) {
+    public ReservationData(String roomName, String hotelName, String reservationStatus, Date fromDate, Date toDate, long id, boolean isRated, UserDb user) {
         this.roomName = roomName;
         this.hotelName = hotelName;
         this.reservationStatus = reservationStatus;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.id = id;
+        this.isRated = isRated;
         this.user = user;
     }
-
 
     public String getReservationStatus() {
         return reservationStatus;
@@ -94,6 +96,14 @@ public class ReservationData {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public boolean isRated() {
+        return isRated;
+    }
+
+    public void setRated(boolean rated) {
+        isRated = rated;
     }
 
     @Override

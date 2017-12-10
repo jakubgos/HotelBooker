@@ -1,11 +1,12 @@
 package com.jgos.hotelbooker.entity.hotel;
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Size;
-
 @Entity
 public class Feedback {
 
@@ -13,10 +14,10 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
 
-    @Size(min = 1, max = 10)
-    private int value;
+    @Range(min=0, max=10, message = "Rate value out of range")
+    private Integer value;
 
-    Boolean isValid;
+    Boolean isValid = false;
 
 
     public Feedback() {
@@ -27,9 +28,6 @@ public class Feedback {
         this.isValid = isValid;
     }
 
-    public Feedback(Boolean isValid) {
-        this.isValid = isValid;
-    }
 
     public long getId() {
         return id;

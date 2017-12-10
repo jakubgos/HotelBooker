@@ -3,6 +3,7 @@ package com.jgos.hotelBooker.reservation;
 import android.os.Handler;
 
 import com.jgos.hotelBooker.data.NetworkServiceImpl;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.RateRequest;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.ReservationData;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.UserReservationResponse;
 import com.jgos.hotelBooker.reservation.interfaces.ReservationModelOps;
@@ -45,6 +46,7 @@ public class ReservationPresenter implements ReservationPresenterOps {
             @Override
             public void run() {
                 getView().hideListView();
+                getView().stopProgressBar();
                 getView().showDataNotAvailable();
             }
         });
@@ -73,11 +75,51 @@ public class ReservationPresenter implements ReservationPresenterOps {
 
     @Override
     public void listItemSelect(ReservationData item) {
-        getView().makeToast("dzialam");
+
+        if(item.isRated())
+        {
+            getView().makeToast("Nie możesz ponownie ocenić tego hotelu");
+
+        }
+        else {
+            getView().showRateDialog(item);
+        }
     }
 
     @Override
     public void showFilterRequested() {
         getView().showFilterActivity();
     }
+
+    @Override
+    public void rateConfirm(RateRequest rateRequest) {
+        getView().showProgressBar();
+        reservationModelOps.rateRequest(Storage.getInstance().getLoginData(), rateRequest);
+    }
+
+    @Override
+    public void rateResultOk() {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                getView().stopProgressBar();
+                getView().makeToast("Ocena zapisana");
+                reservationModelOps.downloadUserReservation(Storage.getInstance().getLoginData());
+
+            }
+        });
+    }
+
+    @Override
+    public void rateResultNok(final String s) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                getView().stopProgressBar();
+                getView().showErrorDialogAndQuit(s);
+            }
+        });
+    }
+
+
 }

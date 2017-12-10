@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.jgos.hotelBooker.data.entity.LoginData;
 import com.jgos.hotelBooker.data.interfaces.NetworkService;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.HotelOffer;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.RateRequest;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.RegisterRequest;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.RegisterResult;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.ReservationRequest;
@@ -15,12 +16,14 @@ import com.jgos.hotelBooker.data.serverEntity.endpoint.ReservationResponse;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.SearchRequest;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.UserReservationResponse;
 import com.jgos.hotelBooker.data.serverEntity.hotel.data.City;
+import com.jgos.hotelBooker.data.serverEntity.hotel.data.ResultStatus;
 import com.jgos.hotelBooker.filter.interfaces.LoginServiceCityListResult;
 import com.jgos.hotelBooker.filter.interfaces.SearchRequestResult;
 import com.jgos.hotelBooker.hotelList.interfaces.ReservationRequestResult;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
 import com.jgos.hotelBooker.login.interfaces.LoginServiceLoginResult;
 import com.jgos.hotelBooker.login.interfaces.LoginServiceRegisterResult;
+import com.jgos.hotelBooker.reservation.interfaces.RateRequestResult;
 import com.jgos.hotelBooker.reservation.interfaces.UserReservationResult;
 
 import java.io.IOException;
@@ -64,6 +67,8 @@ public class NetworkServiceImpl implements NetworkService {
             "secret";
     private static final String SERVER_LOGIN_PATH =
             "oauth/token";
+    private static final String RATE_PATH =
+            "api/rate";
     private static final String NO_DATA_ERROR = "Nie znaleźiono żadnych wyników";
     private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -440,6 +445,70 @@ public class NetworkServiceImpl implements NetworkService {
                 } catch (IOException e) {
                     e.printStackTrace();
                     loginServiceRegisterResult.registerResultFailed("Exception happen...");
+                }
+            }
+        });
+        thread.start();
+    }
+
+    @Override
+    public void rateRequest(final LoginData loginData, final RateRequest rateRequest, final RateRequestResult rateRequestResult) {
+        final Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                Log.d("MyApp_Service", "rateRequest invoked");
+
+                OkHttpClient okHttpClient = new OkHttpClient();
+                String json = null;
+                try {
+                    json = objectMapper.writeValueAsString(rateRequest);
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                    rateRequestResult.rateResultNok("Failed to create Json Object");
+                    return;
+                }
+
+                HttpUrl url = new HttpUrl.Builder()
+                        .scheme("http")
+                        .host(SERVER_ADDRESS)
+                        .port(8080)
+                        .addPathSegments(RATE_PATH)
+                        .build();
+
+                Request request = new Request.Builder()
+                        .url(url)
+                        .addHeader("Authorization", "Bearer " + loginData.getAccess_token())
+                        .post(RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json))
+                        .build();
+
+
+
+                Log.d("MyApp_Service", "NetworkServiceImpl rateRequest request " + request.toString() + "JSON: " + json);
+
+                Response response = null;
+                try {
+                    response = okHttpClient
+                            .newCall(request)
+                            .execute();
+
+                    String responseJson = response.body().string();
+                    //Log.d("MyApp_Service", "NetworkServiceImpl searchRequest result " + responseJson);
+
+                    ResultStatus registerResult = objectMapper.readValue(responseJson, TypeFactory.defaultInstance().constructType(ResultStatus.class));
+
+                    //Log.d("MyApp_Service", "NetworkServiceImpl getParkingList list " + list.toString());
+                    Log.d("MyApp_Service", "NetworkServiceImpl register result " + registerResult.ordinal());
+
+                    if (registerResult == ResultStatus.OK) {
+                        rateRequestResult.rateResultOk();
+                    } else if (registerResult == ResultStatus.RATE_ERROR) {
+                        rateRequestResult.rateResultNok("Failed to rate");
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    rateRequestResult.rateResultNok("Exception happen...");
                 }
             }
         });

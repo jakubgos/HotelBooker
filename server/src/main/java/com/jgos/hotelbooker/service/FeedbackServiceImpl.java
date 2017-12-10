@@ -46,10 +46,14 @@ public class FeedbackServiceImpl implements FeedbackService {
         }
         //create new rating:
         Feedback feedback = new Feedback(rateRequest.getValue(), true);
-        feedbackRepository.save(feedback);
+
         Hotel hotel = hotelRepository.findByOwner(reservation.getOwner());
         hotel.getHotelDetail().addFeedback(feedback);
+        reservation.setFeedback(feedback);
 
+        feedbackRepository.save(feedback);
+        hotelRepository.save(hotel);
+        reservationRepository.save(reservation);
 
         return ResultStatus.OK;
     }

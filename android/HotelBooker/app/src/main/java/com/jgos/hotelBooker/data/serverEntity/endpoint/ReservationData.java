@@ -17,6 +17,7 @@ public class ReservationData {
     private Date fromDate;
     private Date toDate;
     private long id;
+    boolean isRated = false;
 
 
     public ReservationData() {
@@ -36,6 +37,14 @@ public class ReservationData {
 
     public void setReservationStatus(String reservationStatus) {
         this.reservationStatus = reservationStatus;
+    }
+
+    public boolean isRated() {
+        return isRated;
+    }
+
+    public void setRated(boolean rated) {
+        isRated = rated;
     }
 
     public String getHotelName() {
@@ -80,13 +89,14 @@ public class ReservationData {
 
     @Override
     public String toString() {
-        DateFormat df = new SimpleDateFormat("mm/dd/yyyy hh:mm:ss");
         return "ReservationData{" +
                 "roomName='" + roomName + '\'' +
-                ", fromDate=" + df.format(fromDate) + '\'' +
-                ", toDate=" + df.format(toDate) + '\'' +
-                ", hotelNAme=" + hotelName+ '\'' +
+                ", hotelName='" + hotelName + '\'' +
+                ", reservationStatus='" + reservationStatus + '\'' +
+                ", fromDate=" + fromDate +
+                ", toDate=" + toDate +
+                ", id=" + id +
+                ", isRated=" + isRated +
                 '}';
     }
-
 }

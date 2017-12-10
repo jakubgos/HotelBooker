@@ -2,6 +2,7 @@ package com.jgos.hotelbooker.entity.endpoint;
 
 import com.jgos.hotelbooker.entity.user.Reservation;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -10,14 +11,11 @@ import javax.validation.constraints.Size;
 
 public class RateRequest {
 
-    @NotEmpty
-    @Min(1)
-    @Max(10)
+    @NotNull
     public long reservationId;
 
-    @NotEmpty
-    @Min(1)
-    @Max(10)
+    @NotNull
+    @Range(min = 0,max = 10)
     private int value;
 
     public RateRequest() {

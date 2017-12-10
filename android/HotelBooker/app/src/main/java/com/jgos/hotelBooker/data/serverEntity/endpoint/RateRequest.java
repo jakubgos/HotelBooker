@@ -11,6 +11,10 @@ public class RateRequest {
     public RateRequest() {
     }
 
+    public RateRequest(long reservationId, int value) {
+        this.reservationId = reservationId;
+        this.value = value;
+    }
 
     public long getReservationId() {
         return reservationId;

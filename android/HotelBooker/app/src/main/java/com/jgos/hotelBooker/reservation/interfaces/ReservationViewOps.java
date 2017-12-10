@@ -24,4 +24,6 @@ public interface ReservationViewOps {
     void stopProgressBar();
 
     void showFilterActivity();
+
+    void showRateDialog(ReservationData item);
 }

@@ -9,17 +9,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.jgos.hotelBooker.R;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.RateRequest;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.RegisterRequest;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.ReservationData;
 import com.jgos.hotelBooker.filter.FilterActivity;
 import com.jgos.hotelBooker.reservation.interfaces.ReservationPresenterOps;
@@ -37,6 +42,8 @@ public class ReservationActivity extends AppCompatActivity
     private ListView reservationListView;
     private TextView reservationTextView;
     ReservationArrayAdapter adapter;
+    private RatingBar ratingBar;
+    private long selectedReservationId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,6 +182,24 @@ public class ReservationActivity extends AppCompatActivity
     public void showFilterActivity() {
         Intent myIntent = new Intent(this, FilterActivity.class);
         this.startActivity(myIntent);
+    }
+
+    @Override
+    public void showRateDialog(ReservationData item) {
+        selectedReservationId = item.getId();
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title("Oceń Hotel")
+                .customView(R.layout.dialog_rate_custom, true)
+                .positiveText("Zatwierdź")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        mPresenter.rateConfirm(new RateRequest(selectedReservationId,(int) ratingBar.getRating()*2));
+                        Log.d("myapp","rated: "+ ratingBar.getRating()*2 + " : id: " +  selectedReservationId);
+                    }
+                })
+                .show();
+        ratingBar = (RatingBar) dialog.getCustomView().findViewById(R.id.dialog_hotelrate_rate);
     }
 
 

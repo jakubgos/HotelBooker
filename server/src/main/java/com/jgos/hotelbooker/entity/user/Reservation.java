@@ -41,7 +41,7 @@ public class Reservation {
     @Enumerated(EnumType.ORDINAL)
     public ReservationStatus reservationStatus;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     Feedback feedback;
 
     public Reservation() {

@@ -93,7 +93,7 @@ public class ReservationServiceImpl implements ReservationService {
                             .getHotel()
                             .getOwner(),
                     ReservationStatus.WAIT_FOR_CONFIRMATION,
-                    new Feedback(false));
+                    new Feedback(0, false));
 
         reservationRepository.save(reservation);
 

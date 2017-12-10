@@ -3,7 +3,9 @@ package com.jgos.hotelBooker.reservation;
 import com.jgos.hotelBooker.data.NetworkServiceImpl;
 import com.jgos.hotelBooker.data.entity.LoginData;
 import com.jgos.hotelBooker.data.interfaces.NetworkService;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.RateRequest;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.UserReservationResponse;
+import com.jgos.hotelBooker.reservation.interfaces.RateRequestResult;
 import com.jgos.hotelBooker.reservation.interfaces.ReservationModelOps;
 import com.jgos.hotelBooker.reservation.interfaces.ReservationPresenterOps;
 import com.jgos.hotelBooker.reservation.interfaces.UserReservationResult;
@@ -41,5 +43,20 @@ class ReservationModel implements ReservationModelOps {
                 reservationPresenter.reservationRequestFailure(s);
             }
         });
+    }
+
+    @Override
+    public void rateRequest(LoginData loginData, RateRequest rateRequest) {
+        networkService.rateRequest(loginData,rateRequest, new RateRequestResult(){
+            @Override
+            public void rateResultOk() {
+                reservationPresenter.rateResultOk();
+            }
+
+            @Override
+            public void rateResultNok(String s) {
+                reservationPresenter.rateResultNok(s);
+            }
+        } );
     }
 }

@@ -70,12 +70,18 @@ public class ReservationParserServiceImpl implements ReservationParserService{
             toDatePlusDay.setTime(reservation.getToDate());
             toDatePlusDay.add(Calendar.DATE, 1);
 
+            Boolean isRateValid = false;
+            if (reservation.getFeedback() != null){
+                isRateValid = reservation.getFeedback().getValid();
+            }
+
             ReservationData reservationData = new ReservationData(reservation.getRoom().getName(),
                     reservation.getRoom().getHotel().getHotelDetail().getName(),
                     reservation.getReservationStatus().getText(),
                     reservation.getFromDate(),
                     toDatePlusDay.getTime(),
                     reservation.getId(),
+                    isRateValid,
                     reservation.getUser());
             result.add(reservationData);
         }

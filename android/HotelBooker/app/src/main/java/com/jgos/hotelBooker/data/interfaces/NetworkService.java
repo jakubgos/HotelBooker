@@ -1,6 +1,7 @@
 package com.jgos.hotelBooker.data.interfaces;
 
 import com.jgos.hotelBooker.data.entity.LoginData;
+import com.jgos.hotelBooker.data.serverEntity.endpoint.RateRequest;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.RegisterRequest;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.ReservationRequest;
 import com.jgos.hotelBooker.data.serverEntity.endpoint.SearchRequest;
@@ -10,6 +11,7 @@ import com.jgos.hotelBooker.hotelList.interfaces.ReservationRequestResult;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
 import com.jgos.hotelBooker.login.interfaces.LoginServiceLoginResult;
 import com.jgos.hotelBooker.login.interfaces.LoginServiceRegisterResult;
+import com.jgos.hotelBooker.reservation.interfaces.RateRequestResult;
 import com.jgos.hotelBooker.reservation.interfaces.UserReservationResult;
 
 /**
@@ -28,4 +30,6 @@ public interface NetworkService {
 
 
     void register(RegisterRequest registerRequest, LoginServiceRegisterResult loginServiceRegisterResult);
+
+    void rateRequest(LoginData loginData, RateRequest rateRequest, RateRequestResult rateRequestResult);
 }
