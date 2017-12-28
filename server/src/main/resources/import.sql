@@ -25,8 +25,8 @@ insert into rating (id, value) values (4, 4);
 insert into rating (id, value) values (5, 5);
 
 
-insert into hotel_detail (id, name, city_id, description,address, coordinates_id,rating_id) values (1, 'hotelName1',1,'Hotel Senator jest obiektem czterogwiazdkowym. To gwarancja komfortu pokoi hotelowych i jakości obsługi  oraz wysokiego bezpieczeństwa naszych Gości. Budynek Hotelu Senator jest budowlą historyczną dlatego jego architektura i wnętrza są niepowtarzalne. <br/> <br/> Do dyspozycji naszych Klientów jest całodobowa recepcja (pracownicy recepcji posługują się językiem angielskim)','hotel_1_address',1,4);
-insert into hotel_detail (id, name, city_id, description,address, coordinates_id,rating_id) values (2, 'hotelName2',1,'hotel_2_description','hotel_2_address', 2,5);
+insert into hotel_detail (id, name, city_id, description,address, coordinates_id,rating_id,picture_path) values (1, 'hotelName1',1,'Hotel Senator jest obiektem czterogwiazdkowym. To gwarancja komfortu pokoi hotelowych i jakości obsługi  oraz wysokiego bezpieczeństwa naszych Gości. Budynek Hotelu Senator jest budowlą historyczną dlatego jego architektura i wnętrza są niepowtarzalne. <br/> <br/> Do dyspozycji naszych Klientów jest całodobowa recepcja (pracownicy recepcji posługują się językiem angielskim)','hotel_1_address',1,4, 'image\a.jpg');
+insert into hotel_detail (id, name, city_id, description,address, coordinates_id,rating_id,picture_path) values (2, 'hotelName2',1,'hotel_2_description','hotel_2_address', 2,5, 'image\b.jpg');
 
 
 insert into hotel_facilities (id, name) values (1,'Parking');
@@ -60,7 +60,6 @@ insert into hotel_room_list (hotel_id, room_list_id) values (1,1);
 insert into hotel_room_list (hotel_id, room_list_id) values (1,2);
 insert into hotel_room_list (hotel_id, room_list_id) values (2,3);
 
--- insert into reservation (id, room_id,user_id,date) values (1,1,1,'2017-05-28');
 
 
 insert into room_facilities (id, name) values (1,'Telewizor');

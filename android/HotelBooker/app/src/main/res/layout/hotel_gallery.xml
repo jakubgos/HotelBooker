@@ -4,9 +4,17 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/icon"
+        android:id="@+id/hotel_detail_icon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:src="@drawable/hotel" />
+        android:src="@drawable/hotel"
+        android:visibility="gone"/>
+    <ProgressBar
+        android:id="@+id/hotel_detail_progress"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:indeterminate="true"
+ />
 </LinearLayout>

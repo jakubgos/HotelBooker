@@ -1,5 +1,7 @@
 package com.jgos.hotelBooker.data;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -23,10 +25,14 @@ import com.jgos.hotelBooker.hotelList.interfaces.ReservationRequestResult;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
 import com.jgos.hotelBooker.login.interfaces.LoginServiceLoginResult;
 import com.jgos.hotelBooker.login.interfaces.LoginServiceRegisterResult;
+import com.jgos.hotelBooker.login.interfaces.getPictureResult;
 import com.jgos.hotelBooker.reservation.interfaces.RateRequestResult;
 import com.jgos.hotelBooker.reservation.interfaces.UserReservationResult;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 import okhttp3.Credentials;
@@ -514,4 +520,40 @@ public class NetworkServiceImpl implements NetworkService {
         });
         thread.start();
     }
+
+    @Override
+    public void getPicture(final String picturePath, final getPictureResult getPictureResult) {
+        final Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.e("MyApp_Service", "DOWNLOAD STARTING");
+                HttpURLConnection urlConnection = null;
+                try {
+                    String fullUrl = picturePath.replace("\\", "/");
+
+                    URL uri = new URL("http://" + SERVER_ADDRESS + ":8080/" + fullUrl);
+                    urlConnection = (HttpURLConnection) uri.openConnection();
+
+                    InputStream inputStream = urlConnection.getInputStream();
+                    if (inputStream != null) {
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                        Log.e("ImageDownloaderTask", "DOWNLOAD finished!");
+
+                        getPictureResult.getPictureResultOk(bitmap);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    urlConnection.disconnect();
+                    getPictureResult.getPictureResultNOk();
+                    Log.w("ImageDownloader", "Error downloading image from " + picturePath);
+                } finally {
+                    if (urlConnection != null) {
+                        urlConnection.disconnect();
+
+                    }
+                }
+            }
+        });
+        thread.start();
+        }
 }

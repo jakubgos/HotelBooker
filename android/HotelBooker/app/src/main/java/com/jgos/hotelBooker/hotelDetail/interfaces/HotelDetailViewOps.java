@@ -1,5 +1,7 @@
 package com.jgos.hotelBooker.hotelDetail.interfaces;
 
+import android.graphics.Bitmap;
+
 import com.jgos.hotelBooker.data.serverEntity.hotel.HotelDetail;
 import com.jgos.hotelBooker.data.serverEntity.room.Room;
 
@@ -27,4 +29,12 @@ public interface HotelDetailViewOps {
     void endActivity();
 
     void showReservationActivity();
+
+    void stopPictureProgressBar();
+
+    void showPicture(Bitmap bitmap);
+
+    void showPicture();
+
+    void makeToast(String s);
 }

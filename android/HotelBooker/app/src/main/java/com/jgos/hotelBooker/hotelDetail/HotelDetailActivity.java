@@ -1,6 +1,7 @@
 package com.jgos.hotelBooker.hotelDetail;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -14,8 +15,10 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -48,6 +51,9 @@ public class HotelDetailActivity extends AppCompatActivity
     private TextView roomDescription;
     private long roomId;
     private MaterialDialog progressDialog;
+    private View mProgressView;
+    private ImageView imageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +93,8 @@ public class HotelDetailActivity extends AppCompatActivity
         roomCount = (TextView) findViewById(R.id.hd_no_of_ppl);
         roomDescription = (TextView) findViewById(R.id.hd_room_description);
 
+        mProgressView = findViewById(R.id.hotel_detail_progress);
+        imageView = (ImageView) findViewById(R.id.hotel_detail_icon);
         setupMVP();
         mPresenter.onStartup();
 
@@ -292,5 +300,28 @@ public class HotelDetailActivity extends AppCompatActivity
     public void showReservationActivity() {
         Intent myIntent = new Intent(this, ReservationActivity.class);
         this.startActivity(myIntent);
+    }
+
+    @Override
+    public void stopPictureProgressBar() {
+        mProgressView.setVisibility(View.GONE);
+
+    }
+
+    @Override
+    public void showPicture(Bitmap bitmap) {
+        imageView.setImageBitmap(bitmap);
+    }
+
+    @Override
+    public void showPicture() {
+        imageView.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    public void makeToast(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+
     }
 }

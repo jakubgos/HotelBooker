@@ -1,5 +1,7 @@
 package com.jgos.hotelBooker.hotelDetail.interfaces;
 
+import android.graphics.Bitmap;
+
 import com.jgos.hotelBooker.data.serverEntity.endpoint.ReservationResponse;
 
 /**
@@ -24,4 +26,8 @@ public interface HotelDetailPresenterOps {
     void ReservationSuccessDialogDisappear();
 
     void showReservationRequested();
+
+    void getPictureResultOk(Bitmap bitmap);
+
+    void getPictureResultNOk();
 }

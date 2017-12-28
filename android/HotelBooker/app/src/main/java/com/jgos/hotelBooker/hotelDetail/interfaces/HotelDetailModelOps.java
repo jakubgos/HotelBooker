@@ -9,4 +9,6 @@ import com.jgos.hotelBooker.data.serverEntity.endpoint.ReservationRequest;
 
 public interface HotelDetailModelOps {
     void reserveRoom(ReservationRequest reservationRequest, LoginData loginData);
+
+    void getPicture(String picturePath);
 }

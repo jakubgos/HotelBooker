@@ -19,23 +19,24 @@ Done:
 - [I] możliwość edytowania informacji o hotelu (opis/lokalizacja)
 - [S/A] rejestracja dla użytkownika
 - [I] możliwość konfiguracji pokojów, terminów, informacji o pokoju (ilość miejsc, standard, usługi hotelowe, udogodnienia, opis, lokalizacja)
-
-
-Backlog:
 - [S/A/I] galeria zdjęć Hotelu
+- [S/A/I} system ocen/opinii pokoju
+- [S] wysyłanie mailów z potwierdzeniem rezerwacji
+- [S/A] możliwość aulowania zamówienia
+
+!!!!!!!!!!!!!!!!MUST HAVE REQUIREMENTS DONE !!!!!!!!!!!!!!!!
+
+Corner of hope:
 - [A] wyświetlenie hotelów na mapie z pozycją w obrębie X Km 
 - [A] uumozliwienie konfiguracji promienia wyszukiwania hotelów
-- [S/A/I} system ocen/opinii pokoju
 - [I] wykorzystanie netSocketów do aktualizacji danych o zamówieniach
 - [S/A] notyfikacja MQTT o zmianie stanu rezerwacji
-- [S] wysyłanie mailów z potwierdzeniem rezerwacji
 - [A] filtrowanie list/hoteli (np. tylko tam, gdzie basen, czy tylko pokoje w konkretnym hotelu)
 - [S/A] możliwość dodania hotelu do ulubionych
-- [S/A] możliwość naulowania zamówienia
 
 
 Improvements:
-- Add room groups (Allow to add multiple room with same type), priority: Must Have
+- Add room groups (Allow to add multiple room with same type), priority: Must Have [DONE]
 - add drawer lay to filter
 - refactor NetworkServiceImpl class
 

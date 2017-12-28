@@ -336,4 +336,5 @@ public class WebHotel {
         notificationRepository.save(notification);
         return new ModelAndView("redirect:/notification?result=1");
     }
+
 }

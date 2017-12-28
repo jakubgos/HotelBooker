@@ -25,6 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // api security is handled elsewhere (See ResourceServiceConfig)
                 .antMatchers("/api/**")
                 .permitAll()
+                .antMatchers("/image/**")
+                .permitAll()
                 // end api security
                 //.antMatchers("/").permitAll()
                 .anyRequest().hasAuthority(Authorities.ROLE_WEB.name())

@@ -1,5 +1,7 @@
 package com.jgos.hotelBooker.hotelDetail;
 
+import android.graphics.Bitmap;
+
 import com.jgos.hotelBooker.data.NetworkServiceImpl;
 import com.jgos.hotelBooker.data.entity.LoginData;
 import com.jgos.hotelBooker.data.interfaces.NetworkService;
@@ -8,6 +10,7 @@ import com.jgos.hotelBooker.data.serverEntity.endpoint.ReservationResponse;
 import com.jgos.hotelBooker.hotelDetail.interfaces.HotelDetailModelOps;
 import com.jgos.hotelBooker.hotelDetail.interfaces.HotelDetailPresenterOps;
 import com.jgos.hotelBooker.hotelList.interfaces.ReservationRequestResult;
+import com.jgos.hotelBooker.login.interfaces.getPictureResult;
 
 /**
  * Created by Bos on 2017-06-18.
@@ -40,6 +43,21 @@ class HotelDetailModel implements HotelDetailModelOps {
             @Override
             public void reservationRequestReject(ReservationResponse reservationResponse) {
                 hoteDetailPresenter.reservationRequestReject(reservationResponse);
+            }
+        });
+    }
+
+    @Override
+    public void getPicture(String picturePath) {
+        networkService.getPicture(picturePath, new getPictureResult(){
+            @Override
+            public void getPictureResultOk(Bitmap bitmap) {
+                hoteDetailPresenter.getPictureResultOk( bitmap);
+            }
+
+            @Override
+            public void getPictureResultNOk() {
+                hoteDetailPresenter.getPictureResultNOk();
             }
         });
     }

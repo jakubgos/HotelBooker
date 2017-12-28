@@ -1,5 +1,6 @@
 package com.jgos.hotelBooker.hotelDetail;
 
+import android.graphics.Bitmap;
 import android.os.Handler;
 
 import com.jgos.hotelBooker.data.NetworkServiceImpl;
@@ -38,9 +39,10 @@ public class HotelDetailPresenter implements HotelDetailPresenterOps {
 
     @Override
     public void onStartup() {
-        //order is imporant !
+        //order is important !
         getView().prepareHotelData(Storage.getInstance().getSelectedHotelData().getHotelDetail());
         getView().prepareRoomData(Storage.getInstance().getSelectedHotelData().getRoomList().get(0));
+        hotelDetailModelOps.getPicture(Storage.getInstance().getSelectedHotelData().getHotelDetail().getPicturePath());
 
         getView().showSnackBar();
     }
@@ -118,5 +120,29 @@ public class HotelDetailPresenter implements HotelDetailPresenterOps {
     @Override
     public void showReservationRequested() {
         getView().showReservationActivity();
+    }
+
+    @Override
+    public void getPictureResultOk(final Bitmap bitmap) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                getView().showPicture(bitmap);
+        getView().stopPictureProgressBar();
+        getView().showPicture();
+            }
+        });
+    }
+
+    @Override
+    public void getPictureResultNOk() {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+        getView().makeToast("Nie udało sie pobrac galerii");
+                getView().stopPictureProgressBar();
+
+            }
+        });
     }
 }

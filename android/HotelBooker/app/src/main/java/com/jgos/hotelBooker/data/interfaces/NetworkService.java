@@ -11,6 +11,7 @@ import com.jgos.hotelBooker.hotelList.interfaces.ReservationRequestResult;
 import com.jgos.hotelBooker.login.entity.LoginReqParam;
 import com.jgos.hotelBooker.login.interfaces.LoginServiceLoginResult;
 import com.jgos.hotelBooker.login.interfaces.LoginServiceRegisterResult;
+import com.jgos.hotelBooker.login.interfaces.getPictureResult;
 import com.jgos.hotelBooker.reservation.interfaces.RateRequestResult;
 import com.jgos.hotelBooker.reservation.interfaces.UserReservationResult;
 
@@ -32,4 +33,6 @@ public interface NetworkService {
     void register(RegisterRequest registerRequest, LoginServiceRegisterResult loginServiceRegisterResult);
 
     void rateRequest(LoginData loginData, RateRequest rateRequest, RateRequestResult rateRequestResult);
+
+    void getPicture(String picturePath, getPictureResult getPictureResult);
 }

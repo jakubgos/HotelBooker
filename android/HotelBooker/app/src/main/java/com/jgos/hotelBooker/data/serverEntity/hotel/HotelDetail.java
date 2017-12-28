@@ -36,6 +36,16 @@ public class HotelDetail {
 
     private List<Feedback> feedbackList;
 
+    private String picturePath;
+
+    public String getPicturePath() {
+        return picturePath;
+    }
+
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
+    }
+
     public HotelDetail() {
     }
 

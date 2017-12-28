@@ -46,6 +46,32 @@ public class HotelDetail {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Feedback> feedbackList;
 
+    private String picturePath;
+
+    @Override
+    public String toString() {
+        return "HotelDetail{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", address='" + address + '\'' +
+                ", coordinates=" + coordinates +
+                ", city=" + city +
+                ", foodOffer=" + foodOffer +
+                ", hotelFacilities=" + hotelFacilities +
+                ", rating=" + rating +
+                ", feedbackList=" + feedbackList +
+                ", picturePath='" + picturePath + '\'' +
+                '}';
+    }
+
+    public String getPicturePath() {
+        return picturePath;
+    }
+
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
+    }
 
     public HotelDetail() {
     }
@@ -139,19 +165,4 @@ public class HotelDetail {
         this.feedbackList = feedbackList;
     }
 
-    @Override
-    public String toString() {
-        return "HotelDetail{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", address='" + address + '\'' +
-                ", coordinates=" + coordinates +
-                ", city=" + city +
-                ", foodOffer=" + foodOffer +
-                ", hotelFacilities=" + hotelFacilities +
-                ", rating=" + rating +
-                ", feedbackList=" + feedbackList +
-                '}';
-    }
 }

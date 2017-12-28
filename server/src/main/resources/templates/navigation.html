@@ -63,6 +63,10 @@
                             <i class="fa fa-building-o fa-fw"></i> Dane hotelu</a>
                     </li>
                     <li>
+                        <a th:href="@{/gallery}" th:classappend="${#httpServletRequest.getRequestURI() == '/gallery' ? 'active':''}">
+                            <i class="fa fa-building-o fa-fw"></i> Galeria</a>
+                    </li>
+                    <li>
                         <a th:href="@{/room}" th:classappend="${#httpServletRequest.getRequestURI() == '/room' ? 'active':''}">
                             <i class="fa fa-columns fa-fw"></i> Pokoje</a>
                     </li>

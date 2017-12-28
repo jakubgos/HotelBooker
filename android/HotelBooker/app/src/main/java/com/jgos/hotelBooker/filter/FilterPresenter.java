@@ -91,7 +91,7 @@ class FilterPresenter implements FilterPresenterOps {
 
     @Override
     public void arrivalDateClick() {
-        getView().showCalendarDialog(arrivalCalendar, null, DialogChoice.ARRIVAL.name());
+        getView().showCalendarDialog(arrivalCalendar, Calendar.getInstance(), DialogChoice.ARRIVAL.name());
     }
 
     @Override
