@@ -28,7 +28,7 @@ public class ImageServiceImpl implements ImageService {
 
     private final static String CURRENT_PATH = "image";
 
-    private final static String FRUL_PATH = "src\\main\\resources\\images";
+    private final static String FRUL_PATH = "src/main/resources/images";
     private final Path rootLocation = Paths.get(FRUL_PATH);
 
     @Autowired
