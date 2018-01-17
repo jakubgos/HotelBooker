@@ -53,6 +53,7 @@
                                         </div>
                                     <form href="#" role="form" th:action="@{/saveHotelData}" th:object="${hotelDetail}" method="post">
                                         <input type="hidden" th:value="${id}" name="id" th:field="*{id}" />
+                                        <input type="hidden" th:value="${picturePath}" name="id" th:field="*{picturePath}" />
 
                                         <div class="form-group">
                                             <label>Nazwa Hotelu</label>
