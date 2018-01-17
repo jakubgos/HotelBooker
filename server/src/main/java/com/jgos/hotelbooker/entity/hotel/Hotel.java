@@ -5,6 +5,7 @@ import com.jgos.hotelbooker.entity.room.Room;
 import com.jgos.hotelbooker.entity.user.UserDb;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -72,5 +73,13 @@ public class Hotel {
 
     public void setOwner(UserDb owner) {
         this.owner = owner;
+    }
+
+    public void addRoom(Room room) {
+        if (roomList == null)
+        {
+            roomList = new ArrayList<>();
+        }
+        roomList.add(room);
     }
 }

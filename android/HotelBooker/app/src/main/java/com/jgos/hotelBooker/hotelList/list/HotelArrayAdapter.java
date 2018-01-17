@@ -162,7 +162,7 @@ public class HotelArrayAdapter extends ArrayAdapter<HotelData> {
         try {
             String fullUrl = url.replace("\\", "/");
 
-            URL uri = new URL("http://192.168.0.3:8080/"+ fullUrl);
+            URL uri = new URL("http://80.211.216.60:8080/"+ fullUrl);
             urlConnection = (HttpURLConnection) uri.openConnection();
             int statusCode = urlConnection.getResponseCode();
 

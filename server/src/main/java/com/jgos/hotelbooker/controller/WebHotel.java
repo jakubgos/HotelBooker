@@ -295,13 +295,12 @@ public class WebHotel {
     public ModelAndView newRoom(@AuthenticationPrincipal UserDetails userDetails) {
         ModelAndView model = new ModelAndView();
 
-        model.setViewName("editRoom");
+        model.setViewName("newRoom");
         model.addObject("room", new Room());
         model.addObject("allRoomFacilities", roomFacilitiesRepository.findAll());
 
         return model;
     }
-
 
     @RequestMapping(value = {"/saveRoomData"}, method = RequestMethod.POST)
     public ModelAndView saveRoomData(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute("editRoom") Room room, BindingResult errors, Model model) {
@@ -312,10 +311,28 @@ public class WebHotel {
         if (!roomService.verifyData(room)) {
             return new ModelAndView("redirect:/room?result=2");
         }
-
         Hotel hotel = hotelRepository.findByOwner(user);
         room.setHotel(hotel);
         roomRepository.save(room);
+
+        return new ModelAndView("redirect:/room?result=1");
+    }
+
+    @RequestMapping(value = {"/saveNewRoomData"}, method = RequestMethod.POST)
+    public ModelAndView saveNewRoomData(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute("editRoom") Room room, BindingResult errors, Model model) {
+
+        log.info("saveNewRoomData received with " + room.toString());
+        UserDb user = userRepository.findByEmail(userDetails.getUsername());
+
+        if (!roomService.verifyData(room)) {
+            return new ModelAndView("redirect:/room?result=2");
+        }
+        Hotel hotel = hotelRepository.findByOwner(user);
+        room.setHotel(hotel);
+        roomRepository.save(room);
+
+        hotel.addRoom(room);
+        hotelRepository.save(hotel);
 
         return new ModelAndView("redirect:/room?result=1");
     }

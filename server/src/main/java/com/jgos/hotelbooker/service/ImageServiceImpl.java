@@ -49,25 +49,11 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public byte[] getImage(String image) {
-      /*  ClassPathResource classPathResource = new ClassPathResource("/images/" + image);
-        try {
-            return IOUtils.toByteArray(classPathResource.getInputStream());
-        } catch (IOException e) {
-            return new byte[0];
-        }    }
-        */
         try {
             log.info("getImage() invoked with param image: " + image);
 
-
             Path file = rootLocation.resolve(image);
-            log.info("file: " + file.toString());
-            log.info("file: " + file.getRoot().getName(0).toString());
-            log.info("file: " + file.getName(0).toString());
-
             Resource resource = new UrlResource(file.toUri());
-            log.info(resource.getFilename());
-            log.info(resource.getDescription());
 
             if (!resource.exists())
             {
@@ -76,10 +62,6 @@ public class ImageServiceImpl implements ImageService {
                 file = rootLocation.resolve("default.jpeg");
                 resource = new UrlResource(file.toUri());
             }
-            log.info("getImage returning resource: " + resource.exists() + " " + resource.getFilename() +" uri " + resource.getURI().getPath() + " url " + resource.getURL().getPath());
-            log.info("getImage resource: "+ resource.toString());
-
-
             return IOUtils.toByteArray(resource.getInputStream());
 
         } catch (MalformedURLException e) {
