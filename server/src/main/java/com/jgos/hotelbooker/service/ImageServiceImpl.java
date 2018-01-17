@@ -1,5 +1,6 @@
 package com.jgos.hotelbooker.service;
 
+import com.jgos.hotelbooker.controller.ApiHotel;
 import com.jgos.hotelbooker.entity.hotel.HotelDetail;
 import com.jgos.hotelbooker.entity.hotel.ImagePath;
 import com.jgos.hotelbooker.entity.user.UserDb;
@@ -7,6 +8,8 @@ import com.jgos.hotelbooker.repository.HotelDetailRepository;
 import com.jgos.hotelbooker.repository.HotelRepository;
 import com.jgos.hotelbooker.repository.ImageRepository;
 import com.jgos.hotelbooker.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -42,6 +45,8 @@ public class ImageServiceImpl implements ImageService {
     @Autowired
     HotelDetailRepository hotelDetailRepository;
 
+    private static final Logger log = LoggerFactory.getLogger(ImageServiceImpl.class);
+
     @Override
     public byte[] getImage(String image) {
       /*  ClassPathResource classPathResource = new ClassPathResource("/images/" + image);
@@ -52,14 +57,30 @@ public class ImageServiceImpl implements ImageService {
         }    }
         */
         try {
+            log.info("getImage() invoked with param image: " + image);
+
+
             Path file = rootLocation.resolve(image);
+            log.info("file: " + file.toString());
+            log.info("file: " + file.getRoot().getName(0).toString());
+            log.info("file: " + file.getName(0).toString());
+
             Resource resource = new UrlResource(file.toUri());
+            log.info(resource.getFilename());
+            log.info(resource.getDescription());
+
             if (!resource.exists())
             {
+                log.info("getImage resource not found, using default instead.");
+
                 file = rootLocation.resolve("default.jpeg");
                 resource = new UrlResource(file.toUri());
             }
-                return IOUtils.toByteArray(resource.getInputStream());
+            log.info("getImage returning resource: " + resource.exists() + " " + resource.getFilename() +" uri " + resource.getURI().getPath() + " url " + resource.getURL().getPath());
+            log.info("getImage resource: "+ resource.toString());
+
+
+            return IOUtils.toByteArray(resource.getInputStream());
 
         } catch (MalformedURLException e) {
             throw new RuntimeException("FAIL!");
